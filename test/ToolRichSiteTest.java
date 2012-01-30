@@ -1,7 +1,7 @@
 import RichPlayer.RichPlayer;
 import RichSite.ToolRichSite;
 import RichTool.*;
-
+import RichPlayer.*;
 import junit.framework.TestCase;
 
 import java.io.*;
@@ -42,21 +42,14 @@ public class ToolRichSiteTest extends TestCase {
         RichPlayer player = new RichPlayer();
         player.setPoints(10000);
         for (int i = 0; i < 10; i++) {
-
-            try {
-                player.buyTool(RichTool.createTool(1));
-            } catch (ToolException e) {
-                assertTrue(false);
-            }
+            player.buyTool(RichTool.createTool(1));
         }
         player.setPoints(10000);
 
         boolean isException = false;
-        try
-        {
+        try {
             toolRichSite.acceptPlayerCommand(new ToolBuyCommand(player, RichTool.createTool(1)));
-        }catch (ToolOverflowException ex)
-        {
+        } catch (ToolOverflowException ex) {
             assertTrue(true);
             isException = true;
         }

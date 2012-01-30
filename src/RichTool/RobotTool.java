@@ -15,4 +15,8 @@ public class RobotTool extends RichTool {
 
     protected RobotTool() {
     }
+    
+    public boolean equals(Object arg) {
+        return arg instanceof RobotTool;
+    }
 }

@@ -1,5 +1,6 @@
 import RichPlayer.RichPlayer;
 import RichTool.*;
+import RichPlayer.*;
 import junit.framework.TestCase;
 
 public class RichToolTest extends TestCase {
@@ -19,15 +20,9 @@ public class RichToolTest extends TestCase {
         RichPlayer richPlayer = new RichPlayer();
         richPlayer.setPoints(200);
 
-        try {
-            richPlayer.buyTool(RichTool.createTool(1));
-            richPlayer.buyTool(RichTool.createTool(2));
-            richPlayer.buyTool(RichTool.createTool(3));
-        } catch (ToolOverflowException ex) {
-            assertTrue(false);
-        } catch (ToolPointsNotEnoughException ex) {
-            assertTrue(false);
-        }
+        richPlayer.buyTool(RichTool.createTool(1));
+        richPlayer.buyTool(RichTool.createTool(2));
+        richPlayer.buyTool(RichTool.createTool(3));
     }
 
     public void test_should_player_has_no_points_to_buy_tools() {
@@ -36,8 +31,6 @@ public class RichToolTest extends TestCase {
 
         try {
             richPlayer.buyTool(RichTool.createTool(1));
-        } catch (ToolOverflowException ex) {
-            assertTrue(false);
         } catch (ToolPointsNotEnoughException ex) {
             assertTrue(true);
             assertEquals("You have 20 points, not enough to buy Road Block tool.", ex.getMessage());
@@ -47,8 +40,6 @@ public class RichToolTest extends TestCase {
 
         try {
             richPlayer.buyTool(RichTool.createTool(2));
-        } catch (ToolOverflowException ex) {
-            assertTrue(false);
         } catch (ToolPointsNotEnoughException ex) {
             assertTrue(true);
             assertEquals("You have 20 points, not enough to buy Robot tool.", ex.getMessage());
@@ -58,8 +49,6 @@ public class RichToolTest extends TestCase {
 
         try {
             richPlayer.buyTool(RichTool.createTool(3));
-        } catch (ToolOverflowException ex) {
-            assertTrue(false);
         } catch (ToolPointsNotEnoughException ex) {
             assertTrue(true);
             assertEquals("You have 20 points, not enough to buy Bomb tool.", ex.getMessage());
@@ -72,12 +61,8 @@ public class RichToolTest extends TestCase {
         RichPlayer richPlayer = new RichPlayer();
         richPlayer.setPoints(100000);
 
-        try {
-            for (int i = 0; i < 10; i++) {
-                richPlayer.buyTool(RichTool.createTool(1));
-            }
-        } catch (ToolException ex) {
-            assertTrue(false);
+        for (int i = 0; i < 10; i++) {
+            richPlayer.buyTool(RichTool.createTool(1));
         }
 
         richPlayer.setPoints(100000);
@@ -87,10 +72,49 @@ public class RichToolTest extends TestCase {
         } catch (ToolOverflowException ex) {
             assertTrue(true);
             assertEquals("Each player cannot have more than 10 tools", ex.getMessage());
-        } catch (ToolPointsNotEnoughException ex){
-            assertTrue(false);
+        }
+        assertEquals(100000, richPlayer.getPoints());
+    }
+
+    public void test_should_have_150_points_after_selling_road_block() {
+        RichPlayer player = new RichPlayer();
+        player.setPoints(10000);
+        player.buyTool(RichTool.createTool(1));
+        player.setPoints(100);
+
+        assertEquals(1, player.getToolsNumber());
+
+        player.sellTool(RichTool.createTool(1));
+
+        assertEquals(150, player.getPoints());
+        assertEquals(0, player.getToolsNumber());
+    }
+
+    public void test_should_get_tool_underflow_exception_when_not_have_road_block() {
+        RichPlayer player = new RichPlayer();
+        boolean isException = false;
+        try {
+            player.sellTool(RichTool.createTool(1));
+        } catch (ToolUnderflowException ex) {
+            isException = true;
         }
 
-        assertEquals(100000, richPlayer.getPoints());
+        assertTrue(isException);
+        assertEquals(0, player.getToolsNumber());
+    }
+    
+    
+    public void test_player_can_use_tool() {
+        RichPlayer player = new RichPlayer();
+        player.setPoints(100);
+        player.addTool(RichTool.createTool(1));
+        
+        assertEquals(1, player.getToolsNumber());
+        assertEquals(100, player.getPoints());
+
+        player.useTool(RichTool.createTool(1));
+
+        assertEquals(0, player.getToolsNumber());
+        assertEquals(100, player.getPoints());
     }
 }

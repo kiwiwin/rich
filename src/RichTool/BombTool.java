@@ -15,4 +15,8 @@ public class BombTool extends RichTool {
 
     protected BombTool() {
     }
+
+    public boolean equals(Object arg) {
+        return arg instanceof BombTool;
+    }
 }

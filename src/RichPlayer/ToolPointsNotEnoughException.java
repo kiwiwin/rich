@@ -1,5 +1,7 @@
-package RichTool;
+package RichPlayer;
 
+
+import RichTool.RichTool;
 
 public class ToolPointsNotEnoughException extends ToolException{
     private int _playerPoints;

@@ -15,4 +15,8 @@ public class RoadBlockTool extends RichTool {
 
     protected RoadBlockTool() {
     }
+
+    public boolean equals(Object arg) {
+        return arg instanceof RoadBlockTool;
+    }
 }
