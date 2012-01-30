@@ -5,6 +5,8 @@ public abstract class RichTool {
 
     public abstract int getPoints();
 
+    public abstract String getName();
+    
     public static RichTool createTool(int toolNumber){
         switch (toolNumber){
             case 1:

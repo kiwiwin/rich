@@ -9,7 +9,10 @@ public class RoadBlockTool extends RichTool {
         return 50;
     }
 
-    protected RoadBlockTool(){
+    public String getName() {
+        return "Road Block";
+    }
 
+    protected RoadBlockTool() {
     }
 }

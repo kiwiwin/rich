@@ -9,6 +9,10 @@ public class BombTool extends RichTool {
         return 50;
     }
 
+    public String getName() {
+        return "Bomb";
+    }
+
     protected BombTool() {
     }
 }

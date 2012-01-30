@@ -1,8 +1,10 @@
 package RichSite;
 
+import RichTool.*;
+
+
 public class ToolRichSite extends RichSite {
-    public String display()
-    {
-        return "T";
+    public void acceptPlayerCommand(ToolBuyCommand command) {
+        command.executeCommand();
     }
 }
