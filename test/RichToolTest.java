@@ -1,6 +1,5 @@
 import RichPlayer.RichPlayer;
 import RichTool.*;
-import RichPlayer.*;
 import junit.framework.TestCase;
 
 public class RichToolTest extends TestCase {

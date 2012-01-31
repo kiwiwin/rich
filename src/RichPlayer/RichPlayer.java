@@ -1,6 +1,9 @@
 package RichPlayer;
 
 import RichTool.RichTool;
+import RichTool.ToolOverflowException;
+import RichTool.ToolUnderflowException;
+import RichTool.ToolPointsNotEnoughException;
 
 import java.util.ArrayList;
 

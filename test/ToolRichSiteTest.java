@@ -1,12 +1,16 @@
 import RichPlayer.RichPlayer;
-import RichSite.ToolRichSite;
+import RichTool.ToolRichSite;
 import RichTool.*;
-import RichPlayer.*;
 import junit.framework.TestCase;
 
 import java.io.*;
 
 public class ToolRichSiteTest extends TestCase {
+    public void test_should_display_T() {
+        ToolRichSite toolRichSite = new ToolRichSite();
+        assertEquals("T", toolRichSite.display());
+    }
+
     public void test_should_return_automatic_for_not_enough_points() {
     }
 

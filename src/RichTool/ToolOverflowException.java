@@ -1,4 +1,4 @@
-package RichPlayer;
+package RichTool;
 
 public class ToolOverflowException extends ToolException{
     public String getMessage(){
