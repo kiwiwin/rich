@@ -6,14 +6,18 @@ public abstract class RichTool {
     public abstract int getPoints();
 
     public abstract String getName();
-    
-    public static RichTool createTool(int toolNumber){
-        switch (toolNumber){
-            case 1:
+
+    public static final int ROADBLOCK = 1;
+    public static final int ROBOT = 2;
+    public static final int BOMB = 3;
+
+    public static RichTool createTool(int toolNumber) {
+        switch (toolNumber) {
+            case ROADBLOCK:
                 return new RoadBlockTool();
-            case 2:
+            case ROBOT:
                 return new RobotTool();
-            case 3:
+            case BOMB:
                 return new BombTool();
             default:
                 throw new IllegalArgumentException("Unknown tool type");

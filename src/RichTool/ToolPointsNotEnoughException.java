@@ -15,6 +15,6 @@ public class ToolPointsNotEnoughException extends ToolException{
     }
     
     public String getMessage() {
-        return "You have " + getPlayerPoints() + " points, not enough to buy " + _tool.getName() + " tool.";
+        return "You have " + getPlayerPoints() + " points, not enough to buy " + _tool.getName() + " tool";
     }
 }

@@ -2,7 +2,7 @@ package RichTool;
 
 import RichSite.RichSite;
 
-public class ToolRichSite extends RichSite {
+public class RichToolSite extends RichSite {
     public void acceptPlayerCommand(ToolBuyCommand command) {
         command.executeCommand();
     }

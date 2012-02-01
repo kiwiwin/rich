@@ -1,7 +1,13 @@
 package RichTool;
 
 public class ToolUnderflowException extends ToolException {
-    public String getMessage(){
-        return "You don't have such tool to sell";
+    private RichTool _tool;
+
+    public ToolUnderflowException(RichTool tool) {
+        _tool = tool;
+    }
+
+    public String getMessage() {
+        return "You don't have " + _tool.getName();
     }
 }
