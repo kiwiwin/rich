@@ -6,6 +6,26 @@ import junit.framework.TestCase;
 import RichPlayer.RichPlayer;
 
 public class RichPlayerTest extends TestCase {
+
+    public void test_should_player_can_not_have_more_than_10_tools() {
+        RichPlayer richPlayer = new RichPlayer();
+        richPlayer.setPoints(100000);
+
+        for (int i = 0; i < 10; i++) {
+            richPlayer.buyTool(RichTool.createTool(RichTool.ROADBLOCK));
+        }
+
+        richPlayer.setPoints(100000);
+
+        try {
+            richPlayer.buyTool(RichTool.createTool(RichTool.ROADBLOCK));
+        } catch (ToolOverflowException ex) {
+            assertTrue(true);
+            assertEquals("Each player cannot have more than 10 tools", ex.getMessage());
+        }
+        assertEquals(100000, richPlayer.getPoints());
+    }
+
     public void test_player_has_enough_points_buy_roadblock() {
         RichPlayer player = new RichPlayer();
         player.setPoints(100);
@@ -254,7 +274,7 @@ public class RichPlayerTest extends TestCase {
         RichPlayer player = new RichPlayer();
         player.setMoney(5000);
 
-        RichHouse house = new RichHouse();
+        RichHouse house = new RichHouse(0);
         house.setOriginalPrice(1000);
 
         assertNull(house.getOwner());
@@ -269,7 +289,7 @@ public class RichPlayerTest extends TestCase {
         RichPlayer player = new RichPlayer();
         player.setMoney(500);
 
-        RichHouse house = new RichHouse();
+        RichHouse house = new RichHouse(0);
         house.setOriginalPrice(1000);
 
         assertNull(house.getOwner());
@@ -292,7 +312,7 @@ public class RichPlayerTest extends TestCase {
         RichPlayer visitor = new RichPlayer();
         RichPlayer owner = new RichPlayer();
 
-        RichHouse house = new RichHouse();
+        RichHouse house = new RichHouse(0);
         house.setOriginalPrice(1000);
         owner.addHouse(house);
 
@@ -311,7 +331,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_money_to_upgrade_house_from_plat_to_cottage() {
         RichPlayer player = new RichPlayer();
-        RichHouse house = new RichHouse();
+        RichHouse house = new RichHouse(0);
         house.setOriginalPrice(1000);
         player.addHouse(house);
         player.setMoney(10000);
@@ -325,7 +345,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_money_to_upgrade_house_from_cottage_to_villa() {
         RichPlayer player = new RichPlayer();
-        RichHouse house = new RichHouse();
+        RichHouse house = new RichHouse(0);
         house.setOriginalPrice(1000);
         player.addHouse(house);
         player.setMoney(10000);
@@ -340,7 +360,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_money_to_upgrade_house_from_villa_to_skyscraper() {
         RichPlayer player = new RichPlayer();
-        RichHouse house = new RichHouse();
+        RichHouse house = new RichHouse(0);
         house.setOriginalPrice(1000);
         player.addHouse(house);
         player.setMoney(10000);
@@ -356,7 +376,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_sell_plat() {
         RichPlayer player = new RichPlayer();
-        RichHouse house = new RichHouse();
+        RichHouse house = new RichHouse(0);
         house.setOriginalPrice(1000);
 
         player.addHouse(house);
@@ -367,13 +387,16 @@ public class RichPlayerTest extends TestCase {
         player.sellHouse(house);
 
         assertTrue(house.getLevel() instanceof RichHousePlatLevel);
+        assertNull(house.getOwner());
+        assertEquals(1000, house.getOriginalPrice());
         assertEquals(12000, player.getMoney());
         assertEquals(0, player.getHousesNumber());
+
     }
 
     public void test_player_sell_cottage() {
         RichPlayer player = new RichPlayer();
-        RichHouse house = new RichHouse();
+        RichHouse house = new RichHouse(0);
         house.setLevel(new RichHouseCottageLevel(1000));
 
         player.addHouse(house);
@@ -383,7 +406,9 @@ public class RichPlayerTest extends TestCase {
 
         player.sellHouse(house);
 
-        assertTrue(house.getLevel() instanceof RichHouseCottageLevel);
+        assertTrue(house.getLevel() instanceof RichHousePlatLevel);
+        assertNull(house.getOwner());
+        assertEquals(1000, house.getOriginalPrice());
         assertEquals(14000, player.getMoney());
         assertEquals(0, player.getHousesNumber());
     }
@@ -391,7 +416,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_sell_villa() {
         RichPlayer player = new RichPlayer();
-        RichHouse house = new RichHouse();
+        RichHouse house = new RichHouse(0);
         house.setLevel(new RichHouseVillaLevel(1000));
 
         player.addHouse(house);
@@ -401,7 +426,9 @@ public class RichPlayerTest extends TestCase {
 
         player.sellHouse(house);
 
-        assertTrue(house.getLevel() instanceof RichHouseVillaLevel);
+        assertTrue(house.getLevel() instanceof RichHousePlatLevel);
+        assertNull(house.getOwner());
+        assertEquals(1000, house.getOriginalPrice());
         assertEquals(16000, player.getMoney());
         assertEquals(0, player.getHousesNumber());
     }
@@ -409,7 +436,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_sell_skyscraper() {
         RichPlayer player = new RichPlayer();
-        RichHouse house = new RichHouse();
+        RichHouse house = new RichHouse(0);
         house.setLevel(new RichHouseSkyscraperLevel(1000));
 
         player.addHouse(house);
@@ -419,18 +446,20 @@ public class RichPlayerTest extends TestCase {
 
         player.sellHouse(house);
 
-        assertTrue(house.getLevel() instanceof RichHouseSkyscraperLevel);
+        assertTrue(house.getLevel() instanceof RichHousePlatLevel);
+        assertNull(house.getOwner());
+        assertEquals(1000, house.getOriginalPrice());
         assertEquals(18000, player.getMoney());
         assertEquals(0, player.getHousesNumber());
     }
 
     public void test_player_pay_for_toll() {
         RichPlayer owner = new RichPlayer();
-        RichHouse house = new RichHouse();
+        RichHouse house = new RichHouse(0);
         house.setLevel(new RichHousePlatLevel(1000));
-        
+
         owner.addHouse(house);
-        
+
         RichPlayer visitor = new RichPlayer();
         owner.setMoney(10000);
         visitor.setMoney(10000);
@@ -443,13 +472,13 @@ public class RichPlayerTest extends TestCase {
         assertEquals(10500, owner.getMoney());
     }
 
-    public void test_player_add_tool(){
+    public void test_player_add_tool() {
         RichPlayer player = new RichPlayer();
         player.addTool(RichTool.createTool(RichTool.BOMB));
         assertEquals(1, player.getToolsNumber());
     }
 
-    public void test_player_add_money(){
+    public void test_player_add_money() {
         RichPlayer player = new RichPlayer();
         player.addMoney(10000);
         assertEquals(10000, player.getMoney());

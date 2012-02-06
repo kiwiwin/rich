@@ -16,4 +16,8 @@ public class RichHouseCottageLevel extends RichHouseLevel {
     public int getToll() {
         return new RichHousePlatLevel(_originalPrice).getToll() * 2;
     }
+
+    public String display() {
+        return "1";
+    }
 }

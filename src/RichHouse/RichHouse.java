@@ -6,9 +6,8 @@ public class RichHouse {
     private RichHouseLevel _houseLevel;
     private RichPlayer _owner;
 
-    public RichHouse() {
-        _houseLevel = new RichHousePlatLevel(0);
-        _houseLevel.setOriginalPrice(0);
+    public RichHouse(int originalPrice) {
+        _houseLevel = new RichHousePlatLevel(originalPrice);
         _owner = null;
     }
 
@@ -24,16 +23,24 @@ public class RichHouse {
         return _houseLevel;
     }
 
-    public int getPrice() {
+    private int getCost() {
         return _houseLevel.getPrice();
     }
 
     public int getPriceForSell() {
-        return getPrice() * 2;
+        return getCost() * 2;
+    }
+
+    public int getToll() {
+        return _houseLevel.getToll();
     }
 
     public void setOriginalPrice(int price) {
         _houseLevel.setOriginalPrice(price);
+    }
+
+    public int getOriginalPrice() {
+        return _houseLevel.getOriginalPrice();
     }
 
     public void setOwner(RichPlayer player) {
@@ -44,11 +51,7 @@ public class RichHouse {
         return _owner;
     }
 
-    public int getToll() {
-        return _houseLevel.getToll();
-    }
-
-    public int getOriginalPrice() {
-        return _houseLevel.getOriginalPrice();
+    public String display() {
+        return _houseLevel.display();
     }
 }

@@ -1,6 +1,8 @@
 package RichPlayer;
 
+import RichGift.RichGift;
 import RichHouse.RichHouse;
+import RichHouse.RichHousePlatLevel;
 import RichTool.RichTool;
 import RichTool.ToolOverflowException;
 import RichTool.ToolUnderflowException;
@@ -78,9 +80,9 @@ public class RichPlayer {
 
     public void buyHouse(RichHouse house) {
         if (house.getOwner() != null) throw new HouseOwnerException();
-        if (_money < house.getPrice()) throw new HouseMoneyNotEnoughException();
+        if (_money < house.getOriginalPrice()) throw new HouseMoneyNotEnoughException();
         addHouse(house);
-        _money -= house.getPrice();
+        _money -= house.getOriginalPrice();
     }
 
     public int getHousesNumber() {
@@ -115,8 +117,10 @@ public class RichPlayer {
 
     public void sellHouse(RichHouse house) {
         if (!this.equals(house.getOwner())) throw new HouseOwnerException();
-        removeHouse(house);
         addMoney(house.getPriceForSell());
+        removeHouse(house);
+        house.setOwner(null);
+        house.setLevel(new RichHousePlatLevel(house.getOriginalPrice()));
     }
 
     private void removeHouse(RichHouse houseToRemove) {
@@ -128,5 +132,9 @@ public class RichPlayer {
         }
 
         throw new HouseOwnerException();
+    }
+
+    public void acceptGift(RichGift gift) {
+        gift.openGift(this);
     }
 }

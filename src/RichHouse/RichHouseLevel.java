@@ -20,4 +20,6 @@ public abstract class RichHouseLevel {
     public int getOriginalPrice() {
         return _originalPrice;
     }
+
+    public abstract String display();
 }

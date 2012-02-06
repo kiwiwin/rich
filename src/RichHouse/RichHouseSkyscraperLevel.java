@@ -16,4 +16,8 @@ public class RichHouseSkyscraperLevel extends RichHouseLevel {
     public int getToll() {
         return new RichHouseVillaLevel(_originalPrice).getToll() * 2;
     }
+
+    public String display() {
+        return "3";
+    }
 }

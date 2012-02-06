@@ -16,4 +16,8 @@ public class RichHousePlatLevel extends RichHouseLevel {
     public int getToll() {
         return _originalPrice/2;
     }
+
+    public String display() {
+        return "0";
+    }
 }
