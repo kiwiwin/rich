@@ -1,10 +1,12 @@
 import RichHouse.RichHouse;
 import RichMap.RichHouseSite;
 import RichPlayer.RichPlayer;
+import RichHouse.RichHouseCottageLevel;
+import RichHouse.RichHousePlatLevel;
+
 import junit.framework.TestCase;
 
 import java.io.*;
-
 
 public class RichHouseSiteTest extends TestCase {
     private PrintStream _console;
@@ -70,35 +72,98 @@ public class RichHouseSiteTest extends TestCase {
         }
     }
 
-    public void test_should_return_do_you_want_buy_house() {
-        set_output("./test/note_for_empty_plat_test.txt");
-        RichHouseSite site = new RichHouseSite(new RichHouse(1000));
-        site.acceptPlayer(new RichPlayer());
-        reset_output();
-        assertTrue(compareFile("./test/note_for_empty_plat_answer.txt", "./test/note_for_empty_plat_test.txt"));
-    }
-
-
-
     public void test_should_return_player_buy_house() {
-        assertTrue("should redirect input today", false);
-//        set_input();
-//        set_output("./test/buy_empty_play_test.txt");
-//        RichHouse house = new RichHouse(2000);
-//        RichHouseSite site = new RichHouseSite(house);
-//        RichPlayer player = new RichPlayer();
-//        player.setMoney(5000);
-//        site.acceptPlayer(player);
+        set_input("./test/player_buy_house_input.txt");
+        set_output("./test/buy_empty_play_test.txt");
+
+        RichHouse house = new RichHouse(1000);
+        RichHouseSite site = new RichHouseSite(house);
+        RichPlayer player = new RichPlayer();
+        player.setMoney(5000);
+        site.acceptPlayer(player);
+
+        reset_input();
+        reset_output();
+
+        assertEquals(player, house.getOwner());
+        assertEquals(4000, player.getMoney());
+        assertTrue(compareFile("./test/note_for_empty_plat_answer.txt", "./test/buy_empty_play_test.txt"));
     }
 
-    public void test_should_return_do_you_want_upgrade_house() {
+    public void test_should_return_player_not_buy_house() {
+        set_input("./test/player_not_buy_house_input.txt");
+        set_output("./test/not_buy_empty_play_test.txt");
+
+        RichHouse house = new RichHouse(1000);
+        RichHouseSite site = new RichHouseSite(house);
+        RichPlayer player = new RichPlayer();
+        player.setMoney(5000);
+        site.acceptPlayer(player);
+
+        reset_input();
+        reset_output();
+
+        assertEquals(null, house.getOwner());
+        assertEquals(5000, player.getMoney());
+        assertTrue(compareFile("./test/note_for_empty_plat_answer.txt", "./test/not_buy_empty_play_test.txt"));
+    }
+
+    public void test_should_return_player_upgrade_house() {
+        set_input("./test/player_upgrade_house_input.txt");
         set_output("./test/note_for_upgrade_house_test.txt");
+
         RichHouse house = new RichHouse(2000);
         RichPlayer player = new RichPlayer();
         player.addHouse(house);
+        player.setMoney(5000);
+
         RichHouseSite site = new RichHouseSite(house);
         site.acceptPlayer(player);
+
+        reset_input();
         reset_output();
+
+        assertTrue(house.getLevel() instanceof RichHouseCottageLevel);
+        assertEquals(3000, player.getMoney());
         assertTrue(compareFile("./test/note_for_upgrade_house_answer.txt", "./test/note_for_upgrade_house_test.txt"));
+    }
+
+    public void test_should_return_player_not_upgrade_house() {
+        set_input("./test/player_not_upgrade_house_input.txt");
+        set_output("./test/note_for_upgrade_house_test.txt");
+
+        RichHouse house = new RichHouse(2000);
+        RichPlayer player = new RichPlayer();
+        player.addHouse(house);
+        player.setMoney(5000);
+
+        RichHouseSite site = new RichHouseSite(house);
+        site.acceptPlayer(player);
+
+        reset_input();
+        reset_output();
+
+        assertTrue(house.getLevel() instanceof RichHousePlatLevel);
+        assertEquals(5000, player.getMoney());
+        assertTrue(compareFile("./test/note_for_upgrade_house_answer.txt", "./test/note_for_upgrade_house_test.txt"));
+    }
+
+    public void test_should_return_player_pay_for_toll() {
+        RichHouse house = new RichHouse(2000);
+        RichPlayer owner = new RichPlayer();
+        owner.addHouse(house);
+        owner.setMoney(5000);
+        RichPlayer visitor = new RichPlayer();
+        visitor.setMoney(5000);
+
+        RichHouseSite site = new RichHouseSite(house);
+        site.acceptPlayer(visitor);
+
+        reset_input();
+        reset_output();
+
+        assertTrue(house.getLevel() instanceof RichHousePlatLevel);
+        assertEquals(6000, owner.getMoney());
+        assertEquals(4000, visitor.getMoney());
     }
 }
