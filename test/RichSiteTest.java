@@ -67,4 +67,7 @@ public class RichSiteTest extends TestCase {
         }
     }
 
+    public void test_display_player_on_site(){
+        assertTrue(true);
+    }
 }
