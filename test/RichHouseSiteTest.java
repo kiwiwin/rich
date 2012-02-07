@@ -4,74 +4,7 @@ import RichPlayer.RichPlayer;
 import RichHouse.RichHouseCottageLevel;
 import RichHouse.RichHousePlatLevel;
 
-import junit.framework.TestCase;
-
-import java.io.*;
-
-public class RichHouseSiteTest extends TestCase {
-    private PrintStream _console;
-    private InputStream _keyboard;
-
-    private void set_input(String inputFileName) {
-        try {
-            _keyboard = System.in;
-            System.setIn(new FileInputStream(inputFileName));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-    }
-
-    private void reset_input() {
-        System.setIn(_keyboard);
-    }
-
-    private void set_output(String outputFileName) {
-        try {
-            _console = System.out;
-            System.setOut(new PrintStream(new FileOutputStream(outputFileName)));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-    }
-
-    private void reset_output() {
-        System.setOut(_console);
-    }
-
-    private boolean compareFile(String answer, String test) {
-        try {
-            BufferedReader answerReader = new BufferedReader(new FileReader(answer));
-            BufferedReader testReader = new BufferedReader(new FileReader(test));
-
-            int lineNumber = 1;
-            while (true) {
-                String answerLine = answerReader.readLine();
-                String testLine = testReader.readLine();
-
-                if (answerLine == null && testLine == null)
-                    return true;
-
-                if (answerLine == null) {
-                    System.out.println("answer should have " + lineNumber + " line.");
-                    return false;
-                }
-                if (testLine == null) {
-                    System.out.println("answer should have " + lineNumber + " line.");
-                    return false;
-                }
-
-                if (!answerLine.equals(testLine)) {
-                    System.out.println("Line " + lineNumber + " should be :" + answerLine + ", but actual: " + testLine);
-                    return false;
-                }
-
-                lineNumber++;
-            }
-        } catch (IOException e) {
-            return false;
-        }
-    }
-
+public class RichHouseSiteTest extends RichSiteTest {
     public void test_should_return_player_buy_house() {
         set_input("./test/player_buy_house_input.txt");
         set_output("./test/buy_empty_play_test.txt");

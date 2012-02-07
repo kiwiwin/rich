@@ -1,11 +1,11 @@
 package RichTool;
 
 
-public class ToolPointsNotEnoughException extends ToolException{
+public class ToolPointsNotEnoughException extends ToolException {
     private int _playerPoints;
     private RichTool _tool;
-    
-    public ToolPointsNotEnoughException(int playerPoints, RichTool tool){
+
+    public ToolPointsNotEnoughException(int playerPoints, RichTool tool) {
         _playerPoints = playerPoints;
         _tool = tool;
     }
@@ -13,8 +13,8 @@ public class ToolPointsNotEnoughException extends ToolException{
     public int getPlayerPoints() {
         return _playerPoints;
     }
-    
+
     public String getMessage() {
-        return "You have " + getPlayerPoints() + " points, not enough to buy " + _tool.getName() + " tool";
+        return "您当前剩余的点数为" + _playerPoints + "， 不足以购买" + _tool.getName() + "道具.";
     }
 }

@@ -10,7 +10,7 @@ public class BombTool extends RichTool {
     }
 
     public String getName() {
-        return "Bomb";
+        return "炸弹";
     }
 
     protected BombTool() {

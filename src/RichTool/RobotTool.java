@@ -10,7 +10,7 @@ public class RobotTool extends RichTool {
     }
 
     public String getName() {
-        return "Robot";
+        return "机器娃娃";
     }
 
     protected RobotTool() {

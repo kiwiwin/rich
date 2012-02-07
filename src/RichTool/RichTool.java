@@ -23,4 +23,12 @@ public abstract class RichTool {
                 throw new IllegalArgumentException("Unknown tool type");
         }
     }
+
+    public static RichTool createTool(String command) {
+        try {
+            return createTool(Integer.parseInt(command));
+        } catch (Exception ex) {
+            throw new IllegalArgumentException("Unknown tool type");
+        }
+    }
 }
