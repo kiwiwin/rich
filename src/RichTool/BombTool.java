@@ -3,7 +3,7 @@ package RichTool;
 import RichPlayer.RichPlayer;
 import RichMap.RichMap;
 
-public class BombTool extends RichTool {
+public class BombTool extends RichDeferredTool {
     public String display() {
         return "@";
     }
@@ -16,15 +16,15 @@ public class BombTool extends RichTool {
         return "炸弹";
     }
 
-    public void executeTool(RichPlayer player) {
-        player.setPosition(RichMap.instance().getHospitalSitePosition());
-        player.setPunishDays(3);
-    }
-
     protected BombTool() {
     }
 
     public boolean equals(Object arg) {
         return arg instanceof BombTool;
+    }
+
+    public void triggerTool(RichPlayer player) {
+        player.setPosition(RichMap.instance().getHospitalSitePosition());
+        player.setPunishDays(3);
     }
 }

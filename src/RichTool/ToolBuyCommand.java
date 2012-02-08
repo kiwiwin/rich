@@ -3,10 +3,10 @@ package RichTool;
 import RichPlayer.RichPlayer;
 
 public class ToolBuyCommand {
-    private RichTool _tool;
+    private ITool _tool;
     private RichPlayer _player;
 
-    public ToolBuyCommand(RichPlayer player, RichTool _tool) {
+    public ToolBuyCommand(RichPlayer player, ITool _tool) {
         this._player = player;
         this._tool = _tool;
     }

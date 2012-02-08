@@ -4,7 +4,7 @@ import RichGift.RichGift;
 import RichHouse.RichHouse;
 import RichHouse.RichHousePlatLevel;
 import RichMap.RichSitePosition;
-import RichTool.RichTool;
+import RichTool.ITool;
 import RichTool.ToolOverflowException;
 import RichTool.ToolUnderflowException;
 import RichTool.ToolPointsNotEnoughException;
@@ -18,7 +18,7 @@ public class RichPlayer {
     private int _points;
     private int _money;
 
-    private ArrayList<RichTool> _tools;
+    private ArrayList<ITool> _tools;
     private final int TOOL_NUMBER_LIMIT = 10;
     private final int DEFAULT_INIT_MONEY_COUNT = 10000;
     private final int DEFAULT_INIT_POINTS_COUNT = 0;
@@ -28,7 +28,7 @@ public class RichPlayer {
     private int _punishDays;
 
     public RichPlayer() {
-        _tools = new ArrayList<RichTool>();
+        _tools = new ArrayList<ITool>();
         _houses = new ArrayList<RichHouse>();
         _money = DEFAULT_INIT_MONEY_COUNT;
         _points = DEFAULT_INIT_POINTS_COUNT;
@@ -39,13 +39,13 @@ public class RichPlayer {
         return _tools.size();
     }
 
-    public void addTool(RichTool tool) {
+    public void addTool(ITool tool) {
         if (getToolsNumber() >= TOOL_NUMBER_LIMIT) throw new ToolOverflowException();
         _tools.add(tool);
     }
 
-    public void removeTool(RichTool toolToRemove) {
-        for (RichTool tool : _tools) {
+    public void removeTool(ITool toolToRemove) {
+        for (ITool tool : _tools) {
             if (tool.equals(toolToRemove)) {
                 _tools.remove(tool);
                 return;
@@ -71,19 +71,19 @@ public class RichPlayer {
         return _money;
     }
 
-    public void buyTool(RichTool tool) {
+    public void buyTool(ITool tool) {
         if (getPoints() < tool.getPoints()) throw new ToolPointsNotEnoughException(_points, tool);
         addTool(tool);
         _points -= tool.getPoints();
     }
 
 
-    public void sellTool(RichTool toolToSell) {
+    public void sellTool(ITool toolToSell) {
         removeTool(toolToSell);
         _points += toolToSell.getPoints();
     }
 
-    public void useTool(RichTool toolToUse) {
+    public void useTool(ITool toolToUse) {
         removeTool(toolToUse);
     }
 

@@ -1,10 +1,9 @@
 package RichTool;
 
-import RichMap.RichMap;
 import RichMap.RichSitePosition;
 import RichPlayer.RichPlayer;
 
-public class RobotTool extends RichTool {
+public class RobotTool extends RichRealTimeTool {
     public String display() {
         return " ";
     }
@@ -17,18 +16,18 @@ public class RobotTool extends RichTool {
         return "机器娃娃";
     }
 
-    public void executeTool(RichPlayer player) {
-        RichSitePosition position = new RichSitePosition(RichMap.instance(), player.getPosition().getIndex());
-        for (int index = 1; index <= 10; index++) {
-            position.moveForward(1);
-            position.getSite().removeTool();
-        }
-    }
-
     protected RobotTool() {
     }
 
     public boolean equals(Object arg) {
         return arg instanceof RobotTool;
+    }
+
+    public void useTool(RichPlayer player) {
+        RichSitePosition position = new RichSitePosition(player.getPosition());
+        for (int i = 0; i < 10; i++) {
+            position.moveForward(1);
+            position.getSite().removeDeferredTool();
+        }
     }
 }

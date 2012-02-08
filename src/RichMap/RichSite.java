@@ -1,43 +1,42 @@
 package RichMap;
 
 import RichPlayer.RichPlayer;
-import RichTool.RichTool;
+import RichTool.RichDeferredTool;
 
 public abstract class RichSite {
-    private RichTool _tool;
+    private RichDeferredTool _tool;
 
     public abstract void acceptPlayer(RichPlayer player);
 
     public abstract String display();
 
-    public void installTool(RichTool tool) {
-        if (hasToolInstalled()) ;//TODO
-        if (true);//TODO: if there has already a person here, tool can not install at here
+    public void installDeferredTool(RichDeferredTool tool) {
+        if (hasDeferredToolInstalled()) ;//TODO
         _tool = tool;
     }
 
-    public void removeTool() {
+    public void removeDeferredTool() {
         _tool = null;
     }
 
     public void acceptPassenger(RichPlayer player) {
-        if (hasToolInstalled()) {
-            _tool.executeTool(player);
+        if (hasDeferredToolInstalled()) {
+            _tool.triggerTool(player);
         }
 
-        if (isUserStopHere(player))
+        if (isUserStopHere(player)) {
             acceptPlayer(player);
-        if (player.hasRemainStep())
-        {
+        }
+        if (player.hasRemainStep()) {
             player.stepForward();
         }
     }
 
     private boolean isUserStopHere(RichPlayer player) {
-        return this == player.getPosition().getSite() && player.getRemainStep() == 0;
+        return this == player.getPosition().getSite() && !player.hasRemainStep();
     }
 
-    public boolean hasToolInstalled() {
+    public boolean hasDeferredToolInstalled() {
         return _tool != null;
     }
 }

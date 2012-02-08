@@ -1,9 +1,9 @@
 package RichTool;
 
 public class ToolUnderflowException extends ToolException {
-    private RichTool _tool;
+    private ITool _tool;
 
-    public ToolUnderflowException(RichTool tool) {
+    public ToolUnderflowException(ITool tool) {
         _tool = tool;
     }
 

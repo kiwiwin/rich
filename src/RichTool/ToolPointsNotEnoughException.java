@@ -3,9 +3,9 @@ package RichTool;
 
 public class ToolPointsNotEnoughException extends ToolException {
     private int _playerPoints;
-    private RichTool _tool;
+    private ITool _tool;
 
-    public ToolPointsNotEnoughException(int playerPoints, RichTool tool) {
+    public ToolPointsNotEnoughException(int playerPoints, ITool tool) {
         _playerPoints = playerPoints;
         _tool = tool;
     }
