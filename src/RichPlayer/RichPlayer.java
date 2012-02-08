@@ -3,6 +3,7 @@ package RichPlayer;
 import RichGift.RichGift;
 import RichHouse.RichHouse;
 import RichHouse.RichHousePlatLevel;
+import RichMap.RichSitePosition;
 import RichTool.RichTool;
 import RichTool.ToolOverflowException;
 import RichTool.ToolUnderflowException;
@@ -19,11 +20,19 @@ public class RichPlayer {
 
     private ArrayList<RichTool> _tools;
     private final int TOOL_NUMBER_LIMIT = 10;
+    private final int DEFAULT_INIT_MONEY_COUNT = 10000;
+    private final int DEFAULT_INIT_POINTS_COUNT = 0;
     private ArrayList<RichHouse> _houses;
+    private RichSitePosition _position;
+    private int _remainStep;
+    private int _punishDays;
 
     public RichPlayer() {
         _tools = new ArrayList<RichTool>();
         _houses = new ArrayList<RichHouse>();
+        _money = DEFAULT_INIT_MONEY_COUNT;
+        _points = DEFAULT_INIT_POINTS_COUNT;
+        _position = null;//TODO
     }
 
     public int getToolsNumber() {
@@ -136,5 +145,36 @@ public class RichPlayer {
 
     public void acceptGift(RichGift gift) {
         gift.openGift(this);
+    }
+
+
+    public void setPosition(RichSitePosition position) {
+        _position = position;
+    }
+
+    public void stepForward() {
+        _remainStep--;
+        _position.moveForward(1);
+        _position.getSite().acceptPassenger(this);
+    }
+
+    public RichSitePosition getPosition() {
+        return _position;
+    }
+
+    public int getRemainStep() {
+        return _remainStep;
+    }
+
+    public boolean hasRemainStep() {
+        return _remainStep > 0;
+    }
+
+    public void setRemainStep(int remainStep) {
+        _remainStep = remainStep;
+    }
+
+    public void setPunishDays(int punishDays) {
+        _punishDays = punishDays;
     }
 }

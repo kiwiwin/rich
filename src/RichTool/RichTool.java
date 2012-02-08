@@ -1,5 +1,7 @@
 package RichTool;
 
+import RichPlayer.RichPlayer;
+
 public abstract class RichTool {
     public abstract String display();
 
@@ -31,4 +33,6 @@ public abstract class RichTool {
             throw new IllegalArgumentException("Unknown tool type");
         }
     }
+
+    public abstract void executeTool(RichPlayer player);
 }

@@ -23,6 +23,10 @@ public class RichHouseSite extends RichSite {
         }
     }
 
+    public String display() {
+        return _house.display();
+    }
+
     private void handlePayToll(RichPlayer player) {
         player.payHouseToll(_house);
     }

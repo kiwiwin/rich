@@ -19,4 +19,8 @@ public class RichGiftSite extends RichSite {
             System.out.println(ex.getMessage());
         }
     }
+
+    public String display() {
+        return "G";
+    }
 }

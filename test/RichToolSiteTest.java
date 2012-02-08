@@ -2,6 +2,11 @@ import RichMap.RichToolSite;
 import RichPlayer.RichPlayer;
 
 public class RichToolSiteTest extends RichSiteTest {
+    public void test_should_return_T_for_display(){
+        RichToolSite site = new RichToolSite();
+        assertEquals("T", site.display());
+    }
+
     public void test_should_return_player_exit_rich_tool_site_automatically(){
         RichPlayer player = new RichPlayer();
         player.setPoints(10);
@@ -54,7 +59,7 @@ public class RichToolSiteTest extends RichSiteTest {
         RichToolSite site= new RichToolSite();
         site.acceptPlayer(player);
 
-        assertEquals(20, player.getPoints());
+        assertEquals(40, player.getPoints());
         assertEquals(5, player.getToolsNumber());
 
         reset_input();

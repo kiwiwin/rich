@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 
 public class RichToolSite extends RichSite {
     public void acceptPlayer(RichPlayer player) {
-        if (player.getPoints() < 30) return; //return automatically
+        if (player.getPoints() < 30) return; //player do not have enough points, return automatically
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String command;
@@ -17,6 +17,7 @@ public class RichToolSite extends RichSite {
                 if (command.equals("F")) return;
                 try {
                     player.buyTool(RichTool.createTool(command));
+                    if (player.getPoints() < 30) return; //player do not have enough points, return automatically
                 } catch (IllegalArgumentException ex) {
                     System.out.println(ex.getMessage());
                 }
@@ -24,5 +25,9 @@ public class RichToolSite extends RichSite {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public String display() {
+        return "T";
     }
 }

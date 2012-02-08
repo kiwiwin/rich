@@ -14,6 +14,11 @@ public class RichGiftSiteTest extends RichSiteTest {
 //
 //        assertTrue(compareFile("./test/rich_gift_site_welcome_message_answer.txt", "./test/rich_gift_site_welcome_message_test.txt"));
 //    }
+    public void test_should_return_G_for_display(){
+        RichGiftSite site = new RichGiftSite();
+        assertEquals("G", site.display());
+    }
+
 
     public void test_should_return_get_money_gift() {
         set_input("./test/player_get_money_gift_input.txt");

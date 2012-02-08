@@ -480,6 +480,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_add_money() {
         RichPlayer player = new RichPlayer();
+        player.setMoney(0);
         player.addMoney(10000);
         assertEquals(10000, player.getMoney());
     }
