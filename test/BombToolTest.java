@@ -4,6 +4,14 @@ import RichPlayer.RichPlayer;
 import junit.framework.TestCase;
 
 public class BombToolTest extends TestCase {
+    public void test_should_display_at_for_bomb_tool() {
+        assertEquals("@", RichToolFactory.createTool(RichToolFactory.BOMB).display());
+    }
+
+    public void test_should_return_50_for_bomb_get_points() {
+        assertEquals(50, RichToolFactory.createTool(RichToolFactory.BOMB).getPoints());
+    }
+
     public void test_should_return_炸弹_for_getName() {
         ITool tool = RichToolFactory.createTool(RichToolFactory.BOMB);
         assertEquals("炸弹", tool.getName());

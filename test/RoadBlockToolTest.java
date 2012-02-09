@@ -4,6 +4,14 @@ import RichPlayer.*;
 import junit.framework.TestCase;
 
 public class RoadBlockToolTest extends TestCase {
+    public void test_should_display_sharp_for_roadblock_tool() {
+        assertEquals("#", RichToolFactory.createTool(RichToolFactory.ROADBLOCK).display());
+    }
+
+    public void test_should_return_50_for_roadblock_get_points() {
+        assertEquals(50, RichToolFactory.createTool(RichToolFactory.ROADBLOCK).getPoints());
+    }
+
     public void test_should_return_路障_for_getName() {
         ITool tool = RichToolFactory.createTool(RichToolFactory.ROADBLOCK);
         assertEquals("路障", tool.getName());
