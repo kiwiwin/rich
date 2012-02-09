@@ -2,18 +2,6 @@ import RichMap.RichGiftSite;
 import RichPlayer.RichPlayer;
 
 public class RichGiftSiteTest extends RichSiteTest {
-//    public void test_should_display_welcome_message() {
-//        set_output("./test/rich_gift_site_welcome_message_test.txt");
-//
-//        RichPlayer player = new RichPlayer();
-//        RichGiftSite site = new RichGiftSite();
-//
-//        site.acceptPlayer(player);
-//
-//        reset_output();
-//
-//        assertTrue(compareFile("./test/rich_gift_site_welcome_message_answer.txt", "./test/rich_gift_site_welcome_message_test.txt"));
-//    }
     public void test_should_return_G_for_display(){
         RichGiftSite site = new RichGiftSite();
         assertEquals("G", site.display());
@@ -28,7 +16,7 @@ public class RichGiftSiteTest extends RichSiteTest {
         RichGiftSite site = new RichGiftSite();
         player.setMoney(1000);
 
-        site.acceptPlayer(player);
+        site.doAcceptPlayer(player);
 
         reset_input();
         reset_output();

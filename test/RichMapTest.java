@@ -5,12 +5,12 @@ import RichMap.*;
 
 public class RichMapTest extends TestCase {
     public void test_should_return_map_has_70_sites() {
-        RichMap map = RichMap.instance();
+        RichMap map = RichMap.buildMap();
         assertEquals(70, map.getSitesNumber());
     }
 
     public void test_should_return_rich_house_site_for_moving_forward_2_from_startup() {
-        RichMap map = RichMap.instance();
+        RichMap map = RichMap.buildMap();
 
         RichSitePosition position = new RichSitePosition(map, 0);
 

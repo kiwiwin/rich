@@ -14,7 +14,7 @@ public class RichHouseSiteTest extends RichSiteTest {
         RichHouseSite site = new RichHouseSite(house);
         RichPlayer player = new RichPlayer();
         player.setMoney(5000);
-        site.acceptPlayer(player);
+        site.doAcceptPlayer(player);
 
         reset_input();
         reset_output();
@@ -32,7 +32,7 @@ public class RichHouseSiteTest extends RichSiteTest {
         RichHouseSite site = new RichHouseSite(house);
         RichPlayer player = new RichPlayer();
         player.setMoney(5000);
-        site.acceptPlayer(player);
+        site.doAcceptPlayer(player);
 
         reset_input();
         reset_output();
@@ -52,7 +52,7 @@ public class RichHouseSiteTest extends RichSiteTest {
         player.setMoney(5000);
 
         RichHouseSite site = new RichHouseSite(house);
-        site.acceptPlayer(player);
+        site.doAcceptPlayer(player);
 
         reset_input();
         reset_output();
@@ -73,7 +73,7 @@ public class RichHouseSiteTest extends RichSiteTest {
         player.setMoney(5000);
 
         RichHouseSite site = new RichHouseSite(house);
-        site.acceptPlayer(player);
+        site.doAcceptPlayer(player);
 
         reset_input();
         reset_output();
@@ -92,7 +92,7 @@ public class RichHouseSiteTest extends RichSiteTest {
         visitor.setMoney(5000);
 
         RichHouseSite site = new RichHouseSite(house);
-        site.acceptPlayer(visitor);
+        site.doAcceptPlayer(visitor);
 
         assertTrue(house.getLevel() instanceof RichHousePlatLevel);
         assertEquals(6000, owner.getMoney());
@@ -106,12 +106,50 @@ public class RichHouseSiteTest extends RichSiteTest {
         RichMap map = RichMap.buildMap();
         player.setPosition(new RichSitePosition(map, 0));
 
-        player.setRemainStep(5);
-        player.stepForward();
+        player.stepForward(5);
 
         reset_input();
 
         assertEquals(5, player.getPosition().getIndex());
     }
 
+    public void test_should_return_0_for_toll_of_plat_original_price_is_1000_if_house_owner_is_at_prison_or_hospital() {
+        RichHouse house = new RichHouse(1000);
+        RichHouseSite site = new RichHouseSite(house);
+        RichPlayer owner = new RichPlayer();
+        owner.setPunishDays(3);
+        owner.addHouse(house);
+        house.setOwner(owner);
+        owner.setMoney(0);
+        
+        RichPlayer visitor = new RichPlayer();
+        visitor.setMoney(10000);
+        site.acceptPlayer(visitor);
+
+        assertEquals(0, owner.getMoney());
+        assertEquals(10000, visitor.getMoney());
+    }
+
+    public void test_should_return_0_for_toll_of_plat_original_price_is_1000_if_visitor_has_blessing_god() {
+        set_output("./test/player_has_blessing_god_test.txt");
+
+        RichHouse house = new RichHouse(1000);
+        RichHouseSite site = new RichHouseSite(house);
+        RichPlayer owner = new RichPlayer();
+        owner.addHouse(house);
+        house.setOwner(owner);
+        owner.setMoney(0);
+
+        RichPlayer visitor = new RichPlayer();
+        visitor.setMoney(10000);
+        visitor.setBlessingGod();
+        site.acceptPlayer(visitor);
+
+        reset_output();
+
+        assertEquals(0, owner.getMoney());
+        assertEquals(10000, visitor.getMoney());
+
+        assertTrue(compareFile("./test/player_has_blessing_god_answer.txt", "./test/player_has_blessing_god_test.txt"));
+    }
 }

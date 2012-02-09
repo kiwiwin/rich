@@ -16,9 +16,6 @@ public class BombTool extends RichDeferredTool {
         return "炸弹";
     }
 
-    protected BombTool() {
-    }
-
     public boolean equals(Object arg) {
         return arg instanceof BombTool;
     }
@@ -26,5 +23,6 @@ public class BombTool extends RichDeferredTool {
     public void triggerTool(RichPlayer player) {
         player.setPosition(RichMap.instance().getHospitalSitePosition());
         player.setPunishDays(3);
+        player.setVisible(false);
     }
 }

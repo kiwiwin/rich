@@ -15,15 +15,12 @@ public class RoadBlockTool extends RichDeferredTool {
         return "路障";
     }
 
-    protected RoadBlockTool() {
-    }
-
     public boolean equals(Object arg) {
         return arg instanceof RoadBlockTool;
     }
 
     public void triggerTool(RichPlayer player) {
         player.setRemainStep(0);
-        player.getPosition().getSite().acceptPlayer(player);
+//        player.getPosition().getSite().acceptPlayer(player);
     }
 }

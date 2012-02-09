@@ -9,7 +9,7 @@ public class RichMineSite extends RichSite {
         _bonusPoints = points;
     }
 
-    public void acceptPlayer(RichPlayer player) {
+    public void doAcceptPlayer(RichPlayer player) {
         player.addPoints(_bonusPoints);
     }
 

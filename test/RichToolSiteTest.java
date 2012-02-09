@@ -12,7 +12,7 @@ public class RichToolSiteTest extends RichSiteTest {
         player.setPoints(10);
 
         RichToolSite site = new RichToolSite();
-        site.acceptPlayer(player);
+        site.doAcceptPlayer(player);
 
         assertEquals(10, player.getPoints());
     }
@@ -24,7 +24,7 @@ public class RichToolSiteTest extends RichSiteTest {
         player.setPoints(1000);
 
         RichToolSite site= new RichToolSite();
-        site.acceptPlayer(player);
+        site.doAcceptPlayer(player);
 
         assertEquals(740, player.getPoints());
         assertEquals(6, player.getToolsNumber());
@@ -38,7 +38,7 @@ public class RichToolSiteTest extends RichSiteTest {
         player.setPoints(1000);
 
         RichToolSite site= new RichToolSite();
-        site.acceptPlayer(player);
+        site.doAcceptPlayer(player);
 
         assertEquals(1000, player.getPoints());
         assertEquals(0, player.getToolsNumber());
@@ -57,7 +57,7 @@ public class RichToolSiteTest extends RichSiteTest {
         player.setPoints(250);
 
         RichToolSite site= new RichToolSite();
-        site.acceptPlayer(player);
+        site.doAcceptPlayer(player);
 
         assertEquals(40, player.getPoints());
         assertEquals(5, player.getToolsNumber());

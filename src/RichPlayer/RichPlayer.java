@@ -26,6 +26,7 @@ public class RichPlayer {
     private RichSitePosition _position;
     private int _remainStep;
     private int _punishDays;
+    private int _blessingGodDays;
 
     public RichPlayer() {
         _tools = new ArrayList<ITool>();
@@ -77,7 +78,6 @@ public class RichPlayer {
         _points -= tool.getPoints();
     }
 
-
     public void sellTool(ITool toolToSell) {
         removeTool(toolToSell);
         _points += toolToSell.getPoints();
@@ -92,6 +92,14 @@ public class RichPlayer {
         if (_money < house.getOriginalPrice()) throw new HouseMoneyNotEnoughException();
         addHouse(house);
         _money -= house.getOriginalPrice();
+    }
+
+    public void sellHouse(RichHouse house) {
+        if (!this.equals(house.getOwner())) throw new HouseOwnerException();
+        addMoney(house.getPriceForSell());
+        removeHouse(house);
+        house.setOwner(null);
+        house.setLevel(new RichHousePlatLevel(house.getOriginalPrice()));
     }
 
     public int getHousesNumber() {
@@ -124,14 +132,6 @@ public class RichPlayer {
         _points += points;
     }
 
-    public void sellHouse(RichHouse house) {
-        if (!this.equals(house.getOwner())) throw new HouseOwnerException();
-        addMoney(house.getPriceForSell());
-        removeHouse(house);
-        house.setOwner(null);
-        house.setLevel(new RichHousePlatLevel(house.getOriginalPrice()));
-    }
-
     private void removeHouse(RichHouse houseToRemove) {
         for (RichHouse house : _houses) {
             if (house.equals(houseToRemove)) {
@@ -147,13 +147,22 @@ public class RichPlayer {
         gift.openGift(this);
     }
 
-
     public void setPosition(RichSitePosition position) {
+        if (_position != null) _position.getSite().removePlayer(this);
         _position = position;
+        _position.getSite().addPlayer(this);
     }
 
-    public void stepForward() {
-        _remainStep--;
+    public void stepForward(int step){
+        if (_position != null) _position.getSite().removePlayer(this);
+        setRemainStep(step);
+        while(_remainStep-- > 0)
+        {
+            stepForward();
+        }
+    }
+
+    private void stepForward() {
         _position.moveForward(1);
         _position.getSite().acceptPassenger(this);
     }
@@ -162,12 +171,12 @@ public class RichPlayer {
         return _position;
     }
 
-    public int getRemainStep() {
+    private int getRemainStep() {
         return _remainStep;
     }
 
     public boolean hasRemainStep() {
-        return _remainStep > 0;
+        return getRemainStep() > 0;
     }
 
     public void setRemainStep(int remainStep) {
@@ -176,5 +185,26 @@ public class RichPlayer {
 
     public void setPunishDays(int punishDays) {
         _punishDays = punishDays;
+    }
+
+    public boolean isPunished() {
+        return _punishDays > 0;
+    }
+
+    public void setBlessingGod() {
+        _blessingGodDays = 5;
+    }
+
+    public boolean hasBlessingGod() {
+        return _blessingGodDays > 0;
+    }
+
+    public void setVisible(boolean visible) {
+        if (visible){
+            _position.getSite().addPlayer(this);
+        }
+        else {
+            _position.getSite().removePlayer(this);
+        }
     }
 }

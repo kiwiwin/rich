@@ -3,7 +3,7 @@ package RichMap;
 import RichPlayer.RichPlayer;
 
 public class RichPrisonSite extends RichSite {
-    public void acceptPlayer(RichPlayer richPlayer) {
+    public void doAcceptPlayer(RichPlayer richPlayer) {
     }
 
     public String display() {

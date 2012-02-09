@@ -25,8 +25,9 @@ public class BombToolTest extends TestCase {
 
         tool.installTool(player, 1);
 
-        player.stepForward();
+        player.stepForward(1);
 
         assertEquals(map.getHospitalSitePosition().getIndex(), player.getPosition().getIndex());
+        assertFalse(map.getHospitalSitePosition().getSite().hasPlayerStand());
     }
 }

@@ -1,5 +1,6 @@
 import RichTool.*;
 import RichHouse.*;
+import RichMap.*;
 import junit.framework.TestCase;
 
 import RichPlayer.RichPlayer;
@@ -482,5 +483,21 @@ public class RichPlayerTest extends TestCase {
         player.setMoney(0);
         player.addMoney(10000);
         assertEquals(10000, player.getMoney());
+    }
+
+    public void test_player_move_forward_4_steps() {
+        RichPlayer player = new RichPlayer();
+        RichMap map = RichMap.buildMap();
+        player.setPosition(new RichSitePosition(map, 0));
+        player.stepForward(14);
+
+        System.out.println(player.getPosition().getIndex());
+                             
+        RichHospitalSite site =(RichHospitalSite) map.getSite(14);
+        assertTrue(player.getPosition().getSite() instanceof RichHospitalSite);
+        assertEquals(site, player.getPosition().getSite());
+        assertEquals(14, player.getPosition().getIndex());
+        assertTrue(map.getSite(14).hasPlayerStand());
+        assertFalse(map.getSite(0).hasPlayerStand());
     }
 }

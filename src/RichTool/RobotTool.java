@@ -16,9 +16,6 @@ public class RobotTool extends RichRealTimeTool {
         return "机器娃娃";
     }
 
-    protected RobotTool() {
-    }
-
     public boolean equals(Object arg) {
         return arg instanceof RobotTool;
     }

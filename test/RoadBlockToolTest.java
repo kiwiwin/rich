@@ -19,14 +19,14 @@ public class RoadBlockToolTest extends TestCase {
 
     public void test_should_roadblock_block_player() {
         RichDeferredTool tool = (RichDeferredTool)RichToolFactory.createTool(RichToolFactory.ROADBLOCK);
-        RichMap map = RichMap.instance();
+        RichMap map = RichMap.buildMap();
         RichPlayer player= new RichPlayer();
         player.setPosition(new RichSitePosition(map, 63));
 
         tool.installTool(player, 1);
-        player.setRemainStep(7);
-        player.stepForward();
+        player.stepForward(7);
 
         assertEquals(64, player.getPosition().getIndex());
+        assertTrue(map.getSite(64).hasPlayerStand());
     }
 }

@@ -13,7 +13,7 @@ public class RichHouseSite extends RichSite {
         _house = house;
     }
 
-    public void acceptPlayer(RichPlayer player) {
+    public void doAcceptPlayer(RichPlayer player) {
         if (_house.getOwner() == null) {
             handleBuyHouse(player);
         } else if (_house.getOwner() == player) {
@@ -28,6 +28,11 @@ public class RichHouseSite extends RichSite {
     }
 
     private void handlePayToll(RichPlayer player) {
+        if (_house.getOwner().isPunished()) return;
+        if (player.hasBlessingGod()) {
+            System.out.println("福神附身，可免过路费");
+            return;
+        }
         player.payHouseToll(_house);
     }
 

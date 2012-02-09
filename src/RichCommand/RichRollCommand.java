@@ -11,7 +11,6 @@ public class RichRollCommand {
 
     public void executeCommand() {
         int step = (int) Math.ceil(Math.random() * 6);
-        _player.setRemainStep(step);
-        _player.stepForward();
+        _player.stepForward(step);
     }
 }

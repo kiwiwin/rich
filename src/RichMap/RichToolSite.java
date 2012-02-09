@@ -7,7 +7,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class RichToolSite extends RichSite {
-    public void acceptPlayer(RichPlayer player) {
+    public void doAcceptPlayer(RichPlayer player) {
         if (player.getPoints() < 30) return; //player do not have enough points, return automatically
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

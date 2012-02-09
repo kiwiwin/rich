@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class RichGiftSite extends RichSite {
-    public void acceptPlayer(RichPlayer player){
+    public void doAcceptPlayer(RichPlayer player){
         System.out.println("欢迎光临礼品屋，请选择一件您喜欢的礼品：");
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

@@ -11,6 +11,6 @@ public class RichGiftTest extends TestCase {
     }
 
     public void test_should_return_god_gift_for_rich_gift_create_god_gift(){
-        assertTrue(RichGift.createGift(RichGift.GOD) instanceof GodGift);
+        assertTrue(RichGift.createGift(RichGift.BLESSINGGOD) instanceof BlessingGodGift);
     }
 }
