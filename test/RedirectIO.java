@@ -1,38 +1,38 @@
-import junit.framework.TestCase;
-
 import java.io.*;
 
-public class RichSiteTest extends TestCase {
-    private PrintStream _console;
-    private InputStream _keyboard;
+public class RedirectIO {
+    private static PrintStream _console;
+    private static InputStream _keyboard;
 
-    protected void set_input(String inputFileName) {
+    public static boolean set_input(String inputFileName) {
         try {
             _keyboard = System.in;
             System.setIn(new FileInputStream(inputFileName));
         } catch (FileNotFoundException e) {
-            assertTrue(e.getMessage(), false);
+            return false;    
         }
+        return true;
     }
 
-    protected void reset_input() {
+    protected static void reset_input() {
         System.setIn(_keyboard);
     }
 
-    protected void set_output(String outputFileName) {
+    protected static boolean set_output(String outputFileName) {
         try {
             _console = System.out;
             System.setOut(new PrintStream(new FileOutputStream(outputFileName)));
         } catch (FileNotFoundException e) {
-            assertTrue(e.getMessage(), false);
+            return false;
         }
+        return true;
     }
 
-    protected void reset_output() {
+    protected static void reset_output() {
         System.setOut(_console);
     }
 
-    protected boolean compareFile(String answer, String test) {
+    protected static boolean compareFile(String answer, String test) {
         try {
             BufferedReader answerReader = new BufferedReader(new FileReader(answer));
             BufferedReader testReader = new BufferedReader(new FileReader(test));
@@ -65,9 +65,5 @@ public class RichSiteTest extends TestCase {
             System.err.println(e.getMessage());
             return false;
         }
-    }
-
-    public void test_display_player_on_site(){
-        assertTrue(true);
     }
 }

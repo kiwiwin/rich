@@ -492,8 +492,8 @@ public class RichPlayerTest extends TestCase {
         player.stepForward(14);
 
         System.out.println(player.getPosition().getIndex());
-                             
-        RichHospitalSite site =(RichHospitalSite) map.getSite(14);
+
+        RichHospitalSite site = (RichHospitalSite) map.getSite(14);
         assertTrue(player.getPosition().getSite() instanceof RichHospitalSite);
         assertEquals(site, player.getPosition().getSite());
         assertEquals(14, player.getPosition().getIndex());

@@ -17,6 +17,10 @@ public class RichHouseCottageLevel extends RichHouseLevel {
         return new RichHousePlatLevel(_originalPrice).getToll() * 2;
     }
 
+    public boolean isSameLevel(RichHouseLevel level) {
+        return level instanceof RichHouseCottageLevel;
+    }
+
     public String display() {
         return "1";
     }

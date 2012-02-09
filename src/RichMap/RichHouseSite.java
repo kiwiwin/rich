@@ -14,13 +14,21 @@ public class RichHouseSite extends RichSite {
     }
 
     public void doAcceptPlayer(RichPlayer player) {
-        if (_house.getOwner() == null) {
+        if (hasOwner()) {
             handleBuyHouse(player);
-        } else if (_house.getOwner() == player) {
+        } else if (isOwner(player)) {
             handleUpgradeHouse(player);
         } else {
             handlePayToll(player);
         }
+    }
+
+    public boolean isOwner(RichPlayer player) {
+        return _house.getOwner() == player;
+    }
+
+    public boolean hasOwner() {
+        return isOwner(null);
     }
 
     public String display() {

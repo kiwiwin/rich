@@ -1,7 +1,8 @@
 import RichMap.RichToolSite;
 import RichPlayer.RichPlayer;
+import junit.framework.TestCase;
 
-public class RichToolSiteTest extends RichSiteTest {
+public class RichToolSiteTest extends TestCase {
     public void test_should_return_T_for_display(){
         RichToolSite site = new RichToolSite();
         assertEquals("T", site.display());
@@ -18,7 +19,7 @@ public class RichToolSiteTest extends RichSiteTest {
     }
 
     public void test_should_return_player_buy_1_roadblock_2_robot_3_bomb(){
-        set_input("./test/player_buy_1_roadblock_2_robot_3_bomb.txt");
+        RedirectIO.set_input("./test/player_buy_1_roadblock_2_robot_3_bomb.txt");
 
         RichPlayer player = new RichPlayer();
         player.setPoints(1000);
@@ -31,8 +32,8 @@ public class RichToolSiteTest extends RichSiteTest {
     }
 
     public void test_should_return_invalid_tool_(){
-        set_input("./test/player_buy_invalid_tool.txt");
-        set_output("./test/player_buy_invalid_tool_test.txt");
+        RedirectIO.set_input("./test/player_buy_invalid_tool.txt");
+        RedirectIO.set_output("./test/player_buy_invalid_tool_test.txt");
         
         RichPlayer player = new RichPlayer();
         player.setPoints(1000);
@@ -43,15 +44,15 @@ public class RichToolSiteTest extends RichSiteTest {
         assertEquals(1000, player.getPoints());
         assertEquals(0, player.getToolsNumber());
 
-        reset_input();
-        reset_output();
+        RedirectIO.reset_input();
+        RedirectIO.reset_output();
 
-        assertTrue(compareFile("./test/player_buy_invalid_tool_answer.txt", "./test/player_buy_invalid_tool_test.txt"));
+        assertTrue(RedirectIO.compareFile("./test/player_buy_invalid_tool_answer.txt", "./test/player_buy_invalid_tool_test.txt"));
     }
 
     public void test_should_return_not_have_enough_points_buy_tools(){
-        set_input("./test/player_buy_1_roadblock_2_robot_3_bomb.txt");
-        set_output("./test/player_have_not_enough_points_buy_tool_test.txt");
+        RedirectIO.set_input("./test/player_buy_1_roadblock_2_robot_3_bomb.txt");
+        RedirectIO.set_output("./test/player_have_not_enough_points_buy_tool_test.txt");
 
         RichPlayer player = new RichPlayer();
         player.setPoints(250);
@@ -62,9 +63,9 @@ public class RichToolSiteTest extends RichSiteTest {
         assertEquals(40, player.getPoints());
         assertEquals(5, player.getToolsNumber());
 
-        reset_input();
-        reset_output();
+        RedirectIO.reset_input();
+        RedirectIO.reset_output();
 
-        assertTrue(compareFile("./test/player_have_not_enough_points_buy_tool_answer.txt", "./test/player_have_not_enough_points_buy_tool_test.txt"));
+        assertTrue(RedirectIO.compareFile("./test/player_have_not_enough_points_buy_tool_answer.txt", "./test/player_have_not_enough_points_buy_tool_test.txt"));
     }
 }

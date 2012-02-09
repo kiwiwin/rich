@@ -48,9 +48,7 @@ public abstract class RichSite {
     }
 
     private boolean isUserStopHere(RichPlayer player) {
-        boolean re = player.hasRemainStep();
-        boolean bu = player.isPunished();
-        return !re && !bu;
+        return !player.hasRemainStep() && !player.isPunished();
     }
 
     public boolean hasDeferredToolInstalled() {

@@ -4,11 +4,12 @@ import RichMap.*;
 import RichPlayer.RichPlayer;
 import RichHouse.RichHouseCottageLevel;
 import RichHouse.RichHousePlatLevel;
+import junit.framework.TestCase;
 
-public class RichHouseSiteTest extends RichSiteTest {
+public class RichHouseSiteTest extends TestCase {
     public void test_should_return_player_buy_house() {
-        set_input("./test/player_buy_house_input.txt");
-        set_output("./test/buy_empty_play_test.txt");
+        RedirectIO.set_input("./test/player_buy_house_input.txt");
+        RedirectIO.set_output("./test/buy_empty_play_test.txt");
 
         RichHouse house = new RichHouse(1000);
         RichHouseSite site = new RichHouseSite(house);
@@ -16,17 +17,17 @@ public class RichHouseSiteTest extends RichSiteTest {
         player.setMoney(5000);
         site.doAcceptPlayer(player);
 
-        reset_input();
-        reset_output();
+        RedirectIO.reset_input();
+        RedirectIO.reset_output();
 
         assertEquals(player, house.getOwner());
         assertEquals(4000, player.getMoney());
-        assertTrue(compareFile("./test/note_for_empty_plat_answer.txt", "./test/buy_empty_play_test.txt"));
+        assertTrue(RedirectIO.compareFile("./test/note_for_empty_plat_answer.txt", "./test/buy_empty_play_test.txt"));
     }
 
     public void test_should_return_player_not_buy_house() {
-        set_input("./test/player_not_buy_house_input.txt");
-        set_output("./test/not_buy_empty_play_test.txt");
+        RedirectIO.set_input("./test/player_not_buy_house_input.txt");
+        RedirectIO.set_output("./test/not_buy_empty_play_test.txt");
 
         RichHouse house = new RichHouse(1000);
         RichHouseSite site = new RichHouseSite(house);
@@ -34,17 +35,17 @@ public class RichHouseSiteTest extends RichSiteTest {
         player.setMoney(5000);
         site.doAcceptPlayer(player);
 
-        reset_input();
-        reset_output();
+        RedirectIO.reset_input();
+        RedirectIO.reset_output();
 
         assertEquals(null, house.getOwner());
         assertEquals(5000, player.getMoney());
-        assertTrue(compareFile("./test/note_for_empty_plat_answer.txt", "./test/not_buy_empty_play_test.txt"));
+        assertTrue(RedirectIO.compareFile("./test/note_for_empty_plat_answer.txt", "./test/not_buy_empty_play_test.txt"));
     }
 
     public void test_should_return_player_upgrade_house() {
-        set_input("./test/player_upgrade_house_input.txt");
-        set_output("./test/note_for_upgrade_house_test.txt");
+        RedirectIO.set_input("./test/player_upgrade_house_input.txt");
+        RedirectIO.set_output("./test/note_for_upgrade_house_test.txt");
 
         RichHouse house = new RichHouse(2000);
         RichPlayer player = new RichPlayer();
@@ -54,18 +55,18 @@ public class RichHouseSiteTest extends RichSiteTest {
         RichHouseSite site = new RichHouseSite(house);
         site.doAcceptPlayer(player);
 
-        reset_input();
-        reset_output();
+        RedirectIO.reset_input();
+        RedirectIO.reset_output();
 
         assertTrue(house.getLevel() instanceof RichHouseCottageLevel);
         assertEquals(3000, player.getMoney());
-        assertTrue(compareFile("./test/note_for_upgrade_house_answer.txt", "./test/note_for_upgrade_house_test.txt"));
+        assertTrue(RedirectIO.compareFile("./test/note_for_upgrade_house_answer.txt", "./test/note_for_upgrade_house_test.txt"));
     }
 
 
     public void test_should_return_player_not_upgrade_house() {
-        set_input("./test/player_not_upgrade_house_input.txt");
-        set_output("./test/note_for_upgrade_house_test.txt");
+        RedirectIO.set_input("./test/player_not_upgrade_house_input.txt");
+        RedirectIO.set_output("./test/note_for_upgrade_house_test.txt");
 
         RichHouse house = new RichHouse(2000);
         RichPlayer player = new RichPlayer();
@@ -75,12 +76,12 @@ public class RichHouseSiteTest extends RichSiteTest {
         RichHouseSite site = new RichHouseSite(house);
         site.doAcceptPlayer(player);
 
-        reset_input();
-        reset_output();
+        RedirectIO.reset_input();
+        RedirectIO.reset_output();
 
         assertTrue(house.getLevel() instanceof RichHousePlatLevel);
         assertEquals(5000, player.getMoney());
-        assertTrue(compareFile("./test/note_for_upgrade_house_answer.txt", "./test/note_for_upgrade_house_test.txt"));
+        assertTrue(RedirectIO.compareFile("./test/note_for_upgrade_house_answer.txt", "./test/note_for_upgrade_house_test.txt"));
     }
 
     public void test_should_return_player_pay_for_toll() {
@@ -100,7 +101,7 @@ public class RichHouseSiteTest extends RichSiteTest {
     }
 
     public void test_player_move_5_steps_forward_buy_house() {
-        set_input("./test/player_not_buy_house_input.txt");
+        RedirectIO.set_input("./test/player_not_buy_house_input.txt");
 
         RichPlayer player = new RichPlayer();
         RichMap map = RichMap.buildMap();
@@ -108,7 +109,7 @@ public class RichHouseSiteTest extends RichSiteTest {
 
         player.stepForward(5);
 
-        reset_input();
+        RedirectIO.reset_input();
 
         assertEquals(5, player.getPosition().getIndex());
     }
@@ -131,7 +132,7 @@ public class RichHouseSiteTest extends RichSiteTest {
     }
 
     public void test_should_return_0_for_toll_of_plat_original_price_is_1000_if_visitor_has_blessing_god() {
-        set_output("./test/player_has_blessing_god_test.txt");
+        RedirectIO.set_output("./test/player_has_blessing_god_test.txt");
 
         RichHouse house = new RichHouse(1000);
         RichHouseSite site = new RichHouseSite(house);
@@ -145,11 +146,11 @@ public class RichHouseSiteTest extends RichSiteTest {
         visitor.setBlessingGod();
         site.acceptPlayer(visitor);
 
-        reset_output();
+        RedirectIO.reset_output();
 
         assertEquals(0, owner.getMoney());
         assertEquals(10000, visitor.getMoney());
 
-        assertTrue(compareFile("./test/player_has_blessing_god_answer.txt", "./test/player_has_blessing_god_test.txt"));
+        assertTrue(RedirectIO.compareFile("./test/player_has_blessing_god_answer.txt", "./test/player_has_blessing_god_test.txt"));
     }
 }

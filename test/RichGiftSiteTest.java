@@ -1,7 +1,8 @@
 import RichMap.RichGiftSite;
 import RichPlayer.RichPlayer;
+import junit.framework.TestCase;
 
-public class RichGiftSiteTest extends RichSiteTest {
+public class RichGiftSiteTest extends TestCase {
     public void test_should_return_G_for_display(){
         RichGiftSite site = new RichGiftSite();
         assertEquals("G", site.display());
@@ -9,8 +10,8 @@ public class RichGiftSiteTest extends RichSiteTest {
 
 
     public void test_should_return_get_money_gift() {
-        set_input("./test/player_get_money_gift_input.txt");
-        set_output("./test/rich_gift_site_get_money_gift_test.txt");
+        RedirectIO.set_input("./test/player_get_money_gift_input.txt");
+        RedirectIO.set_output("./test/rich_gift_site_get_money_gift_test.txt");
 
         RichPlayer player = new RichPlayer();
         RichGiftSite site = new RichGiftSite();
@@ -18,10 +19,10 @@ public class RichGiftSiteTest extends RichSiteTest {
 
         site.doAcceptPlayer(player);
 
-        reset_input();
-        reset_output();
+        RedirectIO.reset_input();
+        RedirectIO.reset_output();
 
         assertEquals(3000, player.getMoney());
-        assertTrue(compareFile("./test/rich_gift_site_welcome_message_answer.txt", "./test/rich_gift_site_get_money_gift_test.txt"));
+        assertTrue(RedirectIO.compareFile("./test/rich_gift_site_welcome_message_answer.txt", "./test/rich_gift_site_get_money_gift_test.txt"));
     }
 }

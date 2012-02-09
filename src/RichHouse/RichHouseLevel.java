@@ -17,6 +17,8 @@ public abstract class RichHouseLevel {
 
     public abstract int getToll();
 
+    public abstract boolean isSameLevel(RichHouseLevel level);
+
     public int getOriginalPrice() {
         return _originalPrice;
     }

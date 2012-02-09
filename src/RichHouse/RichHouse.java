@@ -54,4 +54,13 @@ public class RichHouse {
     public String display() {
         return _houseLevel.display();
     }
+
+    public void sell() {
+        _owner = null;
+        _houseLevel = new RichHousePlatLevel(getOriginalPrice());
+    }
+
+    public boolean isSameLevel(RichHouse house) {
+        return _houseLevel.isSameLevel(house.getLevel());
+    }
 }

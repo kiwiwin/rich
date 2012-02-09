@@ -2,7 +2,6 @@ package RichPlayer;
 
 import RichGift.RichGift;
 import RichHouse.RichHouse;
-import RichHouse.RichHousePlatLevel;
 import RichMap.RichSitePosition;
 import RichTool.ITool;
 import RichTool.ToolOverflowException;
@@ -34,7 +33,7 @@ public class RichPlayer {
         _houses = new ArrayList<RichHouse>();
         _money = DEFAULT_INIT_MONEY_COUNT;
         _points = DEFAULT_INIT_POINTS_COUNT;
-        _position = null;//TODO
+        _position = null;//TODO:change ?
     }
 
     public int getToolsNumber() {
@@ -99,8 +98,7 @@ public class RichPlayer {
         if (!this.equals(house.getOwner())) throw new HouseOwnerException();
         addMoney(house.getPriceForSell());
         removeHouse(house);
-        house.setOwner(null);
-        house.setLevel(new RichHousePlatLevel(house.getOriginalPrice()));
+        house.sell();
     }
 
     public int getHousesNumber() {
@@ -154,11 +152,10 @@ public class RichPlayer {
         _position.getSite().addPlayer(this);
     }
 
-    public void stepForward(int step){
+    public void stepForward(int step) {
         if (_position != null) _position.getSite().removePlayer(this);
         setRemainStep(step);
-        while(_remainStep-- > 0)
-        {
+        while (_remainStep-- > 0) {
             stepForward();
         }
     }
@@ -201,10 +198,9 @@ public class RichPlayer {
     }
 
     public void setVisible(boolean visible) {
-        if (visible){
+        if (visible) {
             _position.getSite().addPlayer(this);
-        }
-        else {
+        } else {
             _position.getSite().removePlayer(this);
         }
     }
@@ -215,5 +211,25 @@ public class RichPlayer {
 
     public void setName(String name) {
         _name = name;
+    }
+
+    public int getPunlishDays() {
+        return _punishDays;
+    }
+
+    public int getToolsNumberByType(ITool tool) {
+        int result = 0;
+        for (ITool t : _tools) {
+            if (t.equals(tool)) result++;
+        }
+        return result;
+    }
+
+    public int getHousesNumberByLevel(RichHouse house) {
+        int result = 0;
+        for (RichHouse h : _houses) {
+            if (h.isSameLevel(house)) result++;
+        }
+        return result;
     }
 }
