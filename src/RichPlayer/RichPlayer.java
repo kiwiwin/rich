@@ -27,6 +27,7 @@ public class RichPlayer {
     private int _remainStep;
     private int _punishDays;
     private int _blessingGodDays;
+    private String _name;
 
     public RichPlayer() {
         _tools = new ArrayList<ITool>();
@@ -206,5 +207,13 @@ public class RichPlayer {
         else {
             _position.getSite().removePlayer(this);
         }
+    }
+
+    public String display() {
+        return _name;
+    }
+
+    public void setName(String name) {
+        _name = name;
     }
 }
