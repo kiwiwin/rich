@@ -1,6 +1,6 @@
 package RichCommand;
 
-public class RichHelpCommand {
+public class RichHelpCommand extends RichCommand {
     public void executeCommand() {
         String result = "命令一览表\n";
         result += RichRollCommand.getHelp() + "\n";

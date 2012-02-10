@@ -33,7 +33,6 @@ public class RichPlayer {
         _houses = new ArrayList<RichHouse>();
         _money = DEFAULT_INIT_MONEY_COUNT;
         _points = DEFAULT_INIT_POINTS_COUNT;
-        _position = null;//TODO:change ?
     }
 
     public int getToolsNumber() {

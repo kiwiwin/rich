@@ -3,7 +3,7 @@ package RichCommand;
 import RichHouse.RichHouse;
 import RichPlayer.RichPlayer;
 
-public class RichSellHouseCommand {
+public class RichSellHouseCommand extends RichCommand {
     private RichHouse _house;
     private RichPlayer _player;
 

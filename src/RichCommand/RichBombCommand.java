@@ -5,7 +5,7 @@ import RichPlayer.RichPlayer;
 import RichTool.*;
 import RichTool.RichToolFactory;
 
-public class RichBombCommand {
+public class RichBombCommand extends RichCommand {
     private RichPlayer _player;
     private int _offset;
 

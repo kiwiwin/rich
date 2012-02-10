@@ -3,7 +3,7 @@ package RichCommand;
 import RichPlayer.RichPlayer;
 import RichTool.ITool;
 
-public class RichSellToolCommand {
+public class RichSellToolCommand extends RichCommand {
     private RichPlayer _player;
     private ITool _tool;
 

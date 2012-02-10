@@ -3,7 +3,7 @@ package RichCommand;
 import RichMap.RichSitePosition;
 import RichPlayer.RichPlayer;
 
-public class RichRobotCommand {
+public class RichRobotCommand extends RichCommand {
 
     private RichPlayer _player;
 

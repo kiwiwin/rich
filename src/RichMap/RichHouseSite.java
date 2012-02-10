@@ -13,6 +13,10 @@ public class RichHouseSite extends RichSite {
         _house = house;
     }
 
+    public RichHouse getHouse() {
+        return _house;
+    }
+
     public void doAcceptPlayer(RichPlayer player) {
         if (hasOwner()) {
             handleBuyHouse(player);

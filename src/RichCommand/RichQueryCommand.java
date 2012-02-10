@@ -4,7 +4,7 @@ import RichHouse.RichHouse;
 import RichPlayer.RichPlayer;
 import RichTool.RichToolFactory;
 
-public class RichQueryCommand {
+public class RichQueryCommand extends RichCommand {
     private RichPlayer _player;
 
     public RichQueryCommand(RichPlayer player) {

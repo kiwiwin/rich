@@ -17,4 +17,12 @@ public class RichPlayerFactory {
 
         return player;
     }
+
+    public static RichPlayer[] createPlayers(String text) {
+        RichPlayer players[] = new RichPlayer[text.length()];
+        for (int i = 0; i < text.length(); i++) {
+            players[i] = createPlayer(text.substring(i, i+1));
+        }
+        return players;
+    }
 }
