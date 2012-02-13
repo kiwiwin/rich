@@ -24,4 +24,8 @@ public class RichHouseSkyscraperLevel extends RichHouseLevel {
     public String display() {
         return "3";
     }
+
+    public void sell(RichHouse house) {
+        house.setLevel(new RichHousePlatLevel(_originalPrice));
+    }
 }

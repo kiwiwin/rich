@@ -6,9 +6,17 @@ public class RichHouse {
     private RichHouseLevel _houseLevel;
     private RichPlayer _owner;
 
-    public RichHouse(RichHousePlatLevel originalPrice) {
+    public RichHouse(RichHouseLevel originalPrice) {
         _houseLevel = originalPrice;
         _owner = null;
+    }
+
+    public void setOwner(RichPlayer player) {
+        _owner = player;
+    }
+
+    public RichPlayer getOwner() {
+        return _owner;
     }
 
     public void upgrade() {
@@ -43,21 +51,13 @@ public class RichHouse {
         return _houseLevel.getOriginalPrice();
     }
 
-    public void setOwner(RichPlayer player) {
-        _owner = player;
-    }
-
-    public RichPlayer getOwner() {
-        return _owner;
-    }
-
     public String display() {
         return _houseLevel.display();
     }
 
     public void sell() {
         _owner = null;
-        _houseLevel = new RichHousePlatLevel(getOriginalPrice());
+        _houseLevel.sell(this);
     }
 
     public boolean isSameLevel(RichHouse house) {

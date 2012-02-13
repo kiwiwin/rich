@@ -1,57 +1,50 @@
+package RIchHouseTest;
+
 import junit.framework.TestCase;
 
 import RichHouse.*;
 
 public class RichHouseTest extends TestCase {
-    public void test_upgrade_empty_to_cottage() {
-        RichHouse house = new RichHouse(new RichHousePlatLevel(0));
-        house.upgrade();
-        assertTrue(house.getLevel() instanceof RichHouseCottageLevel);
-    }
-
     public void test_should_return_0_for_plat_house_display() {
         RichHouse house = new RichHouse(new RichHousePlatLevel(0));
         assertEquals("0", house.display());
     }
 
     public void test_should_return_1_for_cottage_house_display() {
-        RichHouse house = new RichHouse(new RichHousePlatLevel(0));
-        house.upgrade();
+        RichHouse house = new RichHouse(new RichHouseCottageLevel(0));
         assertEquals("1", house.display());
     }
 
     public void test_should_return_2_for_villa_house_display() {
-        RichHouse house = new RichHouse(new RichHousePlatLevel(0));
-        house.upgrade();
-        house.upgrade();
+        RichHouse house = new RichHouse(new RichHouseVillaLevel(0));
         assertEquals("2", house.display());
     }
 
     public void test_should_return_3_for_skyscraper_house_display() {
-        RichHouse house = new RichHouse(new RichHousePlatLevel(0));
-        house.upgrade();
-        house.upgrade();
-        house.upgrade();
+        RichHouse house = new RichHouse(new RichHouseSkyscraperLevel(0));
         assertEquals("3", house.display());
     }
 
-    public void test_upgrade_cottage_to_villa() {
+    public void test_upgrade_empty_to_cottage() {
         RichHouse house = new RichHouse(new RichHousePlatLevel(0));
-        house.setLevel(new RichHouseCottageLevel(0));
+        house.upgrade();
+        assertTrue(house.getLevel() instanceof RichHouseCottageLevel);
+    }
+
+    public void test_upgrade_cottage_to_villa() {
+        RichHouse house = new RichHouse(new RichHouseCottageLevel(0));
         house.upgrade();
         assertTrue(house.getLevel() instanceof RichHouseVillaLevel);
     }
 
     public void test_upgrade_villa_to_skyscraper() {
-        RichHouse house = new RichHouse(new RichHousePlatLevel(0));
-        house.setLevel(new RichHouseVillaLevel(0));
+        RichHouse house = new RichHouse(new RichHouseVillaLevel(0));
         house.upgrade();
         assertTrue(house.getLevel() instanceof RichHouseSkyscraperLevel);
     }
 
     public void test_cannot_upgrade_skyscraper() {
-        RichHouse house = new RichHouse(new RichHousePlatLevel(0));
-        house.setLevel(new RichHouseSkyscraperLevel(0));
+        RichHouse house = new RichHouse(new RichHouseSkyscraperLevel(0));
         boolean isException = false;
         try {
             house.upgrade();
@@ -61,6 +54,30 @@ public class RichHouseTest extends TestCase {
         }
 
         assertTrue(isException);
+    }
+
+    public void test_should_return_plat_after_sell_plat() {
+        RichHouse house = new RichHouse(new RichHousePlatLevel(0));
+        house.sell();
+        assertTrue(house.getLevel() instanceof RichHousePlatLevel);
+    }
+
+    public void test_should_return_plat_after_sell_cottage() {
+        RichHouse house = new RichHouse(new RichHouseCottageLevel(0));
+        house.sell();
+        assertTrue(house.getLevel() instanceof RichHousePlatLevel);
+    }
+
+    public void test_should_return_plat_after_sell_villa() {
+        RichHouse house = new RichHouse(new RichHouseVillaLevel(0));
+        house.sell();
+        assertTrue(house.getLevel() instanceof RichHousePlatLevel);
+    }
+
+    public void test_should_return_plat_after_sell_skyscraper() {
+        RichHouse house = new RichHouse(new RichHouseSkyscraperLevel(0));
+        house.sell();
+        assertTrue(house.getLevel() instanceof RichHousePlatLevel);
     }
 
     public void test_should_return_500_for_toll_of_plat_original_price_is_1000() {

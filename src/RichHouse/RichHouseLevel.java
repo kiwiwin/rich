@@ -24,4 +24,7 @@ public abstract class RichHouseLevel {
     }
 
     public abstract String display();
+
+
+    public abstract void sell(RichHouse richHouse);
 }
