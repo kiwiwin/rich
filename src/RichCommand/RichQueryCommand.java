@@ -1,6 +1,9 @@
 package RichCommand;
 
 import RichHouse.RichHouse;
+
+import RichHouse.RichHousePlatLevel;
+
 import RichPlayer.RichPlayer;
 import RichTool.RichToolFactory;
 
@@ -30,7 +33,7 @@ public class RichQueryCommand extends RichCommand {
 
     private String queryHouse() {
         String result = "地产：";
-        RichHouse house = new RichHouse(0);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(1000));
         result += "空地" + _player.getHousesNumberByLevel(house) + "处；";
         house.upgrade();
         result += "茅屋" + _player.getHousesNumberByLevel(house) + "处；";

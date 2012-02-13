@@ -274,7 +274,7 @@ public class RichPlayerTest extends TestCase {
         RichPlayer player = new RichPlayer();
         player.setMoney(5000);
 
-        RichHouse house = new RichHouse(0);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(0));
         house.setOriginalPrice(1000);
 
         assertNull(house.getOwner());
@@ -289,7 +289,7 @@ public class RichPlayerTest extends TestCase {
         RichPlayer player = new RichPlayer();
         player.setMoney(500);
 
-        RichHouse house = new RichHouse(0);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(0));
         house.setOriginalPrice(1000);
 
         assertNull(house.getOwner());
@@ -312,7 +312,7 @@ public class RichPlayerTest extends TestCase {
         RichPlayer visitor = new RichPlayer();
         RichPlayer owner = new RichPlayer();
 
-        RichHouse house = new RichHouse(0);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(0));
         house.setOriginalPrice(1000);
         owner.addHouse(house);
 
@@ -331,7 +331,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_money_to_upgrade_house_from_plat_to_cottage() {
         RichPlayer player = new RichPlayer();
-        RichHouse house = new RichHouse(0);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(0));
         house.setOriginalPrice(1000);
         player.addHouse(house);
         player.setMoney(10000);
@@ -345,7 +345,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_money_to_upgrade_house_from_cottage_to_villa() {
         RichPlayer player = new RichPlayer();
-        RichHouse house = new RichHouse(0);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(0));
         house.setOriginalPrice(1000);
         player.addHouse(house);
         player.setMoney(10000);
@@ -360,7 +360,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_money_to_upgrade_house_from_villa_to_skyscraper() {
         RichPlayer player = new RichPlayer();
-        RichHouse house = new RichHouse(0);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(2000));
         house.setOriginalPrice(1000);
         player.addHouse(house);
         player.setMoney(10000);
@@ -376,7 +376,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_sell_plat() {
         RichPlayer player = new RichPlayer();
-        RichHouse house = new RichHouse(0);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(2000));
         house.setOriginalPrice(1000);
 
         player.addHouse(house);
@@ -396,7 +396,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_sell_cottage() {
         RichPlayer player = new RichPlayer();
-        RichHouse house = new RichHouse(0);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(0));
         house.setLevel(new RichHouseCottageLevel(1000));
 
         player.addHouse(house);
@@ -416,7 +416,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_sell_villa() {
         RichPlayer player = new RichPlayer();
-        RichHouse house = new RichHouse(0);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(0));
         house.setLevel(new RichHouseVillaLevel(1000));
 
         player.addHouse(house);
@@ -436,7 +436,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_sell_skyscraper() {
         RichPlayer player = new RichPlayer();
-        RichHouse house = new RichHouse(0);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(0));
         house.setLevel(new RichHouseSkyscraperLevel(1000));
 
         player.addHouse(house);
@@ -455,7 +455,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_pay_for_toll() {
         RichPlayer owner = new RichPlayer();
-        RichHouse house = new RichHouse(0);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(0));
         house.setLevel(new RichHousePlatLevel(1000));
 
         owner.addHouse(house);

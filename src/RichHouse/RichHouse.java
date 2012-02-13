@@ -6,8 +6,8 @@ public class RichHouse {
     private RichHouseLevel _houseLevel;
     private RichPlayer _owner;
 
-    public RichHouse(int originalPrice) {
-        _houseLevel = new RichHousePlatLevel(originalPrice);
+    public RichHouse(RichHousePlatLevel originalPrice) {
+        _houseLevel = originalPrice;
         _owner = null;
     }
 
