@@ -63,4 +63,8 @@ public class RichHouse {
     public boolean isSameLevel(RichHouse house) {
         return _houseLevel.isSameLevel(house.getLevel());
     }
+
+    public boolean hasOwner() {
+        return getOwner() != null;
+    }
 }

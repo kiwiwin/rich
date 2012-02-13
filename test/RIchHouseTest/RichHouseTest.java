@@ -87,25 +87,19 @@ public class RichHouseTest extends TestCase {
     }
 
     public void test_should_return_1000_for_toll_of_cottage_original_price_is_1000() {
-        RichHouse house = new RichHouse(new RichHousePlatLevel(1000));
-        house.upgrade();
+        RichHouse house = new RichHouse(new RichHouseCottageLevel(1000));
         assertTrue(house.getLevel() instanceof RichHouseCottageLevel);
         assertEquals(1000, house.getToll());
     }
 
     public void test_should_return_2000_for_toll_of_villa_original_price_is_1000() {
-        RichHouse house = new RichHouse(new RichHousePlatLevel(1000));
-        house.upgrade();
-        house.upgrade();
+        RichHouse house = new RichHouse(new RichHouseVillaLevel(1000));
         assertTrue(house.getLevel() instanceof RichHouseVillaLevel);
         assertEquals(2000, house.getToll());
     }
 
     public void test_should_return_400_for_toll_of_skyscraper_original_price_is_1000() {
-        RichHouse house = new RichHouse(new RichHousePlatLevel(1000));
-        house.upgrade();
-        house.upgrade();
-        house.upgrade();
+        RichHouse house = new RichHouse(new RichHouseSkyscraperLevel(1000));
         assertTrue(house.getLevel() instanceof RichHouseSkyscraperLevel);
         assertEquals(4000, house.getToll());
     }
@@ -116,28 +110,22 @@ public class RichHouseTest extends TestCase {
     }
 
     public void test_should_return_4000_for_sell_price_of_cottage_original_price_is_1000() {
-        RichHouse house = new RichHouse(new RichHousePlatLevel(1000));
-        house.upgrade();
+        RichHouse house = new RichHouse(new RichHouseCottageLevel(1000));
         assertEquals(4000, house.getPriceForSell());
     }
 
     public void test_should_return_6000_for_sell_price_of_villa_original_price_is_1000() {
-        RichHouse house = new RichHouse(new RichHousePlatLevel(1000));
-        house.upgrade();
-        house.upgrade();
+        RichHouse house = new RichHouse(new RichHouseVillaLevel(1000));
         assertEquals(6000, house.getPriceForSell());
     }
 
     public void test_should_return_8000_for_sell_price_of_skyscraper_original_price_is_1000() {
-        RichHouse house = new RichHouse(new RichHousePlatLevel(1000));
-        house.upgrade();
-        house.upgrade();
-        house.upgrade();
+        RichHouse house = new RichHouse(new RichHouseSkyscraperLevel(1000));
         assertEquals(8000, house.getPriceForSell());
     }
 
     public void test_should_house_has_no_owner_at_beginning() {
         RichHouse house = new RichHouse(new RichHousePlatLevel(1000));
-        assertNull(house.getOwner());
+        assertFalse(house.hasOwner());
     }
 }
