@@ -1,8 +1,12 @@
 package RichToolTest;
 
-import RichTool.*;
-import RichMap.*;
-import RichPlayer.*;
+import RichMap.RichMap;
+import RichMap.RichSitePosition;
+import RichPlayer.RichPlayer;
+import RichPlayer.RichPoint;
+import RichTool.RichDeferredTool;
+import RichTool.RichTool;
+import RichTool.RichToolFactory;
 import junit.framework.TestCase;
 
 public class RoadBlockToolTest extends TestCase {

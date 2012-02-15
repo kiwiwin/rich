@@ -1,8 +1,9 @@
 package RichGiftTest;
 
+import RichGift.MoneyGift;
+import RichPlayer.RichMoney;
+import RichPlayer.RichPlayer;
 import junit.framework.TestCase;
-import RichGift.*;
-import RichPlayer.*;
 
 public class MoneyGiftTest extends TestCase {
     public void test_should_add_2000_money_for_open_money_gift() {

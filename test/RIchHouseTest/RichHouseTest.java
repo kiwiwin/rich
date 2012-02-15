@@ -1,9 +1,8 @@
 package RIchHouseTest;
 
+import RichHouse.*;
 import RichPlayer.RichMoney;
 import junit.framework.TestCase;
-
-import RichHouse.*;
 
 public class RichHouseTest extends TestCase {
     private static final RichMoney dummyMoney = new RichMoney(0);

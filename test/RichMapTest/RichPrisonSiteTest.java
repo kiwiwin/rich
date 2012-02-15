@@ -1,6 +1,9 @@
 package RichMapTest;
 
-import RichMap.*;
+import RichMap.RichMap;
+import RichMap.RichPrisonSite;
+import RichMap.RichSite;
+import RichMap.RichSitePosition;
 import RichPlayer.RichPlayer;
 import junit.framework.TestCase;
 

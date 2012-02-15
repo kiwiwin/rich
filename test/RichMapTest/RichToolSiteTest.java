@@ -2,9 +2,9 @@ package RichMapTest;
 
 import RichMap.RichToolSite;
 import RichPlayer.RichPlayer;
+import RichPlayer.RichPoint;
 import TestHelper.RedirectIO;
 import junit.framework.TestCase;
-import RichPlayer.RichPoint;
 
 public class RichToolSiteTest extends TestCase {
     public void test_should_return_T_for_display(){

@@ -1,7 +1,8 @@
 package RichCommandTest;
 
 import RichCommand.RichRobotCommand;
-import RichMap.*;
+import RichMap.RichMap;
+import RichMap.RichSitePosition;
 import RichPlayer.RichPlayer;
 import RichTool.RichDeferredTool;
 import RichTool.RichToolFactory;

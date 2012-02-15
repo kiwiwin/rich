@@ -1,7 +1,10 @@
 package RichGiftTest;
 
+import RichGift.BlessingGodGift;
+import RichGift.MoneyGift;
+import RichGift.PointsGift;
+import RichGift.RichGift;
 import junit.framework.TestCase;
-import RichGift.*;
 
 public class RichGiftTest extends TestCase {
     public void test_should_return_money_gift_for_rich_gift_create_money_gift(){

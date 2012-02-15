@@ -1,9 +1,7 @@
 package RichMapTest;
 
-import RichMap.RichMap;
-import junit.framework.TestCase;
-
 import RichMap.*;
+import junit.framework.TestCase;
 
 public class RichMapTest extends TestCase {
     public void test_should_return_map_has_70_sites() {

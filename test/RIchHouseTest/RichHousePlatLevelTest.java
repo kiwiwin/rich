@@ -1,8 +1,8 @@
 package RIchHouseTest;
 
 import RichHouse.RichHouse;
-import RichHouse.RichHousePlatLevel;
 import RichHouse.RichHouseCottageLevel;
+import RichHouse.RichHousePlatLevel;
 import RichPlayer.RichMoney;
 import junit.framework.TestCase;
 

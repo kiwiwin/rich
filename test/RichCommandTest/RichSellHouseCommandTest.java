@@ -1,10 +1,11 @@
 package RichCommandTest;
 
 import RichCommand.RichSellHouseCommand;
-import RichHouse.*;
+import RichHouse.RichHouse;
+import RichHouse.RichHousePlatLevel;
+import RichPlayer.RichMoney;
 import RichPlayer.RichPlayer;
 import junit.framework.TestCase;
-import RichPlayer.RichMoney;
 
 public class RichSellHouseCommandTest extends TestCase {
     public void test_should_return_sell_house_success() {

@@ -1,9 +1,13 @@
 package RichToolTest;
 
-import RichTool.*;
-import RichMap.*;
+import RichMap.RichMap;
+import RichMap.RichSitePosition;
 import RichPlayer.RichPlayer;
 import RichPlayer.RichPoint;
+import RichTool.RichDeferredTool;
+import RichTool.RichRealTimeTool;
+import RichTool.RichTool;
+import RichTool.RichToolFactory;
 import junit.framework.TestCase;
 
 public class RobotToolTest extends TestCase {

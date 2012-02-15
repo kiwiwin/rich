@@ -1,8 +1,8 @@
 package RichUtilTest;
 
 import RichUtil.RichIO;
-import junit.framework.TestCase;
 import TestHelper.RedirectIO;
+import junit.framework.TestCase;
 
 import java.io.IOException;
 

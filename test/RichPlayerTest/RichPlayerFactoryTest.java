@@ -1,6 +1,7 @@
 package RichPlayerTest;
 
-import RichPlayer.*;
+import RichPlayer.RichPlayer;
+import RichPlayer.RichPlayerFactory;
 import junit.framework.TestCase;
 
 public class RichPlayerFactoryTest extends TestCase {

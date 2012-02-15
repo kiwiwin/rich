@@ -1,8 +1,8 @@
 package RichMapTest;
 
 import RichMap.RichGiftSite;
-import RichPlayer.RichPlayer;
 import RichPlayer.RichMoney;
+import RichPlayer.RichPlayer;
 import TestHelper.RedirectIO;
 import junit.framework.TestCase;
 

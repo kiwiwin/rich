@@ -1,6 +1,9 @@
 package RichToolTest;
 
-import RichTool.*;
+import RichTool.BombTool;
+import RichTool.RichToolFactory;
+import RichTool.RoadBlockTool;
+import RichTool.RobotTool;
 import junit.framework.TestCase;
 
 public class RichToolFactoryTest extends TestCase {

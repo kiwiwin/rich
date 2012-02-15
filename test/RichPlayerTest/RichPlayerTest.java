@@ -1,13 +1,17 @@
 package RichPlayerTest;
 
-import RichTool.*;
 import RichHouse.*;
-import RichMap.*;
-import junit.framework.TestCase;
-
-import RichPlayer.RichPlayer;
+import RichMap.RichHospitalSite;
+import RichMap.RichMap;
+import RichMap.RichSitePosition;
 import RichPlayer.RichMoney;
+import RichPlayer.RichPlayer;
 import RichPlayer.RichPoint;
+import RichTool.RichToolFactory;
+import RichTool.ToolOverflowException;
+import RichTool.ToolPointsNotEnoughException;
+import RichTool.ToolUnderflowException;
+import junit.framework.TestCase;
 
 public class RichPlayerTest extends TestCase {
 

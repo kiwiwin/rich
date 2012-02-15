@@ -1,11 +1,13 @@
 package RichMapTest;
 
 import RichHouse.RichHouse;
-import RichMap.RichHouseSite;
-import RichMap.*;
-import RichPlayer.*;
 import RichHouse.RichHouseCottageLevel;
 import RichHouse.RichHousePlatLevel;
+import RichMap.RichHouseSite;
+import RichMap.RichMap;
+import RichMap.RichSitePosition;
+import RichPlayer.RichMoney;
+import RichPlayer.RichPlayer;
 import TestHelper.RedirectIO;
 import junit.framework.TestCase;
 

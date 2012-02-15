@@ -1,8 +1,10 @@
 package RichToolTest;
 
+import RichMap.RichMap;
+import RichMap.RichSitePosition;
 import RichPlayer.RichPlayer;
-import RichMap.*;
-import RichTool.*;
+import RichTool.RichDeferredTool;
+import RichTool.RoadBlockTool;
 import junit.framework.TestCase;
 
 public class RichDeferredToolTest extends TestCase {
