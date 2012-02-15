@@ -67,4 +67,8 @@ public class RichHouse {
     public boolean hasOwner() {
         return getOwner() != null;
     }
+
+    public boolean canUpgrade() {
+        return _houseLevel.canUpgrade();
+    }
 }

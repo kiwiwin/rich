@@ -3,7 +3,7 @@ package RichTool;
 import RichMap.RichSitePosition;
 import RichPlayer.RichPlayer;
 
-public abstract class RichDeferredTool implements ITool{
+public abstract class RichDeferredTool implements RichTool {
     public abstract void triggerTool(RichPlayer player);
 
     public boolean installTool(RichPlayer player, int offset) {

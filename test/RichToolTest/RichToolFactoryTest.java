@@ -1,3 +1,5 @@
+package RichToolTest;
+
 import RichTool.*;
 import junit.framework.TestCase;
 

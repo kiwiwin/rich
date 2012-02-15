@@ -1,5 +1,8 @@
+package RichCommandTest;
+
 import RichPlayer.RichPlayer;
 import RichCommand.RichQueryCommand;
+import TestHelper.RedirectIO;
 import junit.framework.TestCase;
 
 public class RichQueryCommandTest extends TestCase {

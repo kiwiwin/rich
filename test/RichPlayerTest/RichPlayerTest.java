@@ -1,3 +1,5 @@
+package RichPlayerTest;
+
 import RichTool.*;
 import RichHouse.*;
 import RichMap.*;
@@ -19,8 +21,8 @@ public class RichPlayerTest extends TestCase {
 
         try {
             richPlayer.buyTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
+            fail("there should have an exception: Each player cannot have more than 10 tools");
         } catch (ToolOverflowException ex) {
-            assertTrue(true);
             assertEquals("Each player cannot have more than 10 tools", ex.getMessage());
         }
         assertEquals(100000, richPlayer.getPoints());
@@ -38,14 +40,12 @@ public class RichPlayerTest extends TestCase {
     public void test_player_has_not_enough_points_buy_roadblock() {
         RichPlayer player = new RichPlayer();
         player.setPoints(30);
-        boolean isException = false;
         try {
             player.buyTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
+            fail("there should have an exception: 您当前剩余的点数为30， 不足以购买路障道具.");
         } catch (ToolPointsNotEnoughException ex) {
-            isException = true;
             assertEquals("您当前剩余的点数为30， 不足以购买路障道具.", ex.getMessage());
         }
-        assertTrue(isException);
         assertEquals(30, player.getPoints());
         assertEquals(0, player.getToolsNumber());
     }
@@ -67,14 +67,12 @@ public class RichPlayerTest extends TestCase {
         player.setPoints(0);
         assertEquals(0, player.getToolsNumber());
 
-        boolean isException = false;
         try {
             player.sellTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
+            fail("there should have an exception: You don't have 路障");
         } catch (ToolUnderflowException ex) {
-            isException = true;
             assertEquals("You don't have 路障", ex.getMessage());
         }
-        assertTrue(isException);
         assertEquals(0, player.getToolsNumber());
         assertEquals(0, player.getPoints());
     }
@@ -95,15 +93,13 @@ public class RichPlayerTest extends TestCase {
 
         assertEquals(0, player.getToolsNumber());
 
-        boolean isException = false;
         try {
             player.useTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
+            fail("there should have an exception");
         } catch (ToolUnderflowException ex) {
-            isException = true;
             assertEquals("You don't have 路障", ex.getMessage());
         }
 
-        assertTrue(isException);
         assertEquals(0, player.getToolsNumber());
     }
 
@@ -119,14 +115,12 @@ public class RichPlayerTest extends TestCase {
     public void test_player_has_not_enough_points_buy_robot() {
         RichPlayer player = new RichPlayer();
         player.setPoints(20);
-        boolean isException = false;
         try {
             player.buyTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
+            fail("there should have an exception");
         } catch (ToolPointsNotEnoughException ex) {
-            isException = true;
             assertEquals("您当前剩余的点数为20， 不足以购买机器娃娃道具.", ex.getMessage());
         }
-        assertTrue(isException);
         assertEquals(20, player.getPoints());
         assertEquals(0, player.getToolsNumber());
     }
@@ -148,14 +142,12 @@ public class RichPlayerTest extends TestCase {
         player.setPoints(0);
         assertEquals(0, player.getToolsNumber());
 
-        boolean isException = false;
         try {
             player.sellTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
+            fail("there should have an exception");
         } catch (ToolUnderflowException ex) {
-            isException = true;
             assertEquals("You don't have 机器娃娃", ex.getMessage());
         }
-        assertTrue(isException);
         assertEquals(0, player.getToolsNumber());
         assertEquals(0, player.getPoints());
     }
@@ -176,15 +168,13 @@ public class RichPlayerTest extends TestCase {
 
         assertEquals(0, player.getToolsNumber());
 
-        boolean isException = false;
         try {
             player.useTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
+            fail("there shold have an exception");
         } catch (ToolUnderflowException ex) {
-            isException = true;
             assertEquals("You don't have 机器娃娃", ex.getMessage());
         }
 
-        assertTrue(isException);
         assertEquals(0, player.getToolsNumber());
     }
 
@@ -200,14 +190,12 @@ public class RichPlayerTest extends TestCase {
     public void test_player_has_not_enough_points_buy_bomb() {
         RichPlayer player = new RichPlayer();
         player.setPoints(20);
-        boolean isException = false;
         try {
             player.buyTool(RichToolFactory.createTool(RichToolFactory.BOMB));
+            fail("there should have an exception");
         } catch (ToolPointsNotEnoughException ex) {
-            isException = true;
             assertEquals("您当前剩余的点数为20， 不足以购买炸弹道具.", ex.getMessage());
         }
-        assertTrue(isException);
         assertEquals(20, player.getPoints());
         assertEquals(0, player.getToolsNumber());
     }
@@ -229,14 +217,12 @@ public class RichPlayerTest extends TestCase {
         player.setPoints(0);
         assertEquals(0, player.getToolsNumber());
 
-        boolean isException = false;
         try {
             player.sellTool(RichToolFactory.createTool(RichToolFactory.BOMB));
+            fail("there should have an exception");
         } catch (ToolUnderflowException ex) {
-            isException = true;
             assertEquals("You don't have 炸弹", ex.getMessage());
         }
-        assertTrue(isException);
         assertEquals(0, player.getToolsNumber());
         assertEquals(0, player.getPoints());
     }
@@ -257,15 +243,13 @@ public class RichPlayerTest extends TestCase {
 
         assertEquals(0, player.getToolsNumber());
 
-        boolean isException = false;
         try {
             player.useTool(RichToolFactory.createTool(RichToolFactory.BOMB));
+            fail("there should have an exception");
         } catch (ToolUnderflowException ex) {
-            isException = true;
             assertEquals("You don't have 炸弹", ex.getMessage());
         }
 
-        assertTrue(isException);
         assertEquals(0, player.getToolsNumber());
     }
 
@@ -294,15 +278,12 @@ public class RichPlayerTest extends TestCase {
 
         assertNull(house.getOwner());
 
-        boolean isException = false;
         try {
             player.buyHouse(house);
+            fail("there should have an exception");
         } catch (HouseMoneyNotEnoughException ex) {
-            isException = true;
             assertEquals("You do not have enough money", ex.getMessage());
         }
-
-        assertTrue(isException);
 
         assertNull(house.getOwner());
         assertEquals(500, player.getMoney());
@@ -316,16 +297,13 @@ public class RichPlayerTest extends TestCase {
         house.setOriginalPrice(1000);
         owner.addHouse(house);
 
-        boolean isException = false;
-
         try {
             visitor.buyHouse(house);
+            fail("there should have an exception");
         } catch (HouseOwnerException ex) {
-            isException = true;
             assertEquals("House has already been occupied", ex.getMessage());
         }
 
-        assertTrue(isException);
         assertEquals(0, visitor.getHousesNumber());
     }
 

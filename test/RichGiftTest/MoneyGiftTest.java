@@ -1,3 +1,5 @@
+package RichGiftTest;
+
 import junit.framework.TestCase;
 import RichGift.*;
 import RichPlayer.*;

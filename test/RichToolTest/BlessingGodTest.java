@@ -1,3 +1,5 @@
+package RichToolTest;
+
 import RichGift.BlessingGodGift;
 import RichPlayer.RichPlayer;
 import junit.framework.TestCase;

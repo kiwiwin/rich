@@ -1,3 +1,5 @@
+package RichCommandTest;
+
 import RichCommand.RichRobotCommand;
 import RichMap.*;
 import RichPlayer.RichPlayer;

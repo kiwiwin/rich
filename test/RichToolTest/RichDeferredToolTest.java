@@ -1,3 +1,5 @@
+package RichToolTest;
+
 import RichPlayer.RichPlayer;
 import RichMap.*;
 import RichTool.*;

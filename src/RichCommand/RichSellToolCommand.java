@@ -1,13 +1,13 @@
 package RichCommand;
 
 import RichPlayer.RichPlayer;
-import RichTool.ITool;
+import RichTool.RichTool;
 
 public class RichSellToolCommand extends RichCommand {
     private RichPlayer _player;
-    private ITool _tool;
+    private RichTool _tool;
 
-    public RichSellToolCommand(RichPlayer player, ITool tool) {
+    public RichSellToolCommand(RichPlayer player, RichTool tool) {
         _player = player;
         _tool = tool;
     }

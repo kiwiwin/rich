@@ -3,7 +3,7 @@ package RichPlayer;
 import RichGift.RichGift;
 import RichHouse.RichHouse;
 import RichMap.RichSitePosition;
-import RichTool.ITool;
+import RichTool.RichTool;
 import RichTool.ToolOverflowException;
 import RichTool.ToolUnderflowException;
 import RichTool.ToolPointsNotEnoughException;
@@ -17,7 +17,7 @@ public class RichPlayer {
     private int _points;
     private int _money;
 
-    private ArrayList<ITool> _tools;
+    private ArrayList<RichTool> _tools;
     private final int TOOL_NUMBER_LIMIT = 10;
     private final int DEFAULT_INIT_MONEY_COUNT = 10000;
     private final int DEFAULT_INIT_POINTS_COUNT = 0;
@@ -29,7 +29,7 @@ public class RichPlayer {
     private String _name;
 
     public RichPlayer() {
-        _tools = new ArrayList<ITool>();
+        _tools = new ArrayList<RichTool>();
         _houses = new ArrayList<RichHouse>();
         _money = DEFAULT_INIT_MONEY_COUNT;
         _points = DEFAULT_INIT_POINTS_COUNT;
@@ -39,14 +39,14 @@ public class RichPlayer {
         return _tools.size();
     }
 
-    public void addTool(ITool tool) {
+    public void addTool(RichTool tool) {
         if (getToolsNumber() >= TOOL_NUMBER_LIMIT) throw new ToolOverflowException();
         _tools.add(tool);
     }
 
-    public void removeTool(ITool toolToRemove) {
-        for (ITool tool : _tools) {
-            if (tool.equals(toolToRemove)) {
+    public void removeTool(RichTool toolToRemove) {
+        for (RichTool tool : _tools) {
+            if (tool.isSameTool(toolToRemove)) {
                 _tools.remove(tool);
                 return;
             }
@@ -71,18 +71,18 @@ public class RichPlayer {
         return _money;
     }
 
-    public void buyTool(ITool tool) {
+    public void buyTool(RichTool tool) {
         if (getPoints() < tool.getPoints()) throw new ToolPointsNotEnoughException(_points, tool);
         addTool(tool);
         _points -= tool.getPoints();
     }
 
-    public void sellTool(ITool toolToSell) {
+    public void sellTool(RichTool toolToSell) {
         removeTool(toolToSell);
         _points += toolToSell.getPoints();
     }
 
-    public void useTool(ITool toolToUse) {
+    public void useTool(RichTool toolToUse) {
         removeTool(toolToUse);
     }
 
@@ -212,14 +212,14 @@ public class RichPlayer {
         _name = name;
     }
 
-    public int getPunlishDays() {
+    public int getPunishDays() {
         return _punishDays;
     }
 
-    public int getToolsNumberByType(ITool tool) {
+    public int getToolsNumberByType(RichTool tool) {
         int result = 0;
-        for (ITool t : _tools) {
-            if (t.equals(tool)) result++;
+        for (RichTool t : _tools) {
+            if (t.isSameTool(tool)) result++;
         }
         return result;
     }

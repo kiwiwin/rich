@@ -1,3 +1,5 @@
+package RichCommandTest;
+
 import RichCommand.RichSellHouseCommand;
 import RichHouse.*;
 import RichPlayer.RichPlayer;

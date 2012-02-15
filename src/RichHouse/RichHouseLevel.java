@@ -27,4 +27,8 @@ public abstract class RichHouseLevel {
 
 
     public abstract void sell(RichHouse richHouse);
+
+    public boolean canUpgrade() {
+        return true;
+    }
 }

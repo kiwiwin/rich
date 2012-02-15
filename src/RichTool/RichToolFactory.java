@@ -5,7 +5,7 @@ public class RichToolFactory {
     public static final int ROBOT = 2;
     public static final int BOMB = 3;
 
-    public static ITool createTool(int toolNumber) {
+    public static RichTool createTool(int toolNumber) {
         switch (toolNumber) {
             case ROADBLOCK:
                 return new RoadBlockTool();
@@ -18,7 +18,7 @@ public class RichToolFactory {
         }
     }
 
-    public static ITool createTool(String command) {
+    public static RichTool createTool(String command) {
         try {
             return createTool(Integer.parseInt(command));
         } catch (Exception ex) {

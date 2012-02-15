@@ -16,8 +16,8 @@ public class RobotTool extends RichRealTimeTool {
         return "机器娃娃";
     }
 
-    public boolean equals(Object arg) {
-        return arg instanceof RobotTool;
+    public boolean isSameTool(RichTool tool) {
+        return tool instanceof RobotTool;
     }
 
     public void useTool(RichPlayer player) {

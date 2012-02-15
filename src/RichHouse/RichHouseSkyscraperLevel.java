@@ -28,4 +28,8 @@ public class RichHouseSkyscraperLevel extends RichHouseLevel {
     public void sell(RichHouse house) {
         house.setLevel(new RichHousePlatLevel(_originalPrice));
     }
+
+    public boolean canUpgrade() {
+        return false;
+    }
 }

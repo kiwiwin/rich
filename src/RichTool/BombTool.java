@@ -16,8 +16,8 @@ public class BombTool extends RichDeferredTool {
         return "炸弹";
     }
 
-    public boolean equals(Object arg) {
-        return arg instanceof BombTool;
+    public boolean isSameTool(RichTool tool) {
+        return tool instanceof BombTool;
     }
 
     public void triggerTool(RichPlayer player) {

@@ -1,3 +1,5 @@
+package RichCommandTest;
+
 import RichCommand.RichBlockCommand;
 import RichPlayer.RichPlayer;
 import RichMap.*;
@@ -7,7 +9,7 @@ import junit.framework.TestCase;
 public class RichBlockCommandTest extends TestCase{
     public void test_should_return_has_road_block_at_site_10()
     {
-        RichMap map = RichMap.instance();
+        RichMap map = RichMap.buildMap();
         RichPlayer player = new RichPlayer();
         player.addTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
         player.setPosition(new RichSitePosition(map, 0));

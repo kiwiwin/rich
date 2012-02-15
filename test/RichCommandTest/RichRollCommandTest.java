@@ -1,3 +1,5 @@
+package RichCommandTest;
+
 import RichCommand.RichRollCommand;
 import RichMap.*;
 import RichPlayer.RichPlayer;

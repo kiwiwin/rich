@@ -1,3 +1,5 @@
+package TestHelper;
+
 import java.io.*;
 
 public class RedirectIO {
@@ -14,11 +16,11 @@ public class RedirectIO {
         return true;
     }
 
-    protected static void reset_input() {
+    public static void reset_input() {
         System.setIn(_keyboard);
     }
 
-    protected static boolean set_output(String outputFileName) {
+    public static boolean set_output(String outputFileName) {
         try {
             _console = System.out;
             System.setOut(new PrintStream(new FileOutputStream(outputFileName)));
@@ -28,11 +30,11 @@ public class RedirectIO {
         return true;
     }
 
-    protected static void reset_output() {
+    public static void reset_output() {
         System.setOut(_console);
     }
 
-    protected static boolean compareFile(String answer, String test) {
+    public static boolean compareFile(String answer, String test) {
         try {
             BufferedReader answerReader = new BufferedReader(new FileReader(answer));
             BufferedReader testReader = new BufferedReader(new FileReader(test));

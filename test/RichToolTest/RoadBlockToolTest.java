@@ -1,3 +1,5 @@
+package RichToolTest;
+
 import RichTool.*;
 import RichMap.*;
 import RichPlayer.*;
@@ -13,7 +15,7 @@ public class RoadBlockToolTest extends TestCase {
     }
 
     public void test_should_return_路障_for_getName() {
-        ITool tool = RichToolFactory.createTool(RichToolFactory.ROADBLOCK);
+        RichTool tool = RichToolFactory.createTool(RichToolFactory.ROADBLOCK);
         assertEquals("路障", tool.getName());
     }
 

@@ -1,8 +1,7 @@
 package RichTool;
 
-import RichMap.RichMap;
 import RichPlayer.RichPlayer;
 
-public abstract class RichRealTimeTool implements ITool{
+public abstract class RichRealTimeTool implements RichTool {
     public abstract void useTool(RichPlayer player);
 }

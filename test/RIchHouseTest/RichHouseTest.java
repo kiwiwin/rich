@@ -24,6 +24,26 @@ public class RichHouseTest extends TestCase {
         RichHouse house = new RichHouse(new RichHouseSkyscraperLevel(0));
         assertEquals("3", house.display());
     }
+    
+    public void test_should_return_true_for_can_upgrade_plat(){
+        RichHouse house = new RichHouse(new RichHousePlatLevel(0));
+        assertTrue(house.canUpgrade());
+    }
+    
+    public void test_should_return_true_for_can_upgrade_cottage(){
+        RichHouse house = new RichHouse(new RichHouseCottageLevel(0));
+        assertTrue(house.canUpgrade());
+    }
+    
+    public void test_should_return_true_for_can_upgrade_villa(){
+        RichHouse house = new RichHouse(new RichHouseVillaLevel(0));
+        assertTrue(house.canUpgrade());
+    }
+    
+    public void test_should_return_false_for_can_upgrade_skyscraper(){
+        RichHouse house = new RichHouse(new RichHouseSkyscraperLevel(0));
+        assertFalse(house.canUpgrade());
+    }
 
     public void test_upgrade_empty_to_cottage() {
         RichHouse house = new RichHouse(new RichHousePlatLevel(0));
@@ -45,15 +65,13 @@ public class RichHouseTest extends TestCase {
 
     public void test_cannot_upgrade_skyscraper() {
         RichHouse house = new RichHouse(new RichHouseSkyscraperLevel(0));
-        boolean isException = false;
         try {
             house.upgrade();
+            fail("there should have an exception: not update skyscraper") ;
         } catch (HouseLevelOverflowException ex) {
             assertEquals("You cannot upgrade skyscraper", ex.getMessage());
-            isException = true;
         }
 
-        assertTrue(isException);
     }
 
     public void test_should_return_plat_after_sell_plat() {

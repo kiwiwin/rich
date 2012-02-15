@@ -1,3 +1,5 @@
+package RichPlayerTest;
+
 import RichPlayer.*;
 import junit.framework.TestCase;
 
@@ -23,14 +25,11 @@ public class RichPlayerFactoryTest extends TestCase {
     }
 
     public void test_invalid_player() {
-        boolean isException = false;
         try {
-            RichPlayer player = RichPlayerFactory.createPlayer("5");
+            RichPlayerFactory.createPlayer("Invalid player Index");
+            fail("there should have an exception: Unknown player index");
         } catch (IllegalArgumentException ex) {
-            isException = true;
             assertEquals("Unknown player index", ex.getMessage());
         }
-
-        assertTrue(isException);
     }
 }

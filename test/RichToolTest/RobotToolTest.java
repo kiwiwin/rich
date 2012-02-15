@@ -1,3 +1,5 @@
+package RichToolTest;
+
 import RichTool.*;
 import RichMap.*;
 import RichPlayer.RichPlayer;
@@ -13,7 +15,7 @@ public class RobotToolTest extends TestCase {
     }
 
     public void test_should_return_机器娃娃_for_getName() {
-        ITool tool = RichToolFactory.createTool(2);
+        RichTool tool = RichToolFactory.createTool(2);
         assertEquals("机器娃娃", tool.getName());
     }
 
