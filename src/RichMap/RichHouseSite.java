@@ -49,7 +49,7 @@ public class RichHouseSite extends RichSite {
     }
 
     private void handleUpgradeHouse(RichPlayer player) {
-        System.out.println("是否升级该处地产，" + _house.getOriginalPrice() + "元（Y/N）?");
+        System.out.println("是否升级该处地产，" + _house.getOriginalPrice().toInt() + "元（Y/N）?");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
             String command = reader.readLine();
@@ -61,7 +61,7 @@ public class RichHouseSite extends RichSite {
     }
 
     private void handleBuyHouse(RichPlayer player) {
-        System.out.println("是否购买该处空地，" + _house.getOriginalPrice() + "元（Y/N）?");
+        System.out.println("是否购买该处空地，" + _house.getOriginalPrice().toInt() + "元（Y/N）?");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
             String command = reader.readLine();

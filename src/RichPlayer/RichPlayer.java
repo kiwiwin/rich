@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class RichPlayer {
     private int _points;
-    private int _money;
+    private RichMoney _money;
 
     private ArrayList<RichTool> _tools;
     private final int TOOL_NUMBER_LIMIT = 10;
@@ -31,7 +31,7 @@ public class RichPlayer {
     public RichPlayer() {
         _tools = new ArrayList<RichTool>();
         _houses = new ArrayList<RichHouse>();
-        _money = DEFAULT_INIT_MONEY_COUNT;
+        _money = new RichMoney(DEFAULT_INIT_MONEY_COUNT);
         _points = DEFAULT_INIT_POINTS_COUNT;
     }
 
@@ -63,11 +63,11 @@ public class RichPlayer {
         return _points;
     }
 
-    public void setMoney(int money) {
+    public void setMoney(RichMoney money) {
         _money = money;
     }
 
-    public int getMoney() {
+    public RichMoney getMoney() {
         return _money;
     }
 
@@ -88,9 +88,9 @@ public class RichPlayer {
 
     public void buyHouse(RichHouse house) {
         if (house.getOwner() != null) throw new HouseOwnerException();
-        if (_money < house.getOriginalPrice()) throw new HouseMoneyNotEnoughException();
+        if (_money.isLessThan(house.getOriginalPrice())) throw new HouseMoneyNotEnoughException();
         addHouse(house);
-        _money -= house.getOriginalPrice();
+        subtractMoney(house.getOriginalPrice());
     }
 
     public void sellHouse(RichHouse house) {
@@ -112,18 +112,22 @@ public class RichPlayer {
     public void upgradeHouse(RichHouse house) {
         if (!this.equals(house.getOwner())) throw new HouseOwnerException();
         house.upgrade();
-        _money -= house.getOriginalPrice();
+        subtractMoney(house.getOriginalPrice());
     }
 
     public void payHouseToll(RichHouse house) {
         if (this.equals(house.getOwner())) throw new HouseOwnerException();
-        _money -= house.getToll();
+        subtractMoney(house.getToll());
         RichPlayer owner = house.getOwner();
         owner.addMoney(house.getToll());
     }
 
-    public void addMoney(int money) {
-        _money += money;
+    public void addMoney(RichMoney money) {
+        _money = _money.add(money);
+    }
+
+    public void subtractMoney(RichMoney money) {
+        _money = _money.subtract(money);
     }
 
     public void addPoints(int points) {

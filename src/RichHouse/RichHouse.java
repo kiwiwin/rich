@@ -1,6 +1,7 @@
 package RichHouse;
 
 import RichPlayer.RichPlayer;
+import RichPlayer.RichMoney;
 
 public class RichHouse {
     private RichHouseLevel _houseLevel;
@@ -31,23 +32,23 @@ public class RichHouse {
         return _houseLevel;
     }
 
-    private int getCost() {
+    private RichMoney getCost() {
         return _houseLevel.getPrice();
     }
 
-    public int getPriceForSell() {
-        return getCost() * 2;
+    public RichMoney getPriceForSell() {
+        return getCost().times(2);
     }
 
-    public int getToll() {
+    public RichMoney getToll() {
         return _houseLevel.getToll();
     }
 
-    public void setOriginalPrice(int price) {
+    public void setOriginalPrice(RichMoney price) {
         _houseLevel.setOriginalPrice(price);
     }
 
-    public int getOriginalPrice() {
+    public RichMoney getOriginalPrice() {
         return _houseLevel.getOriginalPrice();
     }
 

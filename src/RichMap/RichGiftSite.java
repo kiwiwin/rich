@@ -1,10 +1,9 @@
 package RichMap;
 
-import RichGift.GiftCommand;
+import RichGift.RichGift;
 import RichPlayer.RichPlayer;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class RichGiftSite extends RichSite {
@@ -13,9 +12,9 @@ public class RichGiftSite extends RichSite {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
-            String command = reader.readLine();
-            GiftCommand.createGiftCommand(player, command).executeCommand();
-        } catch (IOException ex) {
+            String giftType = reader.readLine();
+            player.acceptGift(RichGift.createGift(Integer.parseInt(giftType)));
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }

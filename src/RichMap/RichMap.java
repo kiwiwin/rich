@@ -3,6 +3,7 @@ package RichMap;
 import RichHouse.RichHouse;
 
 import RichHouse.RichHousePlatLevel;
+import RichPlayer.RichMoney;
 
 public class RichMap {
     private RichSite[] _sites;
@@ -65,23 +66,23 @@ public class RichMap {
         RichMap map = new RichMap(29, 8);
         map.setSite(new RichStartSite(), 0);
         for (int i = 1; i <= 13; i++) {
-            map.setSite(new RichHouseSite(new RichHouse(new RichHousePlatLevel(200))), i);
+            map.setSite(new RichHouseSite(new RichHouse(new RichHousePlatLevel(new RichMoney(200)))), i);
         }
         map.setSite(new RichHospitalSite(), 14);
         for (int i = 15; i <= 27; i++) {
-            map.setSite(new RichHouseSite(new RichHouse(new RichHousePlatLevel(200))), i);
+            map.setSite(new RichHouseSite(new RichHouse(new RichHousePlatLevel(new RichMoney(200)))), i);
         }
         map.setSite(new RichToolSite(), 28);
         for (int i = 29; i <= 34; i++) {
-            map.setSite(new RichHouseSite(new RichHouse(new RichHousePlatLevel(500))), i);
+            map.setSite(new RichHouseSite(new RichHouse(new RichHousePlatLevel(new RichMoney(500)))), i);
         }
         map.setSite(new RichGiftSite(), 35);
         for (int i = 36; i <= 48; i++) {
-            map.setSite(new RichHouseSite(new RichHouse(new RichHousePlatLevel(300))), i);
+            map.setSite(new RichHouseSite(new RichHouse(new RichHousePlatLevel(new RichMoney(300)))), i);
         }
         map.setSite(new RichPrisonSite(), 49);
         for (int i = 50; i <= 62; i++) {
-            map.setSite(new RichHouseSite(new RichHouse(new RichHousePlatLevel(300))), i);
+            map.setSite(new RichHouseSite(new RichHouse(new RichHousePlatLevel(new RichMoney(300)))), i);
         }
         map.setSite(new RichMagicSite(), 63);
         map.setSite(new RichMineSite(20), 64);

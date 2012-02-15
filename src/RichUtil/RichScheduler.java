@@ -10,6 +10,7 @@ import RichPlayer.RichPlayerFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import RichPlayer.RichMoney;
 
 public class RichScheduler {
     private static int _currentPlayerIndex = 0;
@@ -20,13 +21,13 @@ public class RichScheduler {
     public static void initialize() {
         try {
             int money = initializePlayerMoney();
-            initializePlayer(money);
+            initializePlayer(new RichMoney(money));
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
     }
 
-    private static void initializePlayer(int money) throws IOException {
+    private static void initializePlayer(RichMoney money) throws IOException {
         System.out.println("请选择2~4位不重复玩家，输入编号即可。(1.钱夫人; 2.阿土伯; 3.孙小美; 4.金贝贝):");
         _players.addAll(Arrays.asList(RichPlayerFactory.createPlayers(RichIO.readLine())));
 

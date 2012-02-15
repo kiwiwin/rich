@@ -6,6 +6,7 @@ import RichHouse.RichHousePlatLevel;
 
 import RichPlayer.RichPlayer;
 import RichTool.RichToolFactory;
+import RichPlayer.RichMoney;
 
 public class RichQueryCommand extends RichCommand {
     private RichPlayer _player;
@@ -33,7 +34,7 @@ public class RichQueryCommand extends RichCommand {
 
     private String queryHouse() {
         String result = "地产：";
-        RichHouse house = new RichHouse(new RichHousePlatLevel(1000));
+        RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(0)));
         result += "空地" + _player.getHousesNumberByLevel(house) + "处；";
         house.upgrade();
         result += "茅屋" + _player.getHousesNumberByLevel(house) + "处；";
@@ -49,7 +50,7 @@ public class RichQueryCommand extends RichCommand {
     }
 
     private String queryMoney() {
-        return "资金：" + _player.getMoney() + "元";
+        return "资金：" + _player.getMoney().toInt() + "元";
     }
 
 

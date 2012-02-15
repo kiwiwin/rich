@@ -1,7 +1,13 @@
 package RichHouse;
 
+import RichPlayer.RichMoney;
+
 public abstract class RichHouseLevel {
-    protected int _originalPrice;
+    protected RichMoney _originalPrice;
+
+    public RichHouseLevel(RichMoney originalPrice) {
+        _originalPrice = originalPrice;
+    }
 
     public abstract void upgrade(RichHouse house);
 
@@ -9,18 +15,18 @@ public abstract class RichHouseLevel {
         house.setLevel(level);
     }
 
-    public void setOriginalPrice(int price) {
-        _originalPrice = price;
-    }
+    public abstract RichMoney getPrice();
 
-    public abstract int getPrice();
-
-    public abstract int getToll();
+    public abstract RichMoney getToll();
 
     public abstract boolean isSameLevel(RichHouseLevel level);
 
-    public int getOriginalPrice() {
+    public RichMoney getOriginalPrice() {
         return _originalPrice;
+    }
+
+    public void setOriginalPrice(RichMoney price) {
+        _originalPrice = price;
     }
 
     public abstract String display();

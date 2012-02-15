@@ -1,20 +1,22 @@
 package RichHouse;
 
+import RichPlayer.RichMoney;
+
 public class RichHousePlatLevel extends RichHouseLevel {
-    public RichHousePlatLevel(int originalPrice) {
-        _originalPrice = originalPrice;
+    public RichHousePlatLevel(RichMoney originalPrice) {
+        super(originalPrice);
     }
 
     public void upgrade(RichHouse house) {
         setHouseLevel(house, new RichHouseCottageLevel(_originalPrice));
     }
 
-    public int getPrice() {
+    public RichMoney getPrice() {
         return _originalPrice;
     }
 
-    public int getToll() {
-        return _originalPrice / 2;
+    public RichMoney getToll() {
+        return _originalPrice.divide(2);
     }
 
     public boolean isSameLevel(RichHouseLevel level) {
