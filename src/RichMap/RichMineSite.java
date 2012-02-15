@@ -1,11 +1,12 @@
 package RichMap;
 
 import RichPlayer.RichPlayer;
+import RichPlayer.RichPoint;
 
 public class RichMineSite extends RichSite {
-    private int _bonusPoints;
+    private RichPoint _bonusPoints;
 
-    public RichMineSite(int points) {
+    public RichMineSite(RichPoint points) {
         _bonusPoints = points;
     }
 

@@ -46,7 +46,7 @@ public class RichQueryCommand extends RichCommand {
     }
 
     private String queryPoints() {
-        return "点数：" + _player.getPoints() + "点";
+        return "点数：" + _player.getPoints().toInt() + "点";
     }
 
     private String queryMoney() {

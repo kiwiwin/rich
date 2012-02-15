@@ -4,6 +4,7 @@ import RichMap.RichToolSite;
 import RichPlayer.RichPlayer;
 import TestHelper.RedirectIO;
 import junit.framework.TestCase;
+import RichPlayer.RichPoint;
 
 public class RichToolSiteTest extends TestCase {
     public void test_should_return_T_for_display(){
@@ -13,24 +14,24 @@ public class RichToolSiteTest extends TestCase {
 
     public void test_should_return_player_exit_rich_tool_site_automatically(){
         RichPlayer player = new RichPlayer();
-        player.setPoints(10);
+        player.setPoints(new RichPoint(10));
 
         RichToolSite site = new RichToolSite();
         site.doAcceptPlayer(player);
 
-        assertEquals(10, player.getPoints());
+        assertEquals(new RichPoint(10), player.getPoints());
     }
 
     public void test_should_return_player_buy_1_roadblock_2_robot_3_bomb(){
         RedirectIO.set_input("./test/player_buy_1_roadblock_2_robot_3_bomb.txt");
 
         RichPlayer player = new RichPlayer();
-        player.setPoints(1000);
+        player.setPoints(new RichPoint(1000));
 
         RichToolSite site= new RichToolSite();
         site.doAcceptPlayer(player);
 
-        assertEquals(740, player.getPoints());
+        assertEquals(new RichPoint(740), player.getPoints());
         assertEquals(6, player.getToolsNumber());
     }
 
@@ -39,12 +40,12 @@ public class RichToolSiteTest extends TestCase {
         RedirectIO.set_output("./test/player_buy_invalid_tool_test.txt");
         
         RichPlayer player = new RichPlayer();
-        player.setPoints(1000);
+        player.setPoints(new RichPoint(1000));
 
         RichToolSite site= new RichToolSite();
         site.doAcceptPlayer(player);
 
-        assertEquals(1000, player.getPoints());
+        assertEquals(new RichPoint(1000), player.getPoints());
         assertEquals(0, player.getToolsNumber());
 
         RedirectIO.reset_input();
@@ -58,12 +59,12 @@ public class RichToolSiteTest extends TestCase {
         RedirectIO.set_output("./test/player_have_not_enough_points_buy_tool_test.txt");
 
         RichPlayer player = new RichPlayer();
-        player.setPoints(250);
+        player.setPoints(new RichPoint(250));
 
         RichToolSite site= new RichToolSite();
         site.doAcceptPlayer(player);
 
-        assertEquals(40, player.getPoints());
+        assertEquals(new RichPoint(40), player.getPoints());
         assertEquals(5, player.getToolsNumber());
 
         RedirectIO.reset_input();

@@ -1,9 +1,11 @@
 package RichTool;
 
+import RichPlayer.RichPoint;
+
 public interface RichTool {
     public abstract String display();
 
-    public abstract int getPoints();
+    public abstract RichPoint getPoints();
 
     public abstract String getName();
 

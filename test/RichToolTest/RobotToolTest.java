@@ -3,6 +3,7 @@ package RichToolTest;
 import RichTool.*;
 import RichMap.*;
 import RichPlayer.RichPlayer;
+import RichPlayer.RichPoint;
 import junit.framework.TestCase;
 
 public class RobotToolTest extends TestCase {
@@ -11,7 +12,7 @@ public class RobotToolTest extends TestCase {
     }
 
     public void test_should_return_30_for_robot_get_points() {
-        assertEquals(30, RichToolFactory.createTool(RichToolFactory.ROBOT).getPoints());
+        assertEquals(new RichPoint(30), RichToolFactory.createTool(RichToolFactory.ROBOT).getPoints());
     }
 
     public void test_should_return_机器娃娃_for_getName() {

@@ -3,6 +3,7 @@ package RichToolTest;
 import RichTool.*;
 import RichMap.*;
 import RichPlayer.RichPlayer;
+import RichPlayer.RichPoint;
 import junit.framework.TestCase;
 
 public class BombToolTest extends TestCase {
@@ -11,7 +12,7 @@ public class BombToolTest extends TestCase {
     }
 
     public void test_should_return_50_for_bomb_get_points() {
-        assertEquals(50, RichToolFactory.createTool(RichToolFactory.BOMB).getPoints());
+        assertEquals(new RichPoint(50), RichToolFactory.createTool(RichToolFactory.BOMB).getPoints());
     }
 
     public void test_should_return_炸弹_for_getName() {

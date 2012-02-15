@@ -4,6 +4,7 @@ import RichHouse.RichHouse;
 
 import RichHouse.RichHousePlatLevel;
 import RichPlayer.RichMoney;
+import RichPlayer.RichPoint;
 
 public class RichMap {
     private RichSite[] _sites;
@@ -85,12 +86,12 @@ public class RichMap {
             map.setSite(new RichHouseSite(new RichHouse(new RichHousePlatLevel(new RichMoney(300)))), i);
         }
         map.setSite(new RichMagicSite(), 63);
-        map.setSite(new RichMineSite(20), 64);
-        map.setSite(new RichMineSite(80), 65);
-        map.setSite(new RichMineSite(100), 66);
-        map.setSite(new RichMineSite(40), 67);
-        map.setSite(new RichMineSite(80), 68);
-        map.setSite(new RichMineSite(60), 69);
+        map.setSite(new RichMineSite(new RichPoint(20)), 64);
+        map.setSite(new RichMineSite(new RichPoint(80)), 65);
+        map.setSite(new RichMineSite(new RichPoint(100)), 66);
+        map.setSite(new RichMineSite(new RichPoint(40)), 67);
+        map.setSite(new RichMineSite(new RichPoint(80)), 68);
+        map.setSite(new RichMineSite(new RichPoint(60)), 69);
 
         return map;
     }

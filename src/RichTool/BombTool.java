@@ -2,14 +2,15 @@ package RichTool;
 
 import RichPlayer.RichPlayer;
 import RichMap.RichMap;
+import RichPlayer.RichPoint;
 
 public class BombTool extends RichDeferredTool {
     public String display() {
         return "@";
     }
 
-    public int getPoints() {
-        return 50;
+    public RichPoint getPoints() {
+        return new RichPoint(50);
     }
 
     public String getName() {

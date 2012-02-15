@@ -14,7 +14,7 @@ import RichHouse.HouseOwnerException;
 import java.util.ArrayList;
 
 public class RichPlayer {
-    private int _points;
+    private RichPoint _points;
     private RichMoney _money;
 
     private ArrayList<RichTool> _tools;
@@ -32,7 +32,7 @@ public class RichPlayer {
         _tools = new ArrayList<RichTool>();
         _houses = new ArrayList<RichHouse>();
         _money = new RichMoney(DEFAULT_INIT_MONEY_COUNT);
-        _points = DEFAULT_INIT_POINTS_COUNT;
+        _points = new RichPoint(DEFAULT_INIT_POINTS_COUNT);
     }
 
     public int getToolsNumber() {
@@ -55,11 +55,11 @@ public class RichPlayer {
         throw new ToolUnderflowException(toolToRemove);
     }
 
-    public void setPoints(int points) {
-        this._points = points;
+    public void setPoints(RichPoint points) {
+        _points = points;
     }
 
-    public int getPoints() {
+    public RichPoint getPoints() {
         return _points;
     }
 
@@ -72,14 +72,14 @@ public class RichPlayer {
     }
 
     public void buyTool(RichTool tool) {
-        if (getPoints() < tool.getPoints()) throw new ToolPointsNotEnoughException(_points, tool);
+        if (getPoints().isLessThan(tool.getPoints())) throw new ToolPointsNotEnoughException(_points, tool);
         addTool(tool);
-        _points -= tool.getPoints();
+        subtractPoints(tool.getPoints());
     }
 
     public void sellTool(RichTool toolToSell) {
         removeTool(toolToSell);
-        _points += toolToSell.getPoints();
+        addPoints(toolToSell.getPoints());
     }
 
     public void useTool(RichTool toolToUse) {
@@ -130,8 +130,12 @@ public class RichPlayer {
         _money = _money.subtract(money);
     }
 
-    public void addPoints(int points) {
-        _points += points;
+    public void addPoints(RichPoint points) {
+        _points = _points.add(points);
+    }
+
+    public void subtractPoints(RichPoint points) {
+        _points = _points.subtract(points);
     }
 
     private void removeHouse(RichHouse houseToRemove) {

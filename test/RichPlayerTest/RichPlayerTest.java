@@ -7,18 +7,19 @@ import junit.framework.TestCase;
 
 import RichPlayer.RichPlayer;
 import RichPlayer.RichMoney;
+import RichPlayer.RichPoint;
 
 public class RichPlayerTest extends TestCase {
 
     public void test_should_player_can_not_have_more_than_10_tools() {
         RichPlayer richPlayer = new RichPlayer();
-        richPlayer.setPoints(100000);
+        richPlayer.setPoints(new RichPoint(100000));
 
         for (int i = 0; i < 10; i++) {
             richPlayer.buyTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
         }
 
-        richPlayer.setPoints(100000);
+        richPlayer.setPoints(new RichPoint(100000));
 
         try {
             richPlayer.buyTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
@@ -26,46 +27,46 @@ public class RichPlayerTest extends TestCase {
         } catch (ToolOverflowException ex) {
             assertEquals("Each player cannot have more than 10 tools", ex.getMessage());
         }
-        assertEquals(100000, richPlayer.getPoints());
+        assertEquals(new RichPoint(100000), richPlayer.getPoints());
     }
 
     public void test_player_has_enough_points_buy_roadblock() {
         RichPlayer player = new RichPlayer();
-        player.setPoints(100);
+        player.setPoints(new RichPoint(100));
         player.buyTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
 
-        assertEquals(50, player.getPoints());
+        assertEquals(new RichPoint(50), player.getPoints());
         assertEquals(1, player.getToolsNumber());
     }
 
     public void test_player_has_not_enough_points_buy_roadblock() {
         RichPlayer player = new RichPlayer();
-        player.setPoints(30);
+        player.setPoints(new RichPoint(30));
         try {
             player.buyTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
             fail("there should have an exception: 您当前剩余的点数为30， 不足以购买路障道具.");
         } catch (ToolPointsNotEnoughException ex) {
             assertEquals("您当前剩余的点数为30， 不足以购买路障道具.", ex.getMessage());
         }
-        assertEquals(30, player.getPoints());
+        assertEquals(new RichPoint(30), player.getPoints());
         assertEquals(0, player.getToolsNumber());
     }
 
     public void test_player_has_enough_roadblock_sell() {
         RichPlayer player = new RichPlayer();
         player.addTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
-        player.setPoints(0);
+        player.setPoints(new RichPoint(0));
         assertEquals(1, player.getToolsNumber());
 
         player.sellTool(RichToolFactory.createTool(1));
 
         assertEquals(0, player.getToolsNumber());
-        assertEquals(50, player.getPoints());
+        assertEquals(new RichPoint(50), player.getPoints());
     }
 
     public void test_player_has_not_enough_roadblock_sell() {
         RichPlayer player = new RichPlayer();
-        player.setPoints(0);
+        player.setPoints(new RichPoint(0));
         assertEquals(0, player.getToolsNumber());
 
         try {
@@ -75,7 +76,7 @@ public class RichPlayerTest extends TestCase {
             assertEquals("You don't have 路障", ex.getMessage());
         }
         assertEquals(0, player.getToolsNumber());
-        assertEquals(0, player.getPoints());
+        assertEquals(new RichPoint(0), player.getPoints());
     }
 
 
@@ -106,41 +107,41 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_points_buy_robot() {
         RichPlayer player = new RichPlayer();
-        player.setPoints(100);
+        player.setPoints(new RichPoint(100));
         player.buyTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
 
-        assertEquals(70, player.getPoints());
+        assertEquals(new RichPoint(70), player.getPoints());
         assertEquals(1, player.getToolsNumber());
     }
 
     public void test_player_has_not_enough_points_buy_robot() {
         RichPlayer player = new RichPlayer();
-        player.setPoints(20);
+        player.setPoints(new RichPoint(20));
         try {
             player.buyTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
             fail("there should have an exception");
         } catch (ToolPointsNotEnoughException ex) {
             assertEquals("您当前剩余的点数为20， 不足以购买机器娃娃道具.", ex.getMessage());
         }
-        assertEquals(20, player.getPoints());
+        assertEquals(new RichPoint(20), player.getPoints());
         assertEquals(0, player.getToolsNumber());
     }
 
     public void test_player_has_enough_robot_sell() {
         RichPlayer player = new RichPlayer();
         player.addTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
-        player.setPoints(0);
+        player.setPoints(new RichPoint(0));
         assertEquals(1, player.getToolsNumber());
 
         player.sellTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
 
         assertEquals(0, player.getToolsNumber());
-        assertEquals(30, player.getPoints());
+        assertEquals(new RichPoint(30), player.getPoints());
     }
 
     public void test_player_has_not_enough_robot_sell() {
         RichPlayer player = new RichPlayer();
-        player.setPoints(0);
+        player.setPoints(new RichPoint(0));
         assertEquals(0, player.getToolsNumber());
 
         try {
@@ -150,7 +151,7 @@ public class RichPlayerTest extends TestCase {
             assertEquals("You don't have 机器娃娃", ex.getMessage());
         }
         assertEquals(0, player.getToolsNumber());
-        assertEquals(0, player.getPoints());
+        assertEquals(new RichPoint(0), player.getPoints());
     }
 
 
@@ -181,41 +182,41 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_points_buy_bomb() {
         RichPlayer player = new RichPlayer();
-        player.setPoints(100);
+        player.setPoints(new RichPoint(100));
         player.buyTool(RichToolFactory.createTool(RichToolFactory.BOMB));
 
-        assertEquals(50, player.getPoints());
+        assertEquals(new RichPoint(50), player.getPoints());
         assertEquals(1, player.getToolsNumber());
     }
 
     public void test_player_has_not_enough_points_buy_bomb() {
         RichPlayer player = new RichPlayer();
-        player.setPoints(20);
+        player.setPoints(new RichPoint(20));
         try {
             player.buyTool(RichToolFactory.createTool(RichToolFactory.BOMB));
             fail("there should have an exception");
         } catch (ToolPointsNotEnoughException ex) {
             assertEquals("您当前剩余的点数为20， 不足以购买炸弹道具.", ex.getMessage());
         }
-        assertEquals(20, player.getPoints());
+        assertEquals(new RichPoint(20), player.getPoints());
         assertEquals(0, player.getToolsNumber());
     }
 
     public void test_player_has_enough_bomb_sell() {
         RichPlayer player = new RichPlayer();
         player.addTool(RichToolFactory.createTool(RichToolFactory.BOMB));
-        player.setPoints(0);
+        player.setPoints(new RichPoint(0));
         assertEquals(1, player.getToolsNumber());
 
         player.sellTool(RichToolFactory.createTool(RichToolFactory.BOMB));
 
         assertEquals(0, player.getToolsNumber());
-        assertEquals(50, player.getPoints());
+        assertEquals(new RichPoint(50), player.getPoints());
     }
 
     public void test_player_has_not_enough_bomb_sell() {
         RichPlayer player = new RichPlayer();
-        player.setPoints(0);
+        player.setPoints(new RichPoint(0));
         assertEquals(0, player.getToolsNumber());
 
         try {
@@ -225,7 +226,7 @@ public class RichPlayerTest extends TestCase {
             assertEquals("You don't have 炸弹", ex.getMessage());
         }
         assertEquals(0, player.getToolsNumber());
-        assertEquals(0, player.getPoints());
+        assertEquals(new RichPoint(0), player.getPoints());
     }
 
 

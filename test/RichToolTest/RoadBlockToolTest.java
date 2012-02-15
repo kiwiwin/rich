@@ -11,7 +11,7 @@ public class RoadBlockToolTest extends TestCase {
     }
 
     public void test_should_return_50_for_roadblock_get_points() {
-        assertEquals(50, RichToolFactory.createTool(RichToolFactory.ROADBLOCK).getPoints());
+        assertEquals(new RichPoint(50), RichToolFactory.createTool(RichToolFactory.ROADBLOCK).getPoints());
     }
 
     public void test_should_return_路障_for_getName() {

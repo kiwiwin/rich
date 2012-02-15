@@ -2,14 +2,15 @@ package RichTool;
 
 import RichMap.RichSitePosition;
 import RichPlayer.RichPlayer;
+import RichPlayer.RichPoint;
 
 public class RobotTool extends RichRealTimeTool {
     public String display() {
         return " ";
     }
 
-    public int getPoints() {
-        return 30;
+    public RichPoint getPoints() {
+        return new RichPoint(30);
     }
 
     public String getName() {
