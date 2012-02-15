@@ -3,12 +3,14 @@ package RichCommandTest;
 import RichCommand.RichRollCommand;
 import RichMap.RichMap;
 import RichMap.RichSitePosition;
-import RichPlayer.RichPlayer;
+import RichPlayer.*;
 import junit.framework.TestCase;
 
 public class RichRollCommandTest extends TestCase {
+    private static final RichMoney dummyMoney = new RichMoney(0);
+
     public void test_should_return_number_range_from_1_to_6_inclusively() {
-        RichPlayer player = new RichPlayer();
+        RichPlayer player = new RichPlayer(dummyMoney);
         
         RichSitePosition position = new RichSitePosition(RichMap.instance(), 63); //magic position
         player.setPosition(position);

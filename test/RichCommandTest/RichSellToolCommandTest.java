@@ -1,15 +1,16 @@
 package RichCommandTest;
 
 import RichCommand.RichSellToolCommand;
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
+import RichPlayer.*;
 import RichTool.RichTool;
 import RichTool.RichToolFactory;
 import junit.framework.TestCase;
 
 public class RichSellToolCommandTest extends TestCase {
+    private static final RichMoney dummyMoney = new RichMoney(0);
+
     public void test_sell_tool_success(){
-        RichPlayer player = new RichPlayer();
+        RichPlayer player = new RichPlayer(dummyMoney);
         RichTool tool = RichToolFactory.createTool(RichToolFactory.ROADBLOCK);
         player.addTool(tool);
         player.setPoints(new RichPoint(0));

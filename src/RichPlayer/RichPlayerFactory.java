@@ -1,8 +1,8 @@
 package RichPlayer;
 
 public class RichPlayerFactory {
-    public static RichPlayer createPlayer(String index) {
-        RichPlayer player = new RichPlayer();
+    public static RichPlayer createPlayer(String index, RichMoney money) {
+        RichPlayer player = new RichPlayer(money);
         if (index.equals("1")) {
             player.setName("Q");
         } else if (index.equals("2")) {
@@ -18,10 +18,10 @@ public class RichPlayerFactory {
         return player;
     }
 
-    public static RichPlayer[] createPlayers(String text) {
+    public static RichPlayer[] createPlayers(String text, RichMoney money) {
         RichPlayer players[] = new RichPlayer[text.length()];
         for (int i = 0; i < text.length(); i++) {
-            players[i] = createPlayer(text.substring(i, i+1));
+            players[i] = createPlayer(text.substring(i, i+1), money);
         }
         return players;
     }

@@ -17,9 +17,8 @@ public class RichGiftSiteTest extends TestCase {
         RedirectIO.set_input("./test/player_get_money_gift_input.txt");
         RedirectIO.set_output("./test/rich_gift_site_get_money_gift_test.txt");
 
-        RichPlayer player = new RichPlayer();
+        RichPlayer player = new RichPlayer(new RichMoney(1000));
         RichGiftSite site = new RichGiftSite();
-        player.setMoney(new RichMoney(1000));
 
         site.doAcceptPlayer(player);
 

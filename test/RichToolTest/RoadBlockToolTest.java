@@ -2,14 +2,16 @@ package RichToolTest;
 
 import RichMap.RichMap;
 import RichMap.RichSitePosition;
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
+import RichPlayer.*;
 import RichTool.RichDeferredTool;
 import RichTool.RichTool;
 import RichTool.RichToolFactory;
 import junit.framework.TestCase;
 
 public class RoadBlockToolTest extends TestCase {
+    private static final RichMoney dummyMoney = new RichMoney(0);
+
+
     public void test_should_display_sharp_for_roadblock_tool() {
         assertEquals("#", RichToolFactory.createTool(RichToolFactory.ROADBLOCK).display());
     }
@@ -26,7 +28,7 @@ public class RoadBlockToolTest extends TestCase {
     public void test_should_roadblock_block_player() {
         RichDeferredTool tool = (RichDeferredTool)RichToolFactory.createTool(RichToolFactory.ROADBLOCK);
         RichMap map = RichMap.buildMap();
-        RichPlayer player= new RichPlayer();
+        RichPlayer player= new RichPlayer(dummyMoney);
         player.setPosition(new RichSitePosition(map, 63));
 
         tool.installTool(player, 1);

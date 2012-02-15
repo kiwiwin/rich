@@ -4,12 +4,15 @@ import RichMap.RichMap;
 import RichMap.RichSitePosition;
 import RichPlayer.RichPlayer;
 import RichPlayer.RichPoint;
+import RichPlayer.RichMoney;
 import RichTool.RichDeferredTool;
 import RichTool.RichTool;
 import RichTool.RichToolFactory;
 import junit.framework.TestCase;
 
 public class BombToolTest extends TestCase {
+    private static final RichMoney dummyMoney = new RichMoney(0);
+
     public void test_should_display_at_for_bomb_tool() {
         assertEquals("@", RichToolFactory.createTool(RichToolFactory.BOMB).display());
     }
@@ -24,9 +27,9 @@ public class BombToolTest extends TestCase {
     }
 
     public void test_should_return_player_at_hospital() {
-        RichDeferredTool tool = (RichDeferredTool)RichToolFactory.createTool(RichToolFactory.BOMB);
+        RichDeferredTool tool = (RichDeferredTool) RichToolFactory.createTool(RichToolFactory.BOMB);
         RichMap map = RichMap.instance();
-        RichPlayer player = new RichPlayer();
+        RichPlayer player = new RichPlayer(dummyMoney);
         player.setPosition(new RichSitePosition(map, 0));
 
         tool.installTool(player, 1);

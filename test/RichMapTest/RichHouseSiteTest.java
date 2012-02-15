@@ -12,14 +12,15 @@ import TestHelper.RedirectIO;
 import junit.framework.TestCase;
 
 public class RichHouseSiteTest extends TestCase {
+    private static final RichMoney dummyMoney = new RichMoney(0);
+
     public void test_should_return_player_buy_house() {
         RedirectIO.set_input("./test/player_buy_house_input.txt");
         RedirectIO.set_output("./test/buy_empty_play_test.txt");
 
         RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(1000)));
         RichHouseSite site = new RichHouseSite(house);
-        RichPlayer player = new RichPlayer();
-        player.setMoney(new RichMoney(5000));
+        RichPlayer player = new RichPlayer(new RichMoney(5000));
         site.doAcceptPlayer(player);
 
         RedirectIO.reset_input();
@@ -36,8 +37,7 @@ public class RichHouseSiteTest extends TestCase {
 
         RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(1000)));
         RichHouseSite site = new RichHouseSite(house);
-        RichPlayer player = new RichPlayer();
-        player.setMoney(new RichMoney(5000));
+        RichPlayer player = new RichPlayer(new RichMoney(5000));
         site.doAcceptPlayer(player);
 
         RedirectIO.reset_input();
@@ -53,9 +53,8 @@ public class RichHouseSiteTest extends TestCase {
         RedirectIO.set_output("./test/note_for_upgrade_house_test.txt");
 
         RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(2000)));
-        RichPlayer player = new RichPlayer();
+        RichPlayer player = new RichPlayer(new RichMoney(5000));
         player.addHouse(house);
-        player.setMoney(new RichMoney(5000));
 
         RichHouseSite site = new RichHouseSite(house);
         site.doAcceptPlayer(player);
@@ -74,9 +73,8 @@ public class RichHouseSiteTest extends TestCase {
         RedirectIO.set_output("./test/note_for_upgrade_house_test.txt");
 
         RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(2000)));
-        RichPlayer player = new RichPlayer();
+        RichPlayer player = new RichPlayer(new RichMoney(5000));
         player.addHouse(house);
-        player.setMoney(new RichMoney(5000));
 
         RichHouseSite site = new RichHouseSite(house);
         site.doAcceptPlayer(player);
@@ -91,11 +89,9 @@ public class RichHouseSiteTest extends TestCase {
 
     public void test_should_return_player_pay_for_toll() {
         RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(2000)));
-        RichPlayer owner = new RichPlayer();
+        RichPlayer owner = new RichPlayer(new RichMoney(5000));
         owner.addHouse(house);
-        owner.setMoney(new RichMoney(5000));
-        RichPlayer visitor = new RichPlayer();
-        visitor.setMoney(new RichMoney(5000));
+        RichPlayer visitor = new RichPlayer(new RichMoney(5000));
 
         RichHouseSite site = new RichHouseSite(house);
         site.doAcceptPlayer(visitor);
@@ -108,7 +104,7 @@ public class RichHouseSiteTest extends TestCase {
     public void test_player_move_5_steps_forward_buy_house() {
         RedirectIO.set_input("./test/player_not_buy_house_input.txt");
 
-        RichPlayer player = new RichPlayer();
+        RichPlayer player = new RichPlayer(dummyMoney);
         RichMap map = RichMap.buildMap();
         player.setPosition(new RichSitePosition(map, 0));
 
@@ -122,18 +118,16 @@ public class RichHouseSiteTest extends TestCase {
     public void test_should_return_0_for_toll_of_plat_original_price_is_1000_if_house_owner_is_at_prison_or_hospital() {
         RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(1000)));
         RichHouseSite site = new RichHouseSite(house);
-        RichPlayer owner = new RichPlayer();
+        RichPlayer owner = new RichPlayer(dummyMoney);
         owner.setPunishDays(3);
         owner.addHouse(house);
         house.setOwner(owner);
-        owner.setMoney(new RichMoney(0));
-        
-        RichPlayer visitor = new RichPlayer();
-        visitor.setMoney(new RichMoney(10000));
+
+        RichPlayer visitor = new RichPlayer(dummyMoney);
         site.acceptPlayer(visitor);
 
         assertEquals(new RichMoney(0), owner.getMoney());
-        assertEquals(new RichMoney(10000), visitor.getMoney());
+        assertEquals(new RichMoney(0), visitor.getMoney());
     }
 
     public void test_should_return_0_for_toll_of_plat_original_price_is_1000_if_visitor_has_blessing_god() {
@@ -141,20 +135,18 @@ public class RichHouseSiteTest extends TestCase {
 
         RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(1000)));
         RichHouseSite site = new RichHouseSite(house);
-        RichPlayer owner = new RichPlayer();
+        RichPlayer owner = new RichPlayer(dummyMoney);
         owner.addHouse(house);
         house.setOwner(owner);
-        owner.setMoney(new RichMoney(0));
 
-        RichPlayer visitor = new RichPlayer();
-        visitor.setMoney(new RichMoney(10000));
+        RichPlayer visitor = new RichPlayer(dummyMoney);
         visitor.setBlessingGod();
         site.acceptPlayer(visitor);
 
         RedirectIO.reset_output();
 
         assertEquals(new RichMoney(0), owner.getMoney());
-        assertEquals(new RichMoney(10000), visitor.getMoney());
+        assertEquals(new RichMoney(0), visitor.getMoney());
 
         assertTrue(RedirectIO.compareFile("./test/player_has_blessing_god_answer.txt", "./test/player_has_blessing_god_test.txt"));
     }

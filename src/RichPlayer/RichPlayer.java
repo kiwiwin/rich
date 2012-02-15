@@ -19,7 +19,6 @@ public class RichPlayer {
 
     private ArrayList<RichTool> _tools;
     private final int TOOL_NUMBER_LIMIT = 10;
-    private final int DEFAULT_INIT_MONEY_COUNT = 10000;
     private final int DEFAULT_INIT_POINTS_COUNT = 0;
     private ArrayList<RichHouse> _houses;
     private RichSitePosition _position;
@@ -28,10 +27,10 @@ public class RichPlayer {
     private int _blessingGodDays;
     private String _name;
 
-    public RichPlayer() {
+    public RichPlayer(RichMoney money) {
         _tools = new ArrayList<RichTool>();
         _houses = new ArrayList<RichHouse>();
-        _money = new RichMoney(DEFAULT_INIT_MONEY_COUNT);
+        _money = money;
         _points = new RichPoint(DEFAULT_INIT_POINTS_COUNT);
     }
 
@@ -61,10 +60,6 @@ public class RichPlayer {
 
     public RichPoint getPoints() {
         return _points;
-    }
-
-    public void setMoney(RichMoney money) {
-        _money = money;
     }
 
     public RichMoney getMoney() {

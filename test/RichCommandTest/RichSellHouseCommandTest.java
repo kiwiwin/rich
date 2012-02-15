@@ -10,9 +10,8 @@ import junit.framework.TestCase;
 public class RichSellHouseCommandTest extends TestCase {
     public void test_should_return_sell_house_success() {
         RichMoney playerMoneyBeforeSell = new RichMoney(0);
-        RichPlayer player = new RichPlayer();
-        player.setMoney(playerMoneyBeforeSell);
-        
+        RichPlayer player = new RichPlayer(playerMoneyBeforeSell);
+
         RichMoney originalHousePrice = new RichMoney(1000);
         RichHouse house = new RichHouse(new RichHousePlatLevel(originalHousePrice));
 

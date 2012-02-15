@@ -29,10 +29,9 @@ public class RichScheduler {
 
     private static void initializePlayer(RichMoney money) throws IOException {
         System.out.println("请选择2~4位不重复玩家，输入编号即可。(1.钱夫人; 2.阿土伯; 3.孙小美; 4.金贝贝):");
-        _players.addAll(Arrays.asList(RichPlayerFactory.createPlayers(RichIO.readLine())));
+        _players.addAll(Arrays.asList(RichPlayerFactory.createPlayers(RichIO.readLine(), money)));
 
         for (RichPlayer player : _players) {
-            player.setMoney(money);
             player.setPosition(new RichSitePosition(RichMap.instance(), 0));
         }
     }

@@ -2,8 +2,7 @@ package RichToolTest;
 
 import RichMap.RichMap;
 import RichMap.RichSitePosition;
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
+import RichPlayer.*;
 import RichTool.RichDeferredTool;
 import RichTool.RichRealTimeTool;
 import RichTool.RichTool;
@@ -28,7 +27,7 @@ public class RobotToolTest extends TestCase {
         RichRealTimeTool robot = (RichRealTimeTool) RichToolFactory.createTool(RichToolFactory.ROBOT);
         RichDeferredTool bomb = (RichDeferredTool) RichToolFactory.createTool(RichToolFactory.BOMB);
         RichMap map = RichMap.buildMap();
-        RichPlayer player = new RichPlayer();
+        RichPlayer player = new RichPlayer(new RichMoney(0));
         player.setPosition(new RichSitePosition(map, 0));
 
         bomb.installTool(player, 10);
