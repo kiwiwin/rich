@@ -17,14 +17,11 @@ public class RichPlayerTest extends TestCase {
     private static final RichMoney dummyMoney = new RichMoney(0);
 
     public void test_should_player_can_not_have_more_than_10_tools() {
-        RichPlayer richPlayer = new RichPlayer(dummyMoney);
-        richPlayer.setPoints(new RichPoint(100000));
+        RichPlayer richPlayer = new RichPlayer(dummyMoney, new RichPoint(100000));
 
         for (int i = 0; i < 10; i++) {
             richPlayer.buyTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
         }
-
-        richPlayer.setPoints(new RichPoint(100000));
 
         try {
             richPlayer.buyTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
@@ -32,12 +29,11 @@ public class RichPlayerTest extends TestCase {
         } catch (ToolOverflowException ex) {
             assertEquals("Each player cannot have more than 10 tools", ex.getMessage());
         }
-        assertEquals(new RichPoint(100000), richPlayer.getPoints());
+        assertEquals(new RichPoint(99500), richPlayer.getPoints());
     }
 
     public void test_player_has_enough_points_buy_roadblock() {
-        RichPlayer player = new RichPlayer(dummyMoney);
-        player.setPoints(new RichPoint(100));
+        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(100));
         player.buyTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
 
         assertEquals(new RichPoint(50), player.getPoints());
@@ -45,8 +41,7 @@ public class RichPlayerTest extends TestCase {
     }
 
     public void test_player_has_not_enough_points_buy_roadblock() {
-        RichPlayer player = new RichPlayer(dummyMoney);
-        player.setPoints(new RichPoint(30));
+        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(30));
         try {
             player.buyTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
             fail("there should have an exception: 您当前剩余的点数为30， 不足以购买路障道具.");
@@ -58,9 +53,8 @@ public class RichPlayerTest extends TestCase {
     }
 
     public void test_player_has_enough_roadblock_sell() {
-        RichPlayer player = new RichPlayer(dummyMoney);
+        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(0));
         player.addTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
-        player.setPoints(new RichPoint(0));
         assertEquals(1, player.getToolsNumber());
 
         player.sellTool(RichToolFactory.createTool(1));
@@ -70,8 +64,7 @@ public class RichPlayerTest extends TestCase {
     }
 
     public void test_player_has_not_enough_roadblock_sell() {
-        RichPlayer player = new RichPlayer(dummyMoney);
-        player.setPoints(new RichPoint(0));
+        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(0));
         assertEquals(0, player.getToolsNumber());
 
         try {
@@ -86,7 +79,7 @@ public class RichPlayerTest extends TestCase {
 
 
     public void test_player_has_roadblock_to_use() {
-        RichPlayer player = new RichPlayer(dummyMoney);
+        RichPlayer player = new RichPlayer(dummyMoney, null);
         player.addTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
 
         assertEquals(1, player.getToolsNumber());
@@ -96,7 +89,7 @@ public class RichPlayerTest extends TestCase {
     }
 
     public void test_player_has_not_roadblock_to_use() {
-        RichPlayer player = new RichPlayer(dummyMoney);
+        RichPlayer player = new RichPlayer(dummyMoney, null);
 
         assertEquals(0, player.getToolsNumber());
 
@@ -111,8 +104,7 @@ public class RichPlayerTest extends TestCase {
     }
 
     public void test_player_has_enough_points_buy_robot() {
-        RichPlayer player = new RichPlayer(dummyMoney);
-        player.setPoints(new RichPoint(100));
+        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(100));
         player.buyTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
 
         assertEquals(new RichPoint(70), player.getPoints());
@@ -120,8 +112,7 @@ public class RichPlayerTest extends TestCase {
     }
 
     public void test_player_has_not_enough_points_buy_robot() {
-        RichPlayer player = new RichPlayer(dummyMoney);
-        player.setPoints(new RichPoint(20));
+        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(20));
         try {
             player.buyTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
             fail("there should have an exception");
@@ -133,9 +124,8 @@ public class RichPlayerTest extends TestCase {
     }
 
     public void test_player_has_enough_robot_sell() {
-        RichPlayer player = new RichPlayer(dummyMoney);
+        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(0));
         player.addTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
-        player.setPoints(new RichPoint(0));
         assertEquals(1, player.getToolsNumber());
 
         player.sellTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
@@ -145,8 +135,7 @@ public class RichPlayerTest extends TestCase {
     }
 
     public void test_player_has_not_enough_robot_sell() {
-        RichPlayer player = new RichPlayer(dummyMoney);
-        player.setPoints(new RichPoint(0));
+        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(0));
         assertEquals(0, player.getToolsNumber());
 
         try {
@@ -161,7 +150,7 @@ public class RichPlayerTest extends TestCase {
 
 
     public void test_player_has_robot_to_use() {
-        RichPlayer player = new RichPlayer(dummyMoney);
+        RichPlayer player = new RichPlayer(dummyMoney, null);
         player.addTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
 
         assertEquals(1, player.getToolsNumber());
@@ -171,7 +160,7 @@ public class RichPlayerTest extends TestCase {
     }
 
     public void test_player_has_not_robot_to_use() {
-        RichPlayer player = new RichPlayer(dummyMoney);
+        RichPlayer player = new RichPlayer(dummyMoney, null);
 
         assertEquals(0, player.getToolsNumber());
 
@@ -186,8 +175,7 @@ public class RichPlayerTest extends TestCase {
     }
 
     public void test_player_has_enough_points_buy_bomb() {
-        RichPlayer player = new RichPlayer(dummyMoney);
-        player.setPoints(new RichPoint(100));
+        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(100));
         player.buyTool(RichToolFactory.createTool(RichToolFactory.BOMB));
 
         assertEquals(new RichPoint(50), player.getPoints());
@@ -195,8 +183,7 @@ public class RichPlayerTest extends TestCase {
     }
 
     public void test_player_has_not_enough_points_buy_bomb() {
-        RichPlayer player = new RichPlayer(dummyMoney);
-        player.setPoints(new RichPoint(20));
+        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(20));
         try {
             player.buyTool(RichToolFactory.createTool(RichToolFactory.BOMB));
             fail("there should have an exception");
@@ -208,9 +195,8 @@ public class RichPlayerTest extends TestCase {
     }
 
     public void test_player_has_enough_bomb_sell() {
-        RichPlayer player = new RichPlayer(dummyMoney);
+        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(0));
         player.addTool(RichToolFactory.createTool(RichToolFactory.BOMB));
-        player.setPoints(new RichPoint(0));
         assertEquals(1, player.getToolsNumber());
 
         player.sellTool(RichToolFactory.createTool(RichToolFactory.BOMB));
@@ -220,8 +206,7 @@ public class RichPlayerTest extends TestCase {
     }
 
     public void test_player_has_not_enough_bomb_sell() {
-        RichPlayer player = new RichPlayer(dummyMoney);
-        player.setPoints(new RichPoint(0));
+        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(0));
         assertEquals(0, player.getToolsNumber());
 
         try {
@@ -236,7 +221,7 @@ public class RichPlayerTest extends TestCase {
 
 
     public void test_player_has_bomb_to_use() {
-        RichPlayer player = new RichPlayer(dummyMoney);
+        RichPlayer player = new RichPlayer(dummyMoney, null);
         player.addTool(RichToolFactory.createTool(RichToolFactory.BOMB));
 
         assertEquals(1, player.getToolsNumber());
@@ -246,7 +231,7 @@ public class RichPlayerTest extends TestCase {
     }
 
     public void test_player_has_not_bomb_to_use() {
-        RichPlayer player = new RichPlayer(dummyMoney);
+        RichPlayer player = new RichPlayer(dummyMoney, null);
 
         assertEquals(0, player.getToolsNumber());
 
@@ -262,7 +247,7 @@ public class RichPlayerTest extends TestCase {
 
 
     public void test_player_has_enough_money_buy_house_without_owner() {
-        RichPlayer player = new RichPlayer(new RichMoney(5000));
+        RichPlayer player = new RichPlayer(new RichMoney(5000), null);
 
         RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(1000)));
 
@@ -276,7 +261,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_not_enough_money_buy_house_without_owner() {
         RichMoney notEnoughMoney = new RichMoney(500);
-        RichPlayer player = new RichPlayer(notEnoughMoney);
+        RichPlayer player = new RichPlayer(notEnoughMoney, null);
 
         RichMoney housePrice =  new RichMoney(1000);
         RichHouse house = new RichHouse(new RichHousePlatLevel(housePrice));
@@ -295,8 +280,8 @@ public class RichPlayerTest extends TestCase {
     }
 
     public void test_player_can_not_buy_house_already_has_owner() {
-        RichPlayer visitor = new RichPlayer(dummyMoney);
-        RichPlayer owner = new RichPlayer(dummyMoney);
+        RichPlayer visitor = new RichPlayer(dummyMoney, null);
+        RichPlayer owner = new RichPlayer(dummyMoney, null);
 
         RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(1000)));
         owner.addHouse(house);
@@ -313,7 +298,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_money_to_upgrade_house_from_plat_to_cottage() {
         RichMoney enoughMoney = new RichMoney(10000);
-        RichPlayer player = new RichPlayer(enoughMoney);
+        RichPlayer player = new RichPlayer(enoughMoney, null);
         RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(1000)));
         player.addHouse(house);
 
@@ -326,7 +311,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_money_to_upgrade_house_from_cottage_to_villa() {
         RichMoney enoughMoney = new RichMoney(10000);
-        RichPlayer player = new RichPlayer(enoughMoney);
+        RichPlayer player = new RichPlayer(enoughMoney, null);
         RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(1000)));
         player.addHouse(house);
 
@@ -340,7 +325,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_money_to_upgrade_house_from_villa_to_skyscraper() {
         RichMoney enoughMoney = new RichMoney(10000);
-        RichPlayer player = new RichPlayer(enoughMoney);
+        RichPlayer player = new RichPlayer(enoughMoney, null);
         RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(1000)));
         player.addHouse(house);
 
@@ -355,7 +340,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_sell_plat() {
         RichMoney playerMoneyBeforeSell = new RichMoney(10000);
-        RichPlayer player = new RichPlayer(playerMoneyBeforeSell);
+        RichPlayer player = new RichPlayer(playerMoneyBeforeSell, null);
         RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(1000)));
 
         player.addHouse(house);
@@ -373,7 +358,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_sell_cottage() {
         RichMoney playerMoneyBeforeSell = new RichMoney(10000);
-        RichPlayer player = new RichPlayer(playerMoneyBeforeSell);
+        RichPlayer player = new RichPlayer(playerMoneyBeforeSell, null);
         RichHouse house = new RichHouse(new RichHouseCottageLevel(new RichMoney(1000)));
 
         player.addHouse(house);
@@ -391,7 +376,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_sell_villa() {
         RichMoney playerMoneyBeforeSell = new RichMoney(10000);
-        RichPlayer player = new RichPlayer(playerMoneyBeforeSell);
+        RichPlayer player = new RichPlayer(playerMoneyBeforeSell, null);
         RichHouse house = new RichHouse(new RichHouseVillaLevel(new RichMoney(1000)));
 
         player.addHouse(house);
@@ -409,7 +394,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_sell_skyscraper() {
         RichMoney playerMoneyBeforeSell = new RichMoney(10000);
-        RichPlayer player = new RichPlayer(playerMoneyBeforeSell);
+        RichPlayer player = new RichPlayer(playerMoneyBeforeSell, null);
         RichHouse house = new RichHouse(new RichHouseSkyscraperLevel(new RichMoney(1000)));
 
         player.addHouse(house);
@@ -426,13 +411,13 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_pay_for_toll() {
         RichMoney ownerMoneyBeforeSell = new RichMoney(10000);
-        RichPlayer owner = new RichPlayer(ownerMoneyBeforeSell);
+        RichPlayer owner = new RichPlayer(ownerMoneyBeforeSell, null);
 
         RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(1000)));
         owner.addHouse(house);
 
         RichMoney visitorMoneyBeforeSell = new RichMoney(10000);
-        RichPlayer visitor = new RichPlayer(visitorMoneyBeforeSell);
+        RichPlayer visitor = new RichPlayer(visitorMoneyBeforeSell, null);
 
         visitor.payHouseToll(house);
 
@@ -442,20 +427,20 @@ public class RichPlayerTest extends TestCase {
     }
 
     public void test_player_add_tool() {
-        RichPlayer player = new RichPlayer(dummyMoney);
+        RichPlayer player = new RichPlayer(dummyMoney, null);
         player.addTool(RichToolFactory.createTool(RichToolFactory.BOMB));
         assertEquals(1, player.getToolsNumber());
     }
 
     public void test_player_add_money() {
         RichMoney playerMoneyBeforeAddMoney = new RichMoney(0);
-        RichPlayer player = new RichPlayer(playerMoneyBeforeAddMoney);
+        RichPlayer player = new RichPlayer(playerMoneyBeforeAddMoney, null);
         player.addMoney(new RichMoney(10000));
         assertEquals(new RichMoney(10000), player.getMoney());
     }
 
     public void test_player_move_forward_4_steps() {
-        RichPlayer player = new RichPlayer(dummyMoney);
+        RichPlayer player = new RichPlayer(dummyMoney, null);
         RichMap map = RichMap.buildMap();
         player.setPosition(new RichSitePosition(map, 0));
         player.stepForward(14);

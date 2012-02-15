@@ -10,7 +10,7 @@ public class RichQueryCommandTest extends TestCase {
     public void test_query_initialize_player() {
         RedirectIO.set_output("./test/query_initialize_player_test.txt");
 
-        RichPlayer player = new RichPlayer(new RichMoney(10000));
+        RichPlayer player = new RichPlayer(new RichMoney(10000), new RichPoint(0));
         RichQueryCommand command = new RichQueryCommand(player);
 
         command.executeCommand();

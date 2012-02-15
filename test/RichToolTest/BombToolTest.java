@@ -29,7 +29,7 @@ public class BombToolTest extends TestCase {
     public void test_should_return_player_at_hospital() {
         RichDeferredTool tool = (RichDeferredTool) RichToolFactory.createTool(RichToolFactory.BOMB);
         RichMap map = RichMap.instance();
-        RichPlayer player = new RichPlayer(dummyMoney);
+        RichPlayer player = new RichPlayer(dummyMoney, null);
         player.setPosition(new RichSitePosition(map, 0));
 
         tool.installTool(player, 1);

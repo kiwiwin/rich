@@ -12,7 +12,7 @@ public class PointsGiftTest extends TestCase{
 
 
     public void test_should_add_200_points_for_open_points_gift() {
-        RichPlayer player = new RichPlayer(dummyMoney);
+        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(0));
         player.acceptGift(new PointsGift());
         assertEquals(new RichPoint(200), player.getPoints());
     }

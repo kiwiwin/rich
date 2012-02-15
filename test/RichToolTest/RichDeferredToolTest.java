@@ -13,7 +13,7 @@ public class RichDeferredToolTest extends TestCase {
 
     public void test_cannot_install_tool_if_the_site_already_has_one() {
         RichMap map = RichMap.buildMap();
-        RichPlayer player = new RichPlayer(dummyMoney);
+        RichPlayer player = new RichPlayer(dummyMoney, null);
         player.setPosition(new RichSitePosition(map, 0));
 
         RichDeferredTool deferredTool = new RoadBlockTool();
@@ -23,9 +23,9 @@ public class RichDeferredToolTest extends TestCase {
     
     public void test_cannot_install_tool_if_the_site_already_stand_a_person() {
         RichMap map = RichMap.buildMap();
-        RichPlayer player = new RichPlayer(dummyMoney);
+        RichPlayer player = new RichPlayer(dummyMoney, null);
         player.setPosition(new RichSitePosition(map, 0));
-        RichPlayer stander = new RichPlayer(dummyMoney);
+        RichPlayer stander = new RichPlayer(dummyMoney, null);
         stander.setPosition(new RichSitePosition(map, 69));
 
         RichDeferredTool deferredTool = new RoadBlockTool();

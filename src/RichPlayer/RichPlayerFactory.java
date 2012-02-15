@@ -2,7 +2,7 @@ package RichPlayer;
 
 public class RichPlayerFactory {
     public static RichPlayer createPlayer(String index, RichMoney money) {
-        RichPlayer player = new RichPlayer(money);
+        RichPlayer player = new RichPlayer(money, null);
         if (index.equals("1")) {
             player.setName("Q");
         } else if (index.equals("2")) {

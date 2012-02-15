@@ -10,10 +10,9 @@ public class RichSellToolCommandTest extends TestCase {
     private static final RichMoney dummyMoney = new RichMoney(0);
 
     public void test_sell_tool_success(){
-        RichPlayer player = new RichPlayer(dummyMoney);
+        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(0));
         RichTool tool = RichToolFactory.createTool(RichToolFactory.ROADBLOCK);
         player.addTool(tool);
-        player.setPoints(new RichPoint(0));
         RichSellToolCommand command = new RichSellToolCommand(player, tool);
         command.executeCommand();
 

@@ -10,7 +10,7 @@ import junit.framework.TestCase;
 
 public class RichRobotCommandTest extends TestCase {
     public void test_should_clean_tools() {
-        RichPlayer player = new RichPlayer(new RichMoney(0));
+        RichPlayer player = new RichPlayer(new RichMoney(0), null);
         RichMap map = RichMap.buildMap();
     
         player.setPosition(new RichSitePosition(map, 0));

@@ -28,7 +28,7 @@ public class RoadBlockToolTest extends TestCase {
     public void test_should_roadblock_block_player() {
         RichDeferredTool tool = (RichDeferredTool)RichToolFactory.createTool(RichToolFactory.ROADBLOCK);
         RichMap map = RichMap.buildMap();
-        RichPlayer player= new RichPlayer(dummyMoney);
+        RichPlayer player= new RichPlayer(dummyMoney, new RichPoint(0));
         player.setPosition(new RichSitePosition(map, 63));
 
         tool.installTool(player, 1);

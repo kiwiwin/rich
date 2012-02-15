@@ -27,7 +27,7 @@ public class RobotToolTest extends TestCase {
         RichRealTimeTool robot = (RichRealTimeTool) RichToolFactory.createTool(RichToolFactory.ROBOT);
         RichDeferredTool bomb = (RichDeferredTool) RichToolFactory.createTool(RichToolFactory.BOMB);
         RichMap map = RichMap.buildMap();
-        RichPlayer player = new RichPlayer(new RichMoney(0));
+        RichPlayer player = new RichPlayer(new RichMoney(0), null);
         player.setPosition(new RichSitePosition(map, 0));
 
         bomb.installTool(player, 10);

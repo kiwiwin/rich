@@ -19,7 +19,6 @@ public class RichPlayer {
 
     private ArrayList<RichTool> _tools;
     private final int TOOL_NUMBER_LIMIT = 10;
-    private final int DEFAULT_INIT_POINTS_COUNT = 0;
     private ArrayList<RichHouse> _houses;
     private RichSitePosition _position;
     private int _remainStep;
@@ -27,11 +26,11 @@ public class RichPlayer {
     private int _blessingGodDays;
     private String _name;
 
-    public RichPlayer(RichMoney money) {
+    public RichPlayer(RichMoney money, RichPoint point) {
         _tools = new ArrayList<RichTool>();
         _houses = new ArrayList<RichHouse>();
         _money = money;
-        _points = new RichPoint(DEFAULT_INIT_POINTS_COUNT);
+        _points = point;
     }
 
     public int getToolsNumber() {
@@ -52,10 +51,6 @@ public class RichPlayer {
         }
 
         throw new ToolUnderflowException(toolToRemove);
-    }
-
-    public void setPoints(RichPoint points) {
-        _points = points;
     }
 
     public RichPoint getPoints() {
