@@ -1,7 +1,7 @@
 package RichMap;
 
-import RichPlayer.RichPlayer;
 import RichHouse.RichHouse;
+import RichPlayer.RichPlayer;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

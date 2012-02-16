@@ -2,7 +2,7 @@ package RichCommand;
 
 import RichMap.RichSitePosition;
 import RichPlayer.RichPlayer;
-import RichTool.*;
+import RichTool.RichDeferredTool;
 import RichTool.RichToolFactory;
 
 public class RichBombCommand extends RichCommand {

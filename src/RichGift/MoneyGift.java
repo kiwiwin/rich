@@ -1,7 +1,8 @@
 package RichGift;
 
-import RichPlayer.RichPlayer;
+import RichMap.RichGift;
 import RichPlayer.RichMoney;
+import RichPlayer.RichPlayer;
 
 public class MoneyGift extends RichGift {
     private static final RichMoney GIFT_MONEY = new RichMoney(2000);

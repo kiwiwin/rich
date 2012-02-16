@@ -1,7 +1,7 @@
 package RichTool;
 
-import RichPlayer.RichPlayer;
 import RichMap.RichMap;
+import RichPlayer.RichPlayer;
 import RichPlayer.RichPoint;
 
 public class BombTool extends RichDeferredTool {

@@ -1,7 +1,7 @@
 package RichCommand;
 
-import RichMap.RichMap;
 import RichMap.RichHouseSite;
+import RichMap.RichMap;
 import RichTool.RichToolFactory;
 import RichUtil.RichScheduler;
 

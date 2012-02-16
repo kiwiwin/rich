@@ -1,12 +1,10 @@
 package RichCommand;
 
 import RichHouse.RichHouse;
-
 import RichHouse.RichHousePlatLevel;
-
+import RichPlayer.RichMoney;
 import RichPlayer.RichPlayer;
 import RichTool.RichToolFactory;
-import RichPlayer.RichMoney;
 
 public class RichQueryCommand extends RichCommand {
     private RichPlayer _player;

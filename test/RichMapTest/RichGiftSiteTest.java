@@ -1,5 +1,6 @@
 package RichMapTest;
 
+import RichGift.RichGiftFactoryImpl;
 import RichMap.RichGiftSite;
 import RichPlayer.RichMoney;
 import RichPlayer.RichPlayer;
@@ -8,7 +9,7 @@ import junit.framework.TestCase;
 
 public class RichGiftSiteTest extends TestCase {
     public void test_should_return_G_for_display(){
-        RichGiftSite site = new RichGiftSite();
+        RichGiftSite site = new RichGiftSite(null);
         assertEquals("G", site.display());
     }
 
@@ -18,7 +19,7 @@ public class RichGiftSiteTest extends TestCase {
         RedirectIO.set_output("./test/rich_gift_site_get_money_gift_test.txt");
 
         RichPlayer player = new RichPlayer(new RichMoney(1000), null);
-        RichGiftSite site = new RichGiftSite();
+        RichGiftSite site = new RichGiftSite(new RichGiftFactoryImpl());
 
         site.doAcceptPlayer(player);
 

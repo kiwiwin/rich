@@ -1,11 +1,11 @@
 package RichMap;
 
 import RichPlayer.RichPlayer;
+import RichPlayer.RichPoint;
 import RichTool.RichToolFactory;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import RichPlayer.RichPoint;
 
 public class RichToolSite extends RichSite {
     public void doAcceptPlayer(RichPlayer player) {

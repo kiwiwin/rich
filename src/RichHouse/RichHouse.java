@@ -1,7 +1,7 @@
 package RichHouse;
 
-import RichPlayer.RichPlayer;
 import RichPlayer.RichMoney;
+import RichPlayer.RichPlayer;
 
 public class RichHouse {
     private RichHouseLevel _houseLevel;
@@ -42,10 +42,6 @@ public class RichHouse {
 
     public RichMoney getToll() {
         return _houseLevel.getToll();
-    }
-
-    public void setOriginalPrice(RichMoney price) {
-        _houseLevel.setOriginalPrice(price);
     }
 
     public RichMoney getOriginalPrice() {

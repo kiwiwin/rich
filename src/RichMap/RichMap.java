@@ -1,8 +1,8 @@
 package RichMap;
 
 import RichHouse.RichHouse;
-
 import RichHouse.RichHousePlatLevel;
+import RichGift.RichGiftFactoryImpl;
 import RichPlayer.RichMoney;
 import RichPlayer.RichPoint;
 
@@ -77,7 +77,7 @@ public class RichMap {
         for (int i = 29; i <= 34; i++) {
             map.setSite(new RichHouseSite(new RichHouse(new RichHousePlatLevel(new RichMoney(500)))), i);
         }
-        map.setSite(new RichGiftSite(), 35);
+        map.setSite(new RichGiftSite(new RichGiftFactoryImpl()), 35);
         for (int i = 36; i <= 48; i++) {
             map.setSite(new RichHouseSite(new RichHouse(new RichHousePlatLevel(new RichMoney(300)))), i);
         }

@@ -1,5 +1,6 @@
 package RichGift;
 
+import RichMap.RichGift;
 import RichPlayer.RichPlayer;
 import RichPlayer.RichPoint;
 

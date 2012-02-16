@@ -4,13 +4,13 @@ import RichCommand.RichCommand;
 import RichCommand.RichCommandFactory;
 import RichMap.RichMap;
 import RichMap.RichSitePosition;
+import RichPlayer.RichMoney;
 import RichPlayer.RichPlayer;
 import RichPlayer.RichPlayerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import RichPlayer.RichMoney;
 
 public class RichScheduler {
     private static int _currentPlayerIndex = 0;
