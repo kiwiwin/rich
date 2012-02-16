@@ -1,6 +1,5 @@
 package RichPlayer;
 
-import RichMap.RichGift;
 import RichHouse.HouseMoneyNotEnoughException;
 import RichHouse.HouseOwnerException;
 import RichHouse.RichHouse;
@@ -138,9 +137,9 @@ public class RichPlayer {
         throw new HouseOwnerException();
     }
 
-    public void acceptGift(RichGift gift) {
-        gift.openGift(this);
-    }
+//    public void acceptGift(RichGift gift) {
+//        gift.openGift(this);
+//    }
 
     public void setPosition(RichSitePosition position) {
         if (_position != null) _position.getSite().removePlayer(this);

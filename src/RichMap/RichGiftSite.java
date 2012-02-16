@@ -18,7 +18,8 @@ public class RichGiftSite extends RichSite {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
             String giftType = reader.readLine();
-            player.acceptGift(_giftFactory.createGift(Integer.parseInt(giftType)));
+            RichGift gift = _giftFactory.createGift(Integer.parseInt(giftType));
+            gift.openGift(player);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
