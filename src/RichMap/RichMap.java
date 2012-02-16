@@ -11,7 +11,6 @@ public class RichMap {
     private int _width;
     private int _height;
     private static RichMap _instance;
-    private static int HOSPITAL_INDEX = 14;
 
     protected RichMap(int width, int height) {
         _width = width;
@@ -97,6 +96,7 @@ public class RichMap {
     }
 
     public RichSitePosition getHospitalSitePosition() {
+        final int HOSPITAL_INDEX = 14;
         return new RichSitePosition(this, HOSPITAL_INDEX);
     }
 }

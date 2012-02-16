@@ -1,4 +1,4 @@
 package RichHouse;
 
-public class HouseException extends RuntimeException{
+class HouseException extends RuntimeException{
 }

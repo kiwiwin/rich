@@ -16,7 +16,6 @@ public class RichPlayer {
     private RichMoney _money;
 
     private ArrayList<RichTool> _tools;
-    private final int TOOL_NUMBER_LIMIT = 10;
     private ArrayList<RichHouse> _houses;
     private RichSitePosition _position;
     private int _remainStep;
@@ -36,6 +35,7 @@ public class RichPlayer {
     }
 
     public void addTool(RichTool tool) {
+        final int TOOL_NUMBER_LIMIT = 10;
         if (getToolsNumber() >= TOOL_NUMBER_LIMIT) throw new ToolOverflowException();
         _tools.add(tool);
     }

@@ -25,12 +25,7 @@ public abstract class RichHouseLevel {
         return _originalPrice;
     }
 
-    public void setOriginalPrice(RichMoney price) {
-        _originalPrice = price;
-    }
-
     public abstract String display();
-
 
     public abstract void sell(RichHouse richHouse);
 

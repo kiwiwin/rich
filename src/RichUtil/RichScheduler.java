@@ -36,6 +36,10 @@ public class RichScheduler {
         }
     }
 
+    public RichScheduler() {
+        super();    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
     private static int initializePlayerMoney() throws IOException {
         System.out.println("设置玩家初始资金，范围1000～50000（默认10000）");
         String moneyStr = RichIO.readLine();
