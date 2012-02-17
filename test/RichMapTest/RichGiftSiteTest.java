@@ -1,32 +1,46 @@
 package RichMapTest;
 
-import RichGift.RichGiftFactoryImpl;
+import RichGift.RichGiftDefaultFactory;
+import RichMap.RichGiftFactory;
 import RichMap.RichGiftSite;
 import RichPlayer.RichMoney;
 import RichPlayer.RichPlayer;
-import TestHelper.RedirectIO;
+import RichPlayer.RichPoint;
 import junit.framework.TestCase;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.io.StringReader;
+
 public class RichGiftSiteTest extends TestCase {
+    private static final String welcomeMessage = "欢迎光临礼品屋，请选择一件您喜欢的礼品：\n";
+    private static final RichPoint dummyPoint = null;
+    private static final BufferedReader dummyReader = null;
+    private static final PrintStream dummyWriter = null;
+    private static final RichGiftFactory dummyGiftFactory = null;
+
     public void test_should_return_G_for_display(){
-        RichGiftSite site = new RichGiftSite(null);
+        RichGiftSite site = new RichGiftSite(dummyReader, dummyWriter, dummyGiftFactory);
         assertEquals("G", site.display());
     }
 
 
-    public void test_should_return_get_money_gift() {
-        RedirectIO.set_input("./test/player_get_money_gift_input.txt");
-        RedirectIO.set_output("./test/rich_gift_site_get_money_gift_test.txt");
-
-        RichPlayer player = new RichPlayer(new RichMoney(1000), null);
-        RichGiftSite site = new RichGiftSite(new RichGiftFactoryImpl());
+    public void test_should_return_get_money_gift_add_2000_money() {
+        String getMoneyGiftInputString = "1\n";
+        
+        BufferedReader reader = new BufferedReader(new StringReader(getMoneyGiftInputString));
+        ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
+        PrintStream writer = new PrintStream(writerStream);
+        
+        RichPlayer player = new RichPlayer(new RichMoney(1000), dummyPoint);
+        RichGiftSite site = new RichGiftSite(reader, writer, new RichGiftDefaultFactory());
 
         site.doAcceptPlayer(player);
 
-        RedirectIO.reset_input();
-        RedirectIO.reset_output();
-
+        String expectMessage = welcomeMessage;
+        
         assertEquals(new RichMoney(3000), player.getMoney());
-        assertTrue(RedirectIO.compareFile("./test/rich_gift_site_welcome_message_answer.txt", "./test/rich_gift_site_get_money_gift_test.txt"));
+        assertEquals(expectMessage, writerStream.toString());
     }
 }

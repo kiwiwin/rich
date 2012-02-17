@@ -1,6 +1,14 @@
 package RichCommand;
 
+import java.io.PrintStream;
+
 public class RichHelpCommand extends RichCommand {
+    private PrintStream _writer;
+
+    public RichHelpCommand(PrintStream writer) {
+        _writer = writer;
+    }
+
     public void executeCommand() {
         String result = "命令一览表\n";
         result += RichRollCommand.getHelp() + "\n";
@@ -12,7 +20,7 @@ public class RichHelpCommand extends RichCommand {
         result += RichQueryCommand.getHelp() + "\n";
         result += RichHelpCommand.getHelp() + "\n";
         result += RichQuitCommand.getHelp();
-        System.out.println(result);
+        _writer.println(result);
     }
 
     private static String getHelp() {

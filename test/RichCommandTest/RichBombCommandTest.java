@@ -1,23 +1,34 @@
 package RichCommandTest;
 
 import RichCommand.RichBombCommand;
+import RichMap.RichDefaultMap;
 import RichMap.RichMap;
 import RichMap.RichSitePosition;
-import RichPlayer.RichPlayer;
-import RichTool.RichToolFactory;
-import junit.framework.TestCase;
 import RichPlayer.RichMoney;
+import RichPlayer.RichPlayer;
+import RichPlayer.RichPoint;
+import RichTool.BombTool;
+import junit.framework.TestCase;
+
+import java.io.BufferedReader;
+import java.io.PrintStream;
 
 public class RichBombCommandTest extends TestCase {
-    private static final RichMoney dummyMoney = new RichMoney(0);
+    private static final RichMoney dummyMoney = null;
+    private static final RichPoint dummyPoint = null;
+    private static final BufferedReader dummyReader = null;
+    private static final PrintStream dummyWriter = null;
+    private static final RichSitePosition dummyHospitalPosition = null;
 
 
-    public void test_should_return_has_bomb_at_site_5() {
-        RichMap map = RichMap.buildMap();
-        RichPlayer player = new RichPlayer(dummyMoney, null);
-        player.addTool(RichToolFactory.createTool(RichToolFactory.BOMB));
+    public void test_should_return_has_bomb_at_site_10() {
+        RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
+        map.buildMap();
+
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+        player.addTool(new BombTool(dummyHospitalPosition));
         player.setPosition(new RichSitePosition(map, 0));
-        RichBombCommand command = new RichBombCommand(player, 10);
+        RichBombCommand command = new RichBombCommand(player, 10, null);
 
         command.executeCommand();
 
@@ -25,12 +36,14 @@ public class RichBombCommandTest extends TestCase {
         assertEquals(0, player.getPosition().getIndex());
     }
 
-    public void test_should_return_has_bomb_at_negative_site_5() {
-        RichMap map = RichMap.buildMap();
-        RichPlayer player = new RichPlayer(dummyMoney, null);
-        player.addTool(RichToolFactory.createTool(RichToolFactory.BOMB));
+    public void test_should_return_has_bomb_at_negative_site_10() {
+        RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
+        map.buildMap();
+
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+        player.addTool(new BombTool(dummyHospitalPosition));
         player.setPosition(new RichSitePosition(map, 0));
-        RichBombCommand command = new RichBombCommand(player, -10);
+        RichBombCommand command = new RichBombCommand(player, -10, null);
 
         command.executeCommand();
 

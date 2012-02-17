@@ -3,25 +3,25 @@ package RichMap;
 import RichPlayer.RichPlayer;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.PrintStream;
 
 public class RichGiftSite extends RichSite {
     RichGiftFactory _giftFactory;
 
-    public RichGiftSite(RichGiftFactory factory){
+    public RichGiftSite(BufferedReader reader, PrintStream writer, RichGiftFactory factory){
+        super(reader, writer);
         _giftFactory = factory;
     }
 
     public void doAcceptPlayer(RichPlayer player){
-        System.out.println("欢迎光临礼品屋，请选择一件您喜欢的礼品：");
+        _outputWriter.println("欢迎光临礼品屋，请选择一件您喜欢的礼品：");
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
-            String giftType = reader.readLine();
+            String giftType = _inputReader.readLine();
             RichGift gift = _giftFactory.createGift(Integer.parseInt(giftType));
             gift.openGift(player);
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            _outputWriter.println(ex.getMessage());
         }
     }
 

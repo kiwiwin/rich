@@ -1,30 +1,30 @@
 package RichPlayerTest;
 
 import RichHouse.*;
-import RichMap.RichHospitalSite;
-import RichMap.RichMap;
-import RichMap.RichSitePosition;
 import RichPlayer.RichMoney;
 import RichPlayer.RichPlayer;
 import RichPlayer.RichPoint;
-import RichTool.RichToolFactory;
-import RichTool.ToolOverflowException;
-import RichTool.ToolPointsNotEnoughException;
-import RichTool.ToolUnderflowException;
+import RichTool.*;
 import junit.framework.TestCase;
 
+import java.io.BufferedReader;
+import java.io.PrintStream;
+
 public class RichPlayerTest extends TestCase {
-    private static final RichMoney dummyMoney = new RichMoney(0);
+    private static final RichMoney dummyMoney = null;
+    private static final RichPoint dummyPoint = null;
+    private static final BufferedReader dummyReader = null;
+    private static final PrintStream dummyWriter = null;
 
     public void test_should_player_can_not_have_more_than_10_tools() {
         RichPlayer richPlayer = new RichPlayer(dummyMoney, new RichPoint(100000));
 
         for (int i = 0; i < 10; i++) {
-            richPlayer.buyTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
+            richPlayer.buyTool(new RoadBlockTool());
         }
 
         try {
-            richPlayer.buyTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
+            richPlayer.buyTool(new RoadBlockTool());
             fail("there should have an exception: Each player cannot have more than 10 tools");
         } catch (ToolOverflowException ex) {
             assertEquals("Each player cannot have more than 10 tools", ex.getMessage());
@@ -34,7 +34,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_points_buy_roadblock() {
         RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(100));
-        player.buyTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
+        player.buyTool(new RoadBlockTool());
 
         assertEquals(new RichPoint(50), player.getPoints());
         assertEquals(1, player.getToolsNumber());
@@ -43,7 +43,7 @@ public class RichPlayerTest extends TestCase {
     public void test_player_has_not_enough_points_buy_roadblock() {
         RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(30));
         try {
-            player.buyTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
+            player.buyTool(new RoadBlockTool());
             fail("there should have an exception: 您当前剩余的点数为30， 不足以购买路障道具.");
         } catch (ToolPointsNotEnoughException ex) {
             assertEquals("您当前剩余的点数为30， 不足以购买路障道具.", ex.getMessage());
@@ -54,10 +54,10 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_roadblock_sell() {
         RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(0));
-        player.addTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
+        player.addTool(new RoadBlockTool());
         assertEquals(1, player.getToolsNumber());
 
-        player.sellTool(RichToolFactory.createTool(1));
+        player.sellTool(new RoadBlockTool());
 
         assertEquals(0, player.getToolsNumber());
         assertEquals(new RichPoint(50), player.getPoints());
@@ -68,7 +68,7 @@ public class RichPlayerTest extends TestCase {
         assertEquals(0, player.getToolsNumber());
 
         try {
-            player.sellTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
+            player.sellTool(new RoadBlockTool());
             fail("there should have an exception: You don't have 路障");
         } catch (ToolUnderflowException ex) {
             assertEquals("You don't have 路障", ex.getMessage());
@@ -80,11 +80,11 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_roadblock_to_use() {
         RichPlayer player = new RichPlayer(dummyMoney, null);
-        player.addTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
+        player.addTool(new RoadBlockTool());
 
         assertEquals(1, player.getToolsNumber());
 
-        player.useTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
+        player.useTool(new RoadBlockTool());
         assertEquals(0, player.getToolsNumber());
     }
 
@@ -94,7 +94,7 @@ public class RichPlayerTest extends TestCase {
         assertEquals(0, player.getToolsNumber());
 
         try {
-            player.useTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
+            player.useTool(new RoadBlockTool());
             fail("there should have an exception");
         } catch (ToolUnderflowException ex) {
             assertEquals("You don't have 路障", ex.getMessage());
@@ -105,7 +105,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_points_buy_robot() {
         RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(100));
-        player.buyTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
+        player.buyTool(new RobotTool());
 
         assertEquals(new RichPoint(70), player.getPoints());
         assertEquals(1, player.getToolsNumber());
@@ -114,7 +114,7 @@ public class RichPlayerTest extends TestCase {
     public void test_player_has_not_enough_points_buy_robot() {
         RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(20));
         try {
-            player.buyTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
+            player.buyTool(new RobotTool());
             fail("there should have an exception");
         } catch (ToolPointsNotEnoughException ex) {
             assertEquals("您当前剩余的点数为20， 不足以购买机器娃娃道具.", ex.getMessage());
@@ -125,10 +125,10 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_robot_sell() {
         RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(0));
-        player.addTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
+        player.addTool(new RobotTool());
         assertEquals(1, player.getToolsNumber());
 
-        player.sellTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
+        player.sellTool(new RobotTool());
 
         assertEquals(0, player.getToolsNumber());
         assertEquals(new RichPoint(30), player.getPoints());
@@ -139,7 +139,7 @@ public class RichPlayerTest extends TestCase {
         assertEquals(0, player.getToolsNumber());
 
         try {
-            player.sellTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
+            player.sellTool(new RobotTool());
             fail("there should have an exception");
         } catch (ToolUnderflowException ex) {
             assertEquals("You don't have 机器娃娃", ex.getMessage());
@@ -151,11 +151,11 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_robot_to_use() {
         RichPlayer player = new RichPlayer(dummyMoney, null);
-        player.addTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
+        player.addTool(new RobotTool());
 
         assertEquals(1, player.getToolsNumber());
 
-        player.useTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
+        player.useTool(new RobotTool());
         assertEquals(0, player.getToolsNumber());
     }
 
@@ -165,7 +165,7 @@ public class RichPlayerTest extends TestCase {
         assertEquals(0, player.getToolsNumber());
 
         try {
-            player.useTool(RichToolFactory.createTool(RichToolFactory.ROBOT));
+            player.useTool(new RobotTool());
             fail("there shold have an exception");
         } catch (ToolUnderflowException ex) {
             assertEquals("You don't have 机器娃娃", ex.getMessage());
@@ -176,7 +176,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_points_buy_bomb() {
         RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(100));
-        player.buyTool(RichToolFactory.createTool(RichToolFactory.BOMB));
+        player.buyTool(new BombTool(null));
 
         assertEquals(new RichPoint(50), player.getPoints());
         assertEquals(1, player.getToolsNumber());
@@ -185,7 +185,7 @@ public class RichPlayerTest extends TestCase {
     public void test_player_has_not_enough_points_buy_bomb() {
         RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(20));
         try {
-            player.buyTool(RichToolFactory.createTool(RichToolFactory.BOMB));
+            player.buyTool(new BombTool(null));
             fail("there should have an exception");
         } catch (ToolPointsNotEnoughException ex) {
             assertEquals("您当前剩余的点数为20， 不足以购买炸弹道具.", ex.getMessage());
@@ -196,10 +196,10 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_bomb_sell() {
         RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(0));
-        player.addTool(RichToolFactory.createTool(RichToolFactory.BOMB));
+        player.addTool(new BombTool(null));
         assertEquals(1, player.getToolsNumber());
 
-        player.sellTool(RichToolFactory.createTool(RichToolFactory.BOMB));
+        player.sellTool(new BombTool(null));
 
         assertEquals(0, player.getToolsNumber());
         assertEquals(new RichPoint(50), player.getPoints());
@@ -210,7 +210,7 @@ public class RichPlayerTest extends TestCase {
         assertEquals(0, player.getToolsNumber());
 
         try {
-            player.sellTool(RichToolFactory.createTool(RichToolFactory.BOMB));
+            player.sellTool(new BombTool(null));
             fail("there should have an exception");
         } catch (ToolUnderflowException ex) {
             assertEquals("You don't have 炸弹", ex.getMessage());
@@ -222,11 +222,11 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_bomb_to_use() {
         RichPlayer player = new RichPlayer(dummyMoney, null);
-        player.addTool(RichToolFactory.createTool(RichToolFactory.BOMB));
+        player.addTool(new BombTool(null));
 
         assertEquals(1, player.getToolsNumber());
 
-        player.useTool(RichToolFactory.createTool(RichToolFactory.BOMB));
+        player.useTool(new BombTool(null));
         assertEquals(0, player.getToolsNumber());
     }
 
@@ -236,7 +236,7 @@ public class RichPlayerTest extends TestCase {
         assertEquals(0, player.getToolsNumber());
 
         try {
-            player.useTool(RichToolFactory.createTool(RichToolFactory.BOMB));
+            player.useTool(new BombTool(null));
             fail("there should have an exception");
         } catch (ToolUnderflowException ex) {
             assertEquals("You don't have 炸弹", ex.getMessage());
@@ -426,32 +426,14 @@ public class RichPlayerTest extends TestCase {
         assertEquals(new RichMoney(10500), owner.getMoney());
     }
 
-    public void test_player_add_tool() {
-        RichPlayer player = new RichPlayer(dummyMoney, null);
-        player.addTool(RichToolFactory.createTool(RichToolFactory.BOMB));
-        assertEquals(1, player.getToolsNumber());
-    }
-
     public void test_player_add_money() {
         RichMoney playerMoneyBeforeAddMoney = new RichMoney(0);
-        RichPlayer player = new RichPlayer(playerMoneyBeforeAddMoney, null);
+        RichPlayer player = new RichPlayer(playerMoneyBeforeAddMoney, dummyPoint);
         player.addMoney(new RichMoney(10000));
         assertEquals(new RichMoney(10000), player.getMoney());
     }
 
     public void test_player_move_forward_4_steps() {
-        RichPlayer player = new RichPlayer(dummyMoney, null);
-        RichMap map = RichMap.buildMap();
-        player.setPosition(new RichSitePosition(map, 0));
-        player.stepForward(14);
 
-        System.out.println(player.getPosition().getIndex());
-
-        RichHospitalSite site = (RichHospitalSite) map.getSite(14);
-        assertTrue(player.getPosition().getSite() instanceof RichHospitalSite);
-        assertEquals(site, player.getPosition().getSite());
-        assertEquals(14, player.getPosition().getIndex());
-        assertTrue(map.getSite(14).hasPlayerStand());
-        assertFalse(map.getSite(0).hasPlayerStand());
     }
 }

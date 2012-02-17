@@ -2,7 +2,7 @@ package RichCommand;
 
 import RichPlayer.RichPlayer;
 import RichTool.RichDeferredTool;
-import RichTool.RichToolFactory;
+import RichTool.RoadBlockTool;
 
 public class RichBlockCommand extends RichCommand {
     private RichPlayer _player;
@@ -14,8 +14,8 @@ public class RichBlockCommand extends RichCommand {
     }
 
     public void executeCommand() {
-        _player.useTool(RichToolFactory.createTool(RichToolFactory.ROADBLOCK));
-        RichDeferredTool tool = (RichDeferredTool) RichToolFactory.createTool(RichToolFactory.ROADBLOCK);
+        _player.useTool(new RoadBlockTool());
+        RichDeferredTool tool = new RoadBlockTool();
         tool.installTool(_player, _offset);
     }
 

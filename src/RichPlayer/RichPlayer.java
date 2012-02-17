@@ -143,15 +143,22 @@ public class RichPlayer {
         _position.getSite().addPlayer(this);
     }
 
-    public void stepForward(int step) {
+    public void forwardSteps(int step) {
         if (_position != null) _position.getSite().removePlayer(this);
         setRemainStep(step);
-        while (_remainStep-- > 0) {
-            stepForward();
+        while (hasRemainStep()) {
+            _remainStep--;
+            forwardSingleStep();
+        }
+
+        if (!isPunished()) {
+            _position.getSite().acceptPlayer(this);
+        } else {
+            _position.getSite().removePlayer(this);
         }
     }
 
-    private void stepForward() {
+    private void forwardSingleStep() {
         _position.moveForward(1);
         _position.getSite().acceptPassenger(this);
     }
@@ -186,14 +193,6 @@ public class RichPlayer {
 
     public boolean hasBlessingGod() {
         return _blessingGodDays > 0;
-    }
-
-    public void setVisible(boolean visible) {
-        if (visible) {
-            _position.getSite().addPlayer(this);
-        } else {
-            _position.getSite().removePlayer(this);
-        }
     }
 
     public String display() {

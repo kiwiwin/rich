@@ -5,26 +5,34 @@ import RichPlayer.RichPoint;
 import RichTool.RichToolFactory;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.PrintStream;
 
 public class RichToolSite extends RichSite {
-    public void doAcceptPlayer(RichPlayer player) {
-        if (player.getPoints().isLessThan(new RichPoint(30))) return; //player do not have enough points, return automatically
+    private RichToolFactory _factory;
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    public RichToolSite(BufferedReader reader, PrintStream writer, RichToolFactory factory) {
+        super(reader, writer);
+        _factory = factory;
+    }
+
+    public void doAcceptPlayer(RichPlayer player) {
+        if (player.getPoints().isLessThan(new RichPoint(30)))
+            return; //player do not have enough points, return automatically
+
         String command;
         try {
-            while ((command = reader.readLine()) != null) {
+            while ((command = _inputReader.readLine()) != null) {
                 if (command.equals("F")) return;
                 try {
-                    player.buyTool(RichToolFactory.createTool(command));
-                    if (player.getPoints().isLessThan(new RichPoint(30))) return; //player do not have enough points, return automatically
+                    player.buyTool(_factory.createTool(command));
+                    if (player.getPoints().isLessThan(new RichPoint(30)))
+                        return; //player do not have enough points, return automatically
                 } catch (IllegalArgumentException ex) {
-                    System.out.println(ex.getMessage());
+                    _outputWriter.println(ex.getMessage());
                 }
             }
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            _outputWriter.println(ex.getMessage());
         }
     }
 

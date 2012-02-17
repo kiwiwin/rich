@@ -1,74 +1,86 @@
 package RichMapTest;
 
 import RichMap.RichToolSite;
-import RichPlayer.RichPlayer;
 import RichPlayer.RichMoney;
+import RichPlayer.RichPlayer;
 import RichPlayer.RichPoint;
-import TestHelper.RedirectIO;
+import RichTool.RichToolFactory;
 import junit.framework.TestCase;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.io.StringReader;
 
 public class RichToolSiteTest extends TestCase {
     private static final RichMoney dummyMoney = new RichMoney(0);
+    private static final BufferedReader dummyReader = null;
+    private static final PrintStream dummyWriter = null;
+    private static final RichToolFactory dummyFactory = null;
 
-    public void test_should_return_T_for_display(){
-        RichToolSite site = new RichToolSite();
+    public void test_should_return_T_for_display() {
+        RichToolSite site = new RichToolSite(dummyReader, dummyWriter, dummyFactory);
         assertEquals("T", site.display());
     }
 
-    public void test_should_return_player_exit_rich_tool_site_automatically(){
-        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(10));
+    public void test_should_return_player_exit_rich_tool_site_automatically() {
+        RichPoint originalNotEnoughPoint = new RichPoint(10);
+        RichPlayer player = new RichPlayer(dummyMoney, originalNotEnoughPoint);
 
-        RichToolSite site = new RichToolSite();
+        RichToolSite site = new RichToolSite(dummyReader, dummyWriter, dummyFactory);
         site.doAcceptPlayer(player);
 
-        assertEquals(new RichPoint(10), player.getPoints());
+        assertEquals(originalNotEnoughPoint, player.getPoints());
     }
 
-    public void test_should_return_player_buy_1_roadblock_2_robot_3_bomb(){
-        RedirectIO.set_input("./test/player_buy_1_roadblock_2_robot_3_bomb.txt");
+    public void test_should_return_player_buy_1_roadblock_2_robot_3_bomb() {
+        String buy1Block2Robot3BombString = "3\n2\n1\n3\n2\n3\nF\n";
+        BufferedReader reader = new BufferedReader(new StringReader(buy1Block2Robot3BombString));
 
-        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(1000));
+        RichPoint initPoint = new RichPoint(1000);
+        RichPlayer player = new RichPlayer(dummyMoney, initPoint);
 
-        RichToolSite site= new RichToolSite();
+        RichToolSite site = new RichToolSite(reader, dummyWriter, new RichToolFactory(null));
         site.doAcceptPlayer(player);
 
-        assertEquals(new RichPoint(740), player.getPoints());
+        RichPoint expectPoint = new RichPoint(740);
+        assertEquals(expectPoint, player.getPoints());
         assertEquals(6, player.getToolsNumber());
     }
 
-    public void test_should_return_invalid_tool_(){
-        RedirectIO.set_input("./test/player_buy_invalid_tool.txt");
-        RedirectIO.set_output("./test/player_buy_invalid_tool_test.txt");
-        
-        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(1000));
+    public void test_should_return_invalid_tool_() {
+        String invalidToolTypeString = "invalid tool tool type\nF\n";
+        BufferedReader reader = new BufferedReader(new StringReader(invalidToolTypeString));
 
-        RichToolSite site= new RichToolSite();
+        ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
+        PrintStream writer = new PrintStream(writerStream);
+
+        RichPoint originalPoint = new RichPoint(1000);
+        RichPlayer player = new RichPlayer(dummyMoney, originalPoint);
+
+        RichToolSite site = new RichToolSite(reader, writer, new RichToolFactory(null));
         site.doAcceptPlayer(player);
 
-        assertEquals(new RichPoint(1000), player.getPoints());
+        assertEquals(originalPoint, player.getPoints());
         assertEquals(0, player.getToolsNumber());
-
-        RedirectIO.reset_input();
-        RedirectIO.reset_output();
-
-        assertTrue(RedirectIO.compareFile("./test/player_buy_invalid_tool_answer.txt", "./test/player_buy_invalid_tool_test.txt"));
+        assertEquals("错误的道具类型\n", writerStream.toString());
     }
 
-    public void test_should_return_not_have_enough_points_buy_tools(){
-        RedirectIO.set_input("./test/player_buy_1_roadblock_2_robot_3_bomb.txt");
-        RedirectIO.set_output("./test/player_have_not_enough_points_buy_tool_test.txt");
+    public void test_should_return_not_have_enough_points_buy_bomb() {
+        String buyBombString = "3\nF\n";
+        BufferedReader reader = new BufferedReader(new StringReader(buyBombString));
 
-        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(250));
+        ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
+        PrintStream writer = new PrintStream(writerStream);
 
-        RichToolSite site= new RichToolSite();
+        RichPoint originalPoint = new RichPoint(40);
+        RichPlayer player = new RichPlayer(dummyMoney, originalPoint);
+
+        RichToolSite site = new RichToolSite(reader, writer, new RichToolFactory(null));
         site.doAcceptPlayer(player);
 
-        assertEquals(new RichPoint(40), player.getPoints());
-        assertEquals(5, player.getToolsNumber());
-
-        RedirectIO.reset_input();
-        RedirectIO.reset_output();
-
-        assertTrue(RedirectIO.compareFile("./test/player_have_not_enough_points_buy_tool_answer.txt", "./test/player_have_not_enough_points_buy_tool_test.txt"));
+        assertEquals(originalPoint, player.getPoints());
+        assertEquals(0, player.getToolsNumber());
+        assertEquals("您当前剩余的点数为40， 不足以购买炸弹道具.\n", writerStream.toString());
     }
 }

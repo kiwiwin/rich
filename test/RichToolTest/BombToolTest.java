@@ -1,42 +1,57 @@
 package RichToolTest;
 
-import RichMap.RichMap;
-import RichMap.RichSitePosition;
+import RichMap.*;
+import RichPlayer.RichMoney;
 import RichPlayer.RichPlayer;
 import RichPlayer.RichPoint;
-import RichPlayer.RichMoney;
+import RichTool.BombTool;
 import RichTool.RichDeferredTool;
 import RichTool.RichTool;
-import RichTool.RichToolFactory;
 import junit.framework.TestCase;
 
+import java.io.BufferedReader;
+import java.io.PrintStream;
+
 public class BombToolTest extends TestCase {
-    private static final RichMoney dummyMoney = new RichMoney(0);
+    private static final RichMoney dummyMoney = null;
+    private static final RichPoint dummyPoint = null;
+    private static final BufferedReader dummyReader = null;
+    private static final PrintStream dummyWriter = null;
+    private static final RichSitePosition dummyHospitalPosition = null;
 
     public void test_should_display_at_for_bomb_tool() {
-        assertEquals("@", RichToolFactory.createTool(RichToolFactory.BOMB).display());
+        assertEquals("@", new BombTool(dummyHospitalPosition).display());
     }
 
     public void test_should_return_50_for_bomb_get_points() {
-        assertEquals(new RichPoint(50), RichToolFactory.createTool(RichToolFactory.BOMB).getPoints());
+        assertEquals(new RichPoint(50), new BombTool(dummyHospitalPosition).getPoints());
     }
 
     public void test_should_return_炸弹_for_getName() {
-        RichTool tool = RichToolFactory.createTool(RichToolFactory.BOMB);
+        RichTool tool = new BombTool(dummyHospitalPosition);
         assertEquals("炸弹", tool.getName());
     }
 
-    public void test_should_return_player_at_hospital() {
-        RichDeferredTool tool = (RichDeferredTool) RichToolFactory.createTool(RichToolFactory.BOMB);
-        RichMap map = RichMap.instance();
-        RichPlayer player = new RichPlayer(dummyMoney, null);
+    public void test_should_return_player_at_hospital_when_pass_by_a_bomb() {
+       
+        RichMap map = new RichDefaultMap(new RichDefaultMapBuilder(dummyReader, dummyWriter));
+        map.buildMap();
+
+        RichSitePosition hospitalPosition = new RichSitePosition(map, 14);
+        RichDeferredTool tool = new BombTool(hospitalPosition);
+
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
         player.setPosition(new RichSitePosition(map, 0));
 
         tool.installTool(player, 1);
 
-        player.stepForward(1);
+        player.forwardSteps(3);
 
-        assertEquals(map.getHospitalSitePosition().getIndex(), player.getPosition().getIndex());
-        assertFalse(map.getHospitalSitePosition().getSite().hasPlayerStand());
+        RichSite hospitalSite = map.getSite(14);
+        //RichSite hospitalSite = hospitalPosition.getSite();
+
+        assertEquals(hospitalSite, player.getPosition().getSite());
+        assertEquals(3, player.getPunishDays());
+        assertFalse(hospitalSite.hasPlayerStand());
     }
 }

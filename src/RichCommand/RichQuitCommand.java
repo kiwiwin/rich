@@ -1,6 +1,6 @@
 package RichCommand;
 
-import RichUtil.RichScheduler;
+//import RichUtil.RichScheduler;
 
 public class RichQuitCommand extends RichCommand {
     public static String getHelp() {
@@ -8,7 +8,7 @@ public class RichQuitCommand extends RichCommand {
     }
 
     public void executeCommand() {
-        RichScheduler.setSwitchPlayer();
-        RichScheduler.exit();
+//        RichScheduler.setSwitchPlayer();
+//        RichScheduler.exit();
     }
 }

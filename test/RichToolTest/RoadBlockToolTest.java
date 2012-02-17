@@ -1,38 +1,49 @@
 package RichToolTest;
 
+import RichCommandTest.RichDummyMapBuilder;
+import RichMap.RichDefaultMap;
 import RichMap.RichMap;
 import RichMap.RichSitePosition;
-import RichPlayer.*;
+import RichPlayer.RichMoney;
+import RichPlayer.RichPlayer;
+import RichPlayer.RichPoint;
 import RichTool.RichDeferredTool;
 import RichTool.RichTool;
-import RichTool.RichToolFactory;
+import RichTool.RoadBlockTool;
 import junit.framework.TestCase;
 
+import java.io.BufferedReader;
+import java.io.PrintStream;
+
 public class RoadBlockToolTest extends TestCase {
-    private static final RichMoney dummyMoney = new RichMoney(0);
+    private static final RichMoney dummyMoney = null;
+    private static final RichPoint dummyPoint = null;
+    private static final BufferedReader dummyReader = null;
+    private static final PrintStream dummyWriter = null;
 
 
     public void test_should_display_sharp_for_roadblock_tool() {
-        assertEquals("#", RichToolFactory.createTool(RichToolFactory.ROADBLOCK).display());
+        assertEquals("#", new RoadBlockTool().display());
     }
 
     public void test_should_return_50_for_roadblock_get_points() {
-        assertEquals(new RichPoint(50), RichToolFactory.createTool(RichToolFactory.ROADBLOCK).getPoints());
+        assertEquals(new RichPoint(50), new RoadBlockTool().getPoints());
     }
 
     public void test_should_return_路障_for_getName() {
-        RichTool tool = RichToolFactory.createTool(RichToolFactory.ROADBLOCK);
+        RichTool tool = new RoadBlockTool();
         assertEquals("路障", tool.getName());
     }
 
     public void test_should_roadblock_block_player() {
-        RichDeferredTool tool = (RichDeferredTool)RichToolFactory.createTool(RichToolFactory.ROADBLOCK);
-        RichMap map = RichMap.buildMap();
-        RichPlayer player= new RichPlayer(dummyMoney, new RichPoint(0));
+        RichDeferredTool tool = new RoadBlockTool();
+        RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
+        map.buildMap();
+        RichPlayer player= new RichPlayer(dummyMoney, dummyPoint);
         player.setPosition(new RichSitePosition(map, 63));
 
         tool.installTool(player, 1);
-        player.stepForward(7);
+        player.forwardSteps(7);
 
         assertEquals(64, player.getPosition().getIndex());
         assertTrue(map.getSite(64).hasPlayerStand());

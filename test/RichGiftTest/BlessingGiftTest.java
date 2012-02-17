@@ -1,7 +1,8 @@
 package RichGiftTest;
 
 import RichGift.BlessingGodGift;
-import RichPlayer.*;
+import RichPlayer.RichMoney;
+import RichPlayer.RichPlayer;
 import junit.framework.TestCase;
 
 public class BlessingGiftTest extends TestCase {

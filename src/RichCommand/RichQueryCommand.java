@@ -4,12 +4,18 @@ import RichHouse.RichHouse;
 import RichHouse.RichHousePlatLevel;
 import RichPlayer.RichMoney;
 import RichPlayer.RichPlayer;
-import RichTool.RichToolFactory;
+import RichTool.BombTool;
+import RichTool.RoadBlockTool;
+import RichTool.RobotTool;
+
+import java.io.PrintStream;
 
 public class RichQueryCommand extends RichCommand {
     private RichPlayer _player;
+    private PrintStream _outputWriter;
 
-    public RichQueryCommand(RichPlayer player) {
+    public RichQueryCommand(PrintStream writer, RichPlayer player) {
+        _outputWriter = writer;
         _player = player;
     }
 
@@ -19,14 +25,14 @@ public class RichQueryCommand extends RichCommand {
         result += queryPoints() + "\n";
         result += queryHouse() + "\n";
         result += queryTools();
-        System.out.println(result);
+        _outputWriter.println(result);
     }
 
     private String queryTools() {
         String result = "道具：";
-        result += "路障" + _player.getToolsNumberByType(RichToolFactory.createTool(RichToolFactory.ROADBLOCK)) + "个；";
-        result += "炸弹" + _player.getToolsNumberByType(RichToolFactory.createTool(RichToolFactory.BOMB)) + "个；";
-        result += "机器娃娃" + _player.getToolsNumberByType(RichToolFactory.createTool(RichToolFactory.ROBOT)) + "个";
+        result += "路障" + _player.getToolsNumberByType(new RoadBlockTool()) + "个；";
+        result += "炸弹" + _player.getToolsNumberByType(new BombTool(null)) + "个；";
+        result += "机器娃娃" + _player.getToolsNumberByType(new RobotTool()) + "个";
         return result;
     }
 

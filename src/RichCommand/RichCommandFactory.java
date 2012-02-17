@@ -1,31 +1,37 @@
 package RichCommand;
 
-import RichMap.RichHouseSite;
-import RichMap.RichMap;
+import RichPlayer.RichPlayer;
 import RichTool.RichToolFactory;
-import RichUtil.RichScheduler;
+//import RichUtil.RichScheduler;
 
 public class RichCommandFactory {
-    public static RichCommand createCommand(String commandText) {
+    private RichToolFactory _factory;
+
+    public RichCommandFactory(RichToolFactory factory) {
+        _factory = factory;
+    }
+
+    public RichCommand createCommand(String commandText, RichPlayer player) {
         String lowerCaseCommandText = commandText.toLowerCase();
         if (lowerCaseCommandText.equals("roll")) {
-            return new RichRollCommand(RichScheduler.getCurrentPlayer());
+            return new RichRollCommand(player);
         } else if (lowerCaseCommandText.contains("block ")) {
             String arg[] = lowerCaseCommandText.split(" ");
-            return new RichBlockCommand(RichScheduler.getCurrentPlayer(), Integer.parseInt(arg[1]));
+            return new RichBlockCommand(player, Integer.parseInt(arg[1]));
         } else if (lowerCaseCommandText.contains("bomb ")) {
             String arg[] = lowerCaseCommandText.split(" ");
-            return new RichBombCommand(RichScheduler.getCurrentPlayer(), Integer.parseInt(arg[1]));
+            return new RichBombCommand(player, Integer.parseInt(arg[1]), null);
         } else if (lowerCaseCommandText.equals("robot")) {
-            return new RichRobotCommand(RichScheduler.getCurrentPlayer());
+            return new RichRobotCommand(player);
         } else if (lowerCaseCommandText.equals("sell ")) {
             String arg[] = lowerCaseCommandText.split(" ");
-            return new RichSellHouseCommand(RichScheduler.getCurrentPlayer(), ((RichHouseSite) RichMap.instance().getSite(Integer.parseInt(arg[1]))).getHouse());
+            return null;
+            //return new RichSellHouseCommand(RichScheduler.getCurrentPlayer(), ((RichHouseSite) RichMap.instance().getSite(Integer.parseInt(arg[1]))).getHouse());
         } else if (lowerCaseCommandText.equals("selltool ")) {
             String arg[] = lowerCaseCommandText.split(" ");
-            return new RichSellToolCommand(RichScheduler.getCurrentPlayer(), RichToolFactory.createTool(arg[1]));
+            return new RichSellToolCommand(player, _factory.createTool(arg[1]));
         } else if (lowerCaseCommandText.equals("query")) {
-            return new RichQueryCommand(RichScheduler.getCurrentPlayer());
+            return new RichQueryCommand(null, player);    //TODO: replace null
         } else if (lowerCaseCommandText.equals("quit")) {
             return new RichQuitCommand();
         } else {

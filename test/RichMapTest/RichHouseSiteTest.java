@@ -4,150 +4,162 @@ import RichHouse.RichHouse;
 import RichHouse.RichHouseCottageLevel;
 import RichHouse.RichHousePlatLevel;
 import RichMap.RichHouseSite;
-import RichMap.RichMap;
-import RichMap.RichSitePosition;
 import RichPlayer.RichMoney;
 import RichPlayer.RichPlayer;
-import TestHelper.RedirectIO;
+import RichPlayer.RichPoint;
 import junit.framework.TestCase;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.io.StringReader;
+
 public class RichHouseSiteTest extends TestCase {
-    private static final RichMoney dummyMoney = new RichMoney(0);
+    private static final RichPoint dummyPoint = null;
+    private static final BufferedReader dummyReader = null;
+    private static final PrintStream dummyWritter = null;
 
-    public void test_should_return_player_buy_house() {
-        RedirectIO.set_input("./test/player_buy_house_input.txt");
-        RedirectIO.set_output("./test/buy_empty_play_test.txt");
+    public void test_should_return_player_buy_house_for_1000_money() {
+        String buyHouseString = "Y\n";
+        BufferedReader reader = new BufferedReader(new StringReader(buyHouseString));
 
-        RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(1000)));
-        RichHouseSite site = new RichHouseSite(house);
-        RichPlayer player = new RichPlayer(new RichMoney(5000), null);
+        ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
+        PrintStream writer = new PrintStream(writerStream);
+
+        RichMoney housePrice = new RichMoney(1000);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(housePrice));
+        RichHouseSite site = new RichHouseSite(reader, writer, house);
+        RichMoney playerMoneyBeforeBuyHouse = new RichMoney(5000);
+        RichPlayer player = new RichPlayer(playerMoneyBeforeBuyHouse, dummyPoint);
         site.doAcceptPlayer(player);
 
-        RedirectIO.reset_input();
-        RedirectIO.reset_output();
-
         assertEquals(player, house.getOwner());
-        assertEquals(new RichMoney(4000), player.getMoney());
-        assertTrue(RedirectIO.compareFile("./test/note_for_empty_plat_answer.txt", "./test/buy_empty_play_test.txt"));
+        RichMoney expectPlayerMoneyAfterHouse = playerMoneyBeforeBuyHouse.subtract(housePrice);
+        assertEquals(expectPlayerMoneyAfterHouse, player.getMoney());
+        assertEquals("是否购买该处空地，1000元（Y/N）?\n", writerStream.toString());
     }
 
     public void test_should_return_player_not_buy_house() {
-        RedirectIO.set_input("./test/player_not_buy_house_input.txt");
-        RedirectIO.set_output("./test/not_buy_empty_play_test.txt");
+        String notBuyHouseString = "N\n";
+        BufferedReader reader = new BufferedReader(new StringReader(notBuyHouseString));
 
-        RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(1000)));
-        RichHouseSite site = new RichHouseSite(house);
-        RichPlayer player = new RichPlayer(new RichMoney(5000), null);
+        ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
+        PrintStream writer = new PrintStream(writerStream);
+
+        RichMoney housePrice = new RichMoney(1000);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(housePrice));
+        RichHouseSite site = new RichHouseSite(reader, writer, house);
+        RichMoney playerOriginalMoney = new RichMoney(5000);
+        RichPlayer player = new RichPlayer(playerOriginalMoney, dummyPoint);
+
         site.doAcceptPlayer(player);
 
-        RedirectIO.reset_input();
-        RedirectIO.reset_output();
-
-        assertEquals(null, house.getOwner());
-        assertEquals(new RichMoney(5000), player.getMoney());
-        assertTrue(RedirectIO.compareFile("./test/note_for_empty_plat_answer.txt", "./test/not_buy_empty_play_test.txt"));
+        assertFalse(house.hasOwner());
+        assertEquals(playerOriginalMoney, player.getMoney());
+        assertEquals("是否购买该处空地，1000元（Y/N）?\n", writerStream.toString());
     }
 
-    public void test_should_return_player_upgrade_house() {
-        RedirectIO.set_input("./test/player_upgrade_house_input.txt");
-        RedirectIO.set_output("./test/note_for_upgrade_house_test.txt");
+    public void test_should_return_player_upgrade_house_cost_2000_money() {
+        String upgradeHouseString = "Y\n";
+        BufferedReader reader = new BufferedReader(new StringReader(upgradeHouseString));
 
-        RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(2000)));
-        RichPlayer player = new RichPlayer(new RichMoney(5000), null);
+        ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
+        PrintStream writer = new PrintStream(writerStream);
+
+        RichMoney housePrice = new RichMoney(2000);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(housePrice));
+        RichMoney playerMoneyBeforeUpgradeHouse = new RichMoney(5000);
+        RichPlayer player = new RichPlayer(playerMoneyBeforeUpgradeHouse, null);
         player.addHouse(house);
 
-        RichHouseSite site = new RichHouseSite(house);
+        RichHouseSite site = new RichHouseSite(reader, writer, house);
         site.doAcceptPlayer(player);
 
-        RedirectIO.reset_input();
-        RedirectIO.reset_output();
+        RichMoney expectPlayerMoneyAfterUpgradeHouse = playerMoneyBeforeUpgradeHouse.subtract(housePrice);
 
         assertTrue(house.getLevel() instanceof RichHouseCottageLevel);
-        assertEquals(new RichMoney(3000), player.getMoney());
-        assertTrue(RedirectIO.compareFile("./test/note_for_upgrade_house_answer.txt", "./test/note_for_upgrade_house_test.txt"));
+        assertEquals(expectPlayerMoneyAfterUpgradeHouse, player.getMoney());
+        assertEquals("是否升级该处地产，2000元（Y/N）?\n", writerStream.toString());
     }
 
 
     public void test_should_return_player_not_upgrade_house() {
-        RedirectIO.set_input("./test/player_not_upgrade_house_input.txt");
-        RedirectIO.set_output("./test/note_for_upgrade_house_test.txt");
+        String notUpgradeHouseString = "N\n";
+        BufferedReader reader = new BufferedReader(new StringReader(notUpgradeHouseString));
 
-        RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(2000)));
-        RichPlayer player = new RichPlayer(new RichMoney(5000), null);
+        ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
+        PrintStream writer = new PrintStream(writerStream);
+
+        RichMoney housePrice = new RichMoney(2000);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(housePrice));
+        RichMoney playerOriginalMoney = new RichMoney(5000);
+        RichPlayer player = new RichPlayer(playerOriginalMoney, dummyPoint);
         player.addHouse(house);
 
-        RichHouseSite site = new RichHouseSite(house);
+        RichHouseSite site = new RichHouseSite(reader, writer, house);
         site.doAcceptPlayer(player);
 
-        RedirectIO.reset_input();
-        RedirectIO.reset_output();
-
         assertTrue(house.getLevel() instanceof RichHousePlatLevel);
-        assertEquals(new RichMoney(5000), player.getMoney());
-        assertTrue(RedirectIO.compareFile("./test/note_for_upgrade_house_answer.txt", "./test/note_for_upgrade_house_test.txt"));
+        assertEquals(playerOriginalMoney, player.getMoney());
+        assertEquals("是否升级该处地产，2000元（Y/N）?\n", writerStream.toString());
     }
 
     public void test_should_return_player_pay_for_toll() {
-        RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(2000)));
-        RichPlayer owner = new RichPlayer(new RichMoney(5000), null);
+        RichMoney housePrice = new RichMoney(2000);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(housePrice));
+        RichMoney ownerMoneyBefore = new RichMoney(5000);
+        RichPlayer owner = new RichPlayer(ownerMoneyBefore, dummyPoint);
         owner.addHouse(house);
-        RichPlayer visitor = new RichPlayer(new RichMoney(5000), null);
+        RichMoney visitorMoneyBefore = new RichMoney(5000);
+        RichPlayer visitor = new RichPlayer(visitorMoneyBefore, dummyPoint);
 
-        RichHouseSite site = new RichHouseSite(house);
+        RichHouseSite site = new RichHouseSite(dummyReader, dummyWritter, house);
         site.doAcceptPlayer(visitor);
 
+        RichMoney toll = housePrice.divide(2);
+        RichMoney expectOwnerMoneyAfter = ownerMoneyBefore.add(toll);
+        RichMoney expectVisitorMoneyAfter = visitorMoneyBefore.subtract(toll);
+
         assertTrue(house.getLevel() instanceof RichHousePlatLevel);
-        assertEquals(new RichMoney(6000), owner.getMoney());
-        assertEquals(new RichMoney(4000), visitor.getMoney());
-    }
-
-    public void test_player_move_5_steps_forward_buy_house() {
-        RedirectIO.set_input("./test/player_not_buy_house_input.txt");
-
-        RichPlayer player = new RichPlayer(dummyMoney, null);
-        RichMap map = RichMap.buildMap();
-        player.setPosition(new RichSitePosition(map, 0));
-
-        player.stepForward(5);
-
-        RedirectIO.reset_input();
-
-        assertEquals(5, player.getPosition().getIndex());
+        assertEquals(expectOwnerMoneyAfter, owner.getMoney());
+        assertEquals(expectVisitorMoneyAfter, visitor.getMoney());
     }
 
     public void test_should_return_0_for_toll_of_plat_original_price_is_1000_if_house_owner_is_at_prison_or_hospital() {
-        RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(1000)));
-        RichHouseSite site = new RichHouseSite(house);
-        RichPlayer owner = new RichPlayer(dummyMoney, null);
+        RichMoney anonymousHousePrice = new RichMoney(1000);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(anonymousHousePrice));
+        RichHouseSite site = new RichHouseSite(dummyReader, dummyWritter, house);
+        RichMoney ownerMoneyBefore = new RichMoney(500);
+        RichPlayer owner = new RichPlayer(ownerMoneyBefore, dummyPoint);
         owner.setPunishDays(3);
         owner.addHouse(house);
-        house.setOwner(owner);
 
-        RichPlayer visitor = new RichPlayer(dummyMoney, null);
+        RichMoney visitorMoneyBefore = new RichMoney(600);
+        RichPlayer visitor = new RichPlayer(visitorMoneyBefore, dummyPoint);
         site.acceptPlayer(visitor);
 
-        assertEquals(new RichMoney(0), owner.getMoney());
-        assertEquals(new RichMoney(0), visitor.getMoney());
+        assertEquals(ownerMoneyBefore, owner.getMoney());
+        assertEquals(visitorMoneyBefore, visitor.getMoney());
     }
 
     public void test_should_return_0_for_toll_of_plat_original_price_is_1000_if_visitor_has_blessing_god() {
-        RedirectIO.set_output("./test/player_has_blessing_god_test.txt");
+        ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
+        PrintStream writer = new PrintStream(writerStream);
 
         RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(1000)));
-        RichHouseSite site = new RichHouseSite(house);
-        RichPlayer owner = new RichPlayer(dummyMoney, null);
-        owner.addHouse(house);
-        house.setOwner(owner);
+        RichHouseSite site = new RichHouseSite(dummyReader, writer, house);
 
-        RichPlayer visitor = new RichPlayer(dummyMoney, null);
+        RichMoney ownerMoneyBefore = new RichMoney(500);
+        RichPlayer owner = new RichPlayer(ownerMoneyBefore, dummyPoint);
+        owner.addHouse(house);
+
+        RichMoney visitorMoneyBefore = new RichMoney(600);
+        RichPlayer visitor = new RichPlayer(visitorMoneyBefore, dummyPoint);
         visitor.setBlessingGod();
         site.acceptPlayer(visitor);
 
-        RedirectIO.reset_output();
-
-        assertEquals(new RichMoney(0), owner.getMoney());
-        assertEquals(new RichMoney(0), visitor.getMoney());
-
-        assertTrue(RedirectIO.compareFile("./test/player_has_blessing_god_answer.txt", "./test/player_has_blessing_god_test.txt"));
+        assertEquals(ownerMoneyBefore, owner.getMoney());
+        assertEquals(visitorMoneyBefore, visitor.getMoney());
+        assertEquals("福神附身，可免过路费\n", writerStream.toString());
     }
 }

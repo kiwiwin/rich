@@ -3,7 +3,7 @@ package RichGift;
 import RichMap.RichGift;
 import RichMap.RichGiftFactory;
 
-public class RichGiftFactoryImpl extends RichGiftFactory{
+public class RichGiftDefaultFactory extends RichGiftFactory{
     public RichGift createGift(int giftNumber) {
         switch(giftNumber){
             case 1:

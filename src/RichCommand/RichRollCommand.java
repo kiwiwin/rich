@@ -1,7 +1,7 @@
 package RichCommand;
 
 import RichPlayer.RichPlayer;
-import RichUtil.RichScheduler;
+//import RichUtil.RichScheduler;
 
 public class RichRollCommand extends RichCommand {
     private RichPlayer _player;
@@ -12,8 +12,8 @@ public class RichRollCommand extends RichCommand {
 
     public void executeCommand() {
         int step = (int) Math.ceil(Math.random() * 6);
-        _player.stepForward(step);
-        RichScheduler.setSwitchPlayer();
+        _player.forwardSteps(step);
+//        RichScheduler.setSwitchPlayer();
     }
 
     public static String getHelp() {

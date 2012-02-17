@@ -1,33 +1,44 @@
 package RichToolTest;
 
+import RichCommandTest.RichDummyMapBuilder;
+import RichMap.RichDefaultMap;
 import RichMap.RichMap;
 import RichMap.RichSitePosition;
-import RichPlayer.*;
-import RichTool.RichDeferredTool;
-import RichTool.RichRealTimeTool;
-import RichTool.RichTool;
-import RichTool.RichToolFactory;
+import RichPlayer.RichMoney;
+import RichPlayer.RichPlayer;
+import RichPlayer.RichPoint;
+import RichTool.*;
 import junit.framework.TestCase;
 
+import java.io.BufferedReader;
+import java.io.PrintStream;
+
 public class RobotToolTest extends TestCase {
+    private static final RichMoney dummyMoney = null;
+    private static final RichPoint dummyPoint = null;
+    private static final BufferedReader dummyReader = null;
+    private static final PrintStream dummyWriter = null;
+
+
     public void test_should_display_empty_for_robot_tool() {
-        assertEquals(" ", RichToolFactory.createTool(RichToolFactory.ROBOT).display());
+        assertEquals(" ", new RobotTool().display());
     }
 
     public void test_should_return_30_for_robot_get_points() {
-        assertEquals(new RichPoint(30), RichToolFactory.createTool(RichToolFactory.ROBOT).getPoints());
+        assertEquals(new RichPoint(30), new RobotTool().getPoints());
     }
 
     public void test_should_return_机器娃娃_for_getName() {
-        RichTool tool = RichToolFactory.createTool(2);
+        RichTool tool = new RobotTool();
         assertEquals("机器娃娃", tool.getName());
     }
 
     public void test_should_return_clean_site() {
-        RichRealTimeTool robot = (RichRealTimeTool) RichToolFactory.createTool(RichToolFactory.ROBOT);
-        RichDeferredTool bomb = (RichDeferredTool) RichToolFactory.createTool(RichToolFactory.BOMB);
-        RichMap map = RichMap.buildMap();
-        RichPlayer player = new RichPlayer(new RichMoney(0), null);
+        RichRealTimeTool robot = new RobotTool();
+        RichDeferredTool bomb = new BombTool(null);
+        RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
+        map.buildMap();
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
         player.setPosition(new RichSitePosition(map, 0));
 
         bomb.installTool(player, 10);
