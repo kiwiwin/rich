@@ -21,7 +21,7 @@ public class RichGiftSite extends RichSite {
 
         try {
             String giftType = _inputReader.readLine();
-            RichGift gift = _giftFactory.createGift(Integer.parseInt(giftType));
+            RichGift gift = _giftFactory.createGift(giftType);
             gift.openGift(player);
         } catch (Exception ex) {
             _outputWriter.println(ex.getMessage());

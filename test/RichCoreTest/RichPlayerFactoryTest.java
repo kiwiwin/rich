@@ -1,4 +1,4 @@
-package RichPlayerTest;
+package RichCoreTest;
 
 import RichCore.RichPlayer;
 import RichCore.RichPlayerFactory;

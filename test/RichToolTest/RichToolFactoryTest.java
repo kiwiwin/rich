@@ -18,4 +18,13 @@ public class RichToolFactoryTest extends TestCase {
     public void test_should_return_bomb_tool_for_rich_tool_bomb() {
         assertTrue(new RichDefaultToolFactory(null).createTool(RichDefaultToolFactory.BOMB) instanceof BombTool);
     }
+
+    public void test_should_exception_for_create_invalid_tool() {
+        try {
+            new RichDefaultToolFactory(null).createTool(-1);
+            fail("there should have an exception");
+        } catch (IllegalArgumentException ex) {
+            assertEquals("Invalid tool type", ex.getMessage());
+        }
+    }
 }

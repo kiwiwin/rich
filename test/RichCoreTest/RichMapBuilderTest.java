@@ -1,4 +1,4 @@
-package RichMapTest;
+package RichCoreTest;
 
 import RichCore.RichGiftFactory;
 import RichCore.RichMapBuilder;

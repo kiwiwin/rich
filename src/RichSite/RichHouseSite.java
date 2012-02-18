@@ -15,8 +15,8 @@ public class RichHouseSite extends RichSite {
         _house = house;
     }
 
-    public void doAcceptPlayer(RichPlayer player) {
-        if (hasOwner()) {
+    protected void doAcceptPlayer(RichPlayer player) {
+        if (!hasOwner()) {
             handleBuyHouse(player);
         } else if (isOwner(player)) {
             handleUpgradeHouse(player);
@@ -25,12 +25,12 @@ public class RichHouseSite extends RichSite {
         }
     }
 
-    public boolean isOwner(RichPlayer player) {
+    private boolean isOwner(RichPlayer player) {
         return _house.getOwner() == player;
     }
 
-    public boolean hasOwner() {
-        return isOwner(null);
+    private boolean hasOwner() {
+        return !isOwner(null);
     }
 
     public String display() {

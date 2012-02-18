@@ -1,4 +1,4 @@
-package RichMapTest;
+package RichSiteTest;
 
 import RichCore.RichMoney;
 import RichCore.RichPlayer;

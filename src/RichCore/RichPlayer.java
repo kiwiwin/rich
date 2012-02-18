@@ -90,6 +90,7 @@ public class RichPlayer {
 
     public void upgradeHouse(RichHouse house) {
         if (!this.equals(house.getOwner())) throw new HouseOwnerException();
+        if (_money.isLessThan(house.getOriginalPrice())) throw new HouseMoneyNotEnoughException();
         house.upgrade();
         subtractMoney(house.getOriginalPrice());
     }

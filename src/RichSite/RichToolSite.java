@@ -17,23 +17,15 @@ public class RichToolSite extends RichSite {
     }
 
     public void doAcceptPlayer(RichPlayer player) {
-        if (player.getPoints().isLessThan(new RichPoint(30)))
-            return; //player do not have enough points, return automatically
-
-        String command;
-        try {
-            while ((command = _inputReader.readLine()) != null) {
-                if (command.equals("F")) return;
-                try {
-                    player.buyTool(_factory.createTool(command));
-                    if (player.getPoints().isLessThan(new RichPoint(30)))
-                        return; //player do not have enough points, return automatically
-                } catch (IllegalArgumentException ex) {
-                    _outputWriter.println(ex.getMessage());
-                }
+        while (!player.getPoints().isLessThan(new RichPoint(30))) {
+            String toolType;
+            try {
+                toolType = _inputReader.readLine();
+                if (toolType.equals("F")) return;
+                player.buyTool(_factory.createTool(toolType));
+            } catch (Exception ex) {
+                _outputWriter.println(ex.getMessage());
             }
-        } catch (Exception ex) {
-            _outputWriter.println(ex.getMessage());
         }
     }
 

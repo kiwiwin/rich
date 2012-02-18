@@ -1,4 +1,4 @@
-package RIchHouseTest;
+package RichCoreTest;
 
 import RichCore.RichHouse;
 import RichCore.RichMoney;
@@ -11,11 +11,6 @@ import junit.framework.TestCase;
 public class RichHouseTest extends TestCase {
     private static final RichMoney dummyMoney = new RichMoney(0);
     
-    public void test_should_return_0_for_plat_house_display() {
-        RichHouse house = new RichHouse(new RichHousePlatLevel(dummyMoney));
-        assertEquals("0", house.display());
-    }
-
     public void test_should_return_1_for_cottage_house_display() {
         RichHouse house = new RichHouse(new RichHouseCottageLevel(dummyMoney));
         assertEquals("1", house.display());
@@ -74,12 +69,6 @@ public class RichHouseTest extends TestCase {
         house.upgrade();
 
         assertTrue(house.getLevel() instanceof RichHouseSkyscraperLevel);
-    }
-
-    public void test_should_return_plat_after_sell_plat() {
-        RichHouse house = new RichHouse(new RichHousePlatLevel(dummyMoney));
-        house.sell();
-        assertTrue(house.getLevel() instanceof RichHousePlatLevel);
     }
 
     public void test_should_return_plat_after_sell_cottage() {

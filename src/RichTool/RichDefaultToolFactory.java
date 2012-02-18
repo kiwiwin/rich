@@ -24,7 +24,7 @@ public class RichDefaultToolFactory implements RichToolFactory{
             case BOMB:
                 return new BombTool(_hospitalPosition);
             default:
-                throw new IllegalArgumentException("Unknown tool type");
+                throw new IllegalArgumentException("Invalid tool type");
         }
     }
 
