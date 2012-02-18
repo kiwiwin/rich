@@ -1,13 +1,4 @@
-package RichPlayer;
-
-import RichHouse.HouseMoneyNotEnoughException;
-import RichHouse.HouseOwnerException;
-import RichHouse.RichHouse;
-import RichMap.RichSitePosition;
-import RichTool.RichTool;
-import RichTool.ToolOverflowException;
-import RichTool.ToolPointsNotEnoughException;
-import RichTool.ToolUnderflowException;
+package RichCore;
 
 import java.util.ArrayList;
 

@@ -1,13 +1,8 @@
 package RichToolTest;
 
 import RichCommandTest.RichDummyMapBuilder;
-import RichMap.RichDefaultMap;
-import RichMap.RichMap;
-import RichMap.RichSitePosition;
-import RichPlayer.RichMoney;
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
-import RichTool.RichDeferredTool;
+import RichCore.*;
+import RichSite.RichDefaultMap;
 import RichTool.RoadBlockTool;
 import junit.framework.TestCase;
 
@@ -27,7 +22,7 @@ public class RichDeferredToolTest extends TestCase {
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
         player.setPosition(new RichSitePosition(map, 0));
 
-        RichDeferredTool deferredTool = new RoadBlockTool();
+        RoadBlockTool deferredTool = new RoadBlockTool();
         assertTrue(deferredTool.installTool(player, 1));
         assertFalse(deferredTool.installTool(player, 1));
     }
@@ -41,7 +36,7 @@ public class RichDeferredToolTest extends TestCase {
         RichPlayer stander = new RichPlayer(dummyMoney, dummyPoint);
         stander.setPosition(new RichSitePosition(map, 69));
 
-        RichDeferredTool deferredTool = new RoadBlockTool();
+        RoadBlockTool deferredTool = new RoadBlockTool();
         assertFalse(deferredTool.installTool(player, 69));
     }
 }

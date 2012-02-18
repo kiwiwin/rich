@@ -1,7 +1,11 @@
 package RIchHouseTest;
 
-import RichHouse.*;
-import RichPlayer.RichMoney;
+import RichCore.RichHouse;
+import RichCore.RichMoney;
+import RichHouse.RichHouseCottageLevel;
+import RichHouse.RichHousePlatLevel;
+import RichHouse.RichHouseSkyscraperLevel;
+import RichHouse.RichHouseVillaLevel;
 import junit.framework.TestCase;
 
 public class RichHouseTest extends TestCase {
@@ -67,13 +71,9 @@ public class RichHouseTest extends TestCase {
 
     public void test_cannot_upgrade_skyscraper() {
         RichHouse house = new RichHouse(new RichHouseSkyscraperLevel(dummyMoney));
-        try {
-            house.upgrade();
-            fail("there should have an exception: not update skyscraper") ;
-        } catch (HouseLevelOverflowException ex) {
-            assertEquals("You cannot upgrade skyscraper", ex.getMessage());
-        }
+        house.upgrade();
 
+        assertTrue(house.getLevel() instanceof RichHouseSkyscraperLevel);
     }
 
     public void test_should_return_plat_after_sell_plat() {

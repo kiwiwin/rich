@@ -1,16 +1,8 @@
 package RichTool;
 
-import RichMap.RichSitePosition;
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
+import RichCore.*;
 
 public class BombTool extends RichDeferredTool {
-//    private RichSite _hospitalSite;
-//
-//    public BombTool(RichSite hospitalSite) {
-//        _hospitalSite = hospitalSite;
-//    }
-
     private RichSitePosition _hospitalSitePosition;
 
     public BombTool(RichSitePosition position) {
@@ -37,6 +29,5 @@ public class BombTool extends RichDeferredTool {
         player.setPosition(_hospitalSitePosition);
         player.setRemainStep(0);
         player.setPunishDays(3);
-//        player.setVisible(false);
     }
 }

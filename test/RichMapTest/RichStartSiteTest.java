@@ -1,6 +1,6 @@
 package RichMapTest;
 
-import RichMap.RichStartSite;
+import RichSite.RichStartSite;
 import junit.framework.TestCase;
 
 import java.io.BufferedReader;

@@ -1,10 +1,10 @@
 package RichCommandTest;
 
 import RichCommand.RichSellHouseCommand;
-import RichHouse.RichHouse;
+import RichCore.RichHouse;
+import RichCore.RichMoney;
+import RichCore.RichPlayer;
 import RichHouse.RichHousePlatLevel;
-import RichPlayer.RichMoney;
-import RichPlayer.RichPlayer;
 import junit.framework.TestCase;
 
 public class RichSellHouseCommandTest extends TestCase {

@@ -1,7 +1,7 @@
 package RichCommand;
 
-import RichPlayer.RichPlayer;
-import RichTool.RichTool;
+import RichCore.RichPlayer;
+import RichCore.RichTool;
 
 public class RichSellToolCommand extends RichCommand {
     private RichPlayer _player;

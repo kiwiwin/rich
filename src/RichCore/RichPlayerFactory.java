@@ -1,4 +1,4 @@
-package RichPlayer;
+package RichCore;
 
 public class RichPlayerFactory {
     public static RichPlayer createPlayer(String index, RichMoney money) {

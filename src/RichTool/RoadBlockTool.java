@@ -1,7 +1,9 @@
 package RichTool;
 
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
+import RichCore.RichDeferredTool;
+import RichCore.RichPlayer;
+import RichCore.RichPoint;
+import RichCore.RichTool;
 
 public class RoadBlockTool extends RichDeferredTool {
     public String display() {

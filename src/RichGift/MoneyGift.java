@@ -1,10 +1,10 @@
 package RichGift;
 
-import RichMap.RichGift;
-import RichPlayer.RichMoney;
-import RichPlayer.RichPlayer;
+import RichCore.RichGift;
+import RichCore.RichMoney;
+import RichCore.RichPlayer;
 
-public class MoneyGift extends RichGift {
+public class MoneyGift implements RichGift {
     private static final RichMoney GIFT_MONEY = new RichMoney(2000);
 
     public void openGift(RichPlayer richPlayer) {

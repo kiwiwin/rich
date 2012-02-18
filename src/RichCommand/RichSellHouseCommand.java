@@ -1,7 +1,7 @@
 package RichCommand;
 
-import RichHouse.RichHouse;
-import RichPlayer.RichPlayer;
+import RichCore.RichHouse;
+import RichCore.RichPlayer;
 
 public class RichSellHouseCommand extends RichCommand {
     private RichHouse _house;

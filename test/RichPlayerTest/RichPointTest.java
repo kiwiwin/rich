@@ -1,7 +1,7 @@
 package RichPlayerTest;
 
 
-import RichPlayer.RichPoint;
+import RichCore.RichPoint;
 import junit.framework.TestCase;
 
 public class RichPointTest extends TestCase {

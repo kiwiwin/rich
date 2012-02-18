@@ -1,10 +1,10 @@
 package RichGift;
 
-import RichMap.RichGift;
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
+import RichCore.RichGift;
+import RichCore.RichPlayer;
+import RichCore.RichPoint;
 
-public class PointsGift extends RichGift {
+public class PointsGift implements RichGift {
     private static final RichPoint GIFT_POINTS = new RichPoint(200);
 
     public void openGift(RichPlayer richPlayer) {

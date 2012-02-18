@@ -1,11 +1,9 @@
-package RichMap;
+package RichSite;
 
+import RichCore.*;
 import RichGift.RichGiftDefaultFactory;
-import RichHouse.RichHouse;
 import RichHouse.RichHousePlatLevel;
-import RichPlayer.RichMoney;
-import RichPlayer.RichPoint;
-import RichTool.RichToolFactory;
+import RichTool.RichDefaultToolFactory;
 
 public class RichDefaultMap extends RichMap {
     private final int WIDTH = 29;
@@ -57,7 +55,7 @@ public class RichDefaultMap extends RichMap {
         for (int i = 15; i <= 27; i++) {
             setSite(_mapBuilder.buildHouseSite(new RichHouse(new RichHousePlatLevel(new RichMoney(200)))), i);
         }
-        setSite(_mapBuilder.buildToolSite(new RichToolFactory(new RichSitePosition(this, HOSPITAL_SITE_INDEX))), 28);
+        setSite(_mapBuilder.buildToolSite(new RichDefaultToolFactory(new RichSitePosition(this, HOSPITAL_SITE_INDEX))), 28);
         for (int i = 29; i <= 34; i++) {
             setSite(_mapBuilder.buildHouseSite(new RichHouse(new RichHousePlatLevel(new RichMoney(500)))), i);
         }

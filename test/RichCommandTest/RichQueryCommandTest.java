@@ -1,9 +1,9 @@
 package RichCommandTest;
 
 import RichCommand.RichQueryCommand;
-import RichPlayer.RichMoney;
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
+import RichCore.RichMoney;
+import RichCore.RichPlayer;
+import RichCore.RichPoint;
 import junit.framework.TestCase;
 
 import java.io.ByteArrayOutputStream;

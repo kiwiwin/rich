@@ -1,14 +1,8 @@
 package RichToolTest;
 
 import RichCommandTest.RichDummyMapBuilder;
-import RichMap.RichDefaultMap;
-import RichMap.RichMap;
-import RichMap.RichSitePosition;
-import RichPlayer.RichMoney;
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
-import RichTool.RichDeferredTool;
-import RichTool.RichTool;
+import RichCore.*;
+import RichSite.RichDefaultMap;
 import RichTool.RoadBlockTool;
 import junit.framework.TestCase;
 
@@ -36,7 +30,7 @@ public class RoadBlockToolTest extends TestCase {
     }
 
     public void test_should_roadblock_block_player() {
-        RichDeferredTool tool = new RoadBlockTool();
+        RoadBlockTool tool = new RoadBlockTool();
         RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
         map.buildMap();
         RichPlayer player= new RichPlayer(dummyMoney, dummyPoint);

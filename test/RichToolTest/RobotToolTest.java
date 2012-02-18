@@ -1,13 +1,10 @@
 package RichToolTest;
 
 import RichCommandTest.RichDummyMapBuilder;
-import RichMap.RichDefaultMap;
-import RichMap.RichMap;
-import RichMap.RichSitePosition;
-import RichPlayer.RichMoney;
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
-import RichTool.*;
+import RichCore.*;
+import RichSite.RichDefaultMap;
+import RichTool.BombTool;
+import RichTool.RobotTool;
 import junit.framework.TestCase;
 
 import java.io.BufferedReader;
@@ -34,8 +31,8 @@ public class RobotToolTest extends TestCase {
     }
 
     public void test_should_return_clean_site() {
-        RichRealTimeTool robot = new RobotTool();
-        RichDeferredTool bomb = new BombTool(null);
+        RobotTool robot = new RobotTool();
+        BombTool bomb = new BombTool(null);
         RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
         map.buildMap();
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);

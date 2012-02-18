@@ -1,8 +1,8 @@
 package RichGiftTest;
 
+import RichCore.RichMoney;
+import RichCore.RichPlayer;
 import RichGift.MoneyGift;
-import RichPlayer.RichMoney;
-import RichPlayer.RichPlayer;
 import junit.framework.TestCase;
 
 public class MoneyGiftTest extends TestCase {

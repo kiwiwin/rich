@@ -1,7 +1,7 @@
 package RichCommand;
 
-import RichMap.RichSitePosition;
-import RichPlayer.RichPlayer;
+import RichCore.RichPlayer;
+import RichCore.RichSitePosition;
 
 public class RichRobotCommand extends RichCommand {
 

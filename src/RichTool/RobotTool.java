@@ -1,8 +1,6 @@
 package RichTool;
 
-import RichMap.RichSitePosition;
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
+import RichCore.*;
 
 public class RobotTool extends RichRealTimeTool {
     public String display() {

@@ -1,10 +1,10 @@
 package RichCommandTest;
 
 import RichCommand.RichSellToolCommand;
-import RichPlayer.RichMoney;
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
-import RichTool.RichTool;
+import RichCore.RichMoney;
+import RichCore.RichPlayer;
+import RichCore.RichPoint;
+import RichCore.RichTool;
 import RichTool.RoadBlockTool;
 import junit.framework.TestCase;
 

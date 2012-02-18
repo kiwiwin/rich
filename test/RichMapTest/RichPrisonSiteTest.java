@@ -1,10 +1,10 @@
 package RichMapTest;
 
-import RichMap.RichPrisonSite;
-import RichMap.RichSite;
-import RichPlayer.RichMoney;
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
+import RichCore.RichMoney;
+import RichCore.RichPlayer;
+import RichCore.RichPoint;
+import RichCore.RichSite;
+import RichSite.RichPrisonSite;
 import junit.framework.TestCase;
 
 import java.io.BufferedReader;

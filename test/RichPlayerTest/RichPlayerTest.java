@@ -1,10 +1,13 @@
 package RichPlayerTest;
 
-import RichHouse.*;
-import RichPlayer.RichMoney;
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
-import RichTool.*;
+import RichCore.*;
+import RichHouse.RichHouseCottageLevel;
+import RichHouse.RichHousePlatLevel;
+import RichHouse.RichHouseSkyscraperLevel;
+import RichHouse.RichHouseVillaLevel;
+import RichTool.BombTool;
+import RichTool.RoadBlockTool;
+import RichTool.RobotTool;
 import junit.framework.TestCase;
 
 import java.io.BufferedReader;

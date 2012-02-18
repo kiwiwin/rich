@@ -1,15 +1,17 @@
 package RichTool;
 
-import RichMap.RichSitePosition;
+import RichCore.RichSitePosition;
+import RichCore.RichTool;
+import RichCore.RichToolFactory;
 
-public class RichToolFactory {
+public class RichDefaultToolFactory implements RichToolFactory{
     public static final int ROADBLOCK = 1;
     public static final int ROBOT = 2;
     public static final int BOMB = 3;
+
     private RichSitePosition _hospitalPosition;
 
-
-    public RichToolFactory(RichSitePosition position) {
+    public RichDefaultToolFactory(RichSitePosition position) {
         _hospitalPosition = position;
     }
 

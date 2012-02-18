@@ -1,6 +1,6 @@
 package RichMapTest;
 
-import RichMap.RichHospitalSite;
+import RichSite.RichHospitalSite;
 import junit.framework.TestCase;
 
 import java.io.BufferedReader;

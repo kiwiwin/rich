@@ -1,9 +1,9 @@
 package RichGift;
 
-import RichMap.RichGift;
-import RichPlayer.RichPlayer;
+import RichCore.RichGift;
+import RichCore.RichPlayer;
 
-public class BlessingGodGift extends RichGift {
+public class BlessingGodGift implements RichGift {
 
     public void openGift(RichPlayer player) {
         player.setBlessingGod();

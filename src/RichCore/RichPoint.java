@@ -1,4 +1,4 @@
-package RichPlayer;
+package RichCore;
 
 public class RichPoint {
 

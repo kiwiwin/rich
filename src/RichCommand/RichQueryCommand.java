@@ -1,9 +1,9 @@
 package RichCommand;
 
-import RichHouse.RichHouse;
+import RichCore.RichHouse;
+import RichCore.RichMoney;
+import RichCore.RichPlayer;
 import RichHouse.RichHousePlatLevel;
-import RichPlayer.RichMoney;
-import RichPlayer.RichPlayer;
 import RichTool.BombTool;
 import RichTool.RoadBlockTool;
 import RichTool.RobotTool;

@@ -1,6 +1,8 @@
 package RichHouse;
 
-import RichPlayer.RichMoney;
+import RichCore.RichHouse;
+import RichCore.RichHouseLevel;
+import RichCore.RichMoney;
 
 public class RichHousePlatLevel extends RichHouseLevel {
     public RichHousePlatLevel(RichMoney originalPrice) {

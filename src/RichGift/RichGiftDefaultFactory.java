@@ -1,7 +1,7 @@
 package RichGift;
 
-import RichMap.RichGift;
-import RichMap.RichGiftFactory;
+import RichCore.RichGift;
+import RichCore.RichGiftFactory;
 
 public class RichGiftDefaultFactory extends RichGiftFactory{
     public RichGift createGift(int giftNumber) {

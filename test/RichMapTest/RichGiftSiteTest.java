@@ -1,11 +1,11 @@
 package RichMapTest;
 
+import RichCore.RichGiftFactory;
+import RichCore.RichMoney;
+import RichCore.RichPlayer;
+import RichCore.RichPoint;
 import RichGift.RichGiftDefaultFactory;
-import RichMap.RichGiftFactory;
-import RichMap.RichGiftSite;
-import RichPlayer.RichMoney;
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
+import RichSite.RichGiftSite;
 import junit.framework.TestCase;
 
 import java.io.BufferedReader;

@@ -1,6 +1,8 @@
 package RichHouse;
 
-import RichPlayer.RichMoney;
+import RichCore.RichHouse;
+import RichCore.RichHouseLevel;
+import RichCore.RichMoney;
 
 public class RichHouseSkyscraperLevel extends RichHouseLevel {
     public RichHouseSkyscraperLevel(RichMoney originalPrice) {
@@ -8,7 +10,6 @@ public class RichHouseSkyscraperLevel extends RichHouseLevel {
     }
 
     public void upgrade(RichHouse house) {
-        throw new HouseLevelOverflowException();
     }
 
     public RichMoney getPrice() {

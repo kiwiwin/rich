@@ -1,8 +1,9 @@
-package RichMap;
+package RichSite;
 
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
-import RichTool.RichToolFactory;
+import RichCore.RichPlayer;
+import RichCore.RichPoint;
+import RichCore.RichSite;
+import RichCore.RichToolFactory;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;

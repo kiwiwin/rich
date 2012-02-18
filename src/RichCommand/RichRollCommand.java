@@ -1,6 +1,6 @@
 package RichCommand;
 
-import RichPlayer.RichPlayer;
+import RichCore.RichPlayer;
 //import RichUtil.RichScheduler;
 
 public class RichRollCommand extends RichCommand {

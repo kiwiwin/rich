@@ -1,13 +1,13 @@
 package RichCommand;
 
-import RichPlayer.RichPlayer;
-import RichTool.RichToolFactory;
+import RichCore.RichPlayer;
+import RichTool.RichDefaultToolFactory;
 //import RichUtil.RichScheduler;
 
 public class RichCommandFactory {
-    private RichToolFactory _factory;
+    private RichDefaultToolFactory _factory;
 
-    public RichCommandFactory(RichToolFactory factory) {
+    public RichCommandFactory(RichDefaultToolFactory factory) {
         _factory = factory;
     }
 
@@ -26,7 +26,6 @@ public class RichCommandFactory {
         } else if (lowerCaseCommandText.equals("sell ")) {
             String arg[] = lowerCaseCommandText.split(" ");
             return null;
-            //return new RichSellHouseCommand(RichScheduler.getCurrentPlayer(), ((RichHouseSite) RichMap.instance().getSite(Integer.parseInt(arg[1]))).getHouse());
         } else if (lowerCaseCommandText.equals("selltool ")) {
             String arg[] = lowerCaseCommandText.split(" ");
             return new RichSellToolCommand(player, _factory.createTool(arg[1]));

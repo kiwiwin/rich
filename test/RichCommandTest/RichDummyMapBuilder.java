@@ -1,15 +1,9 @@
 package RichCommandTest;
 
-import RichHouse.RichHouse;
-import RichMap.RichGiftFactory;
-import RichMap.RichMapBuilder;
-import RichMap.RichSite;
-import RichPlayer.RichPoint;
-import RichTool.RichToolFactory;
+import RichCore.*;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
-
 
 public class RichDummyMapBuilder extends RichMapBuilder {
     private BufferedReader _dummyReader;

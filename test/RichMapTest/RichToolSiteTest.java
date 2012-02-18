@@ -1,10 +1,10 @@
 package RichMapTest;
 
-import RichMap.RichToolSite;
-import RichPlayer.RichMoney;
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
-import RichTool.RichToolFactory;
+import RichCore.RichMoney;
+import RichCore.RichPlayer;
+import RichCore.RichPoint;
+import RichSite.RichToolSite;
+import RichTool.RichDefaultToolFactory;
 import junit.framework.TestCase;
 
 import java.io.BufferedReader;
@@ -16,7 +16,7 @@ public class RichToolSiteTest extends TestCase {
     private static final RichMoney dummyMoney = new RichMoney(0);
     private static final BufferedReader dummyReader = null;
     private static final PrintStream dummyWriter = null;
-    private static final RichToolFactory dummyFactory = null;
+    private static final RichDefaultToolFactory dummyFactory = null;
 
     public void test_should_return_T_for_display() {
         RichToolSite site = new RichToolSite(dummyReader, dummyWriter, dummyFactory);
@@ -40,7 +40,7 @@ public class RichToolSiteTest extends TestCase {
         RichPoint initPoint = new RichPoint(1000);
         RichPlayer player = new RichPlayer(dummyMoney, initPoint);
 
-        RichToolSite site = new RichToolSite(reader, dummyWriter, new RichToolFactory(null));
+        RichToolSite site = new RichToolSite(reader, dummyWriter, new RichDefaultToolFactory(null));
         site.doAcceptPlayer(player);
 
         RichPoint expectPoint = new RichPoint(740);
@@ -58,7 +58,7 @@ public class RichToolSiteTest extends TestCase {
         RichPoint originalPoint = new RichPoint(1000);
         RichPlayer player = new RichPlayer(dummyMoney, originalPoint);
 
-        RichToolSite site = new RichToolSite(reader, writer, new RichToolFactory(null));
+        RichToolSite site = new RichToolSite(reader, writer, new RichDefaultToolFactory(null));
         site.doAcceptPlayer(player);
 
         assertEquals(originalPoint, player.getPoints());
@@ -76,7 +76,7 @@ public class RichToolSiteTest extends TestCase {
         RichPoint originalPoint = new RichPoint(40);
         RichPlayer player = new RichPlayer(dummyMoney, originalPoint);
 
-        RichToolSite site = new RichToolSite(reader, writer, new RichToolFactory(null));
+        RichToolSite site = new RichToolSite(reader, writer, new RichDefaultToolFactory(null));
         site.doAcceptPlayer(player);
 
         assertEquals(originalPoint, player.getPoints());

@@ -1,6 +1,7 @@
 package RichMapTest;
 
-import RichMap.*;
+import RichCore.RichMap;
+import RichSite.*;
 import junit.framework.TestCase;
 
 public class RichMapTest extends TestCase {

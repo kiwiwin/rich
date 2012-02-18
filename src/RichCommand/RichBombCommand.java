@@ -1,9 +1,9 @@
 package RichCommand;
 
-import RichMap.RichSitePosition;
-import RichPlayer.RichPlayer;
+import RichCore.RichDeferredTool;
+import RichCore.RichPlayer;
+import RichCore.RichSitePosition;
 import RichTool.BombTool;
-import RichTool.RichDeferredTool;
 
 public class RichBombCommand extends RichCommand {
     private RichPlayer _player;

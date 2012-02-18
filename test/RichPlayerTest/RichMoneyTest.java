@@ -1,6 +1,6 @@
 package RichPlayerTest;
 
-import RichPlayer.RichMoney;
+import RichCore.RichMoney;
 import junit.framework.TestCase;
 
 public class RichMoneyTest extends TestCase {

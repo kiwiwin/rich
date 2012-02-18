@@ -1,9 +1,9 @@
 package RichGiftTest;
 
+import RichCore.RichMoney;
+import RichCore.RichPlayer;
+import RichCore.RichPoint;
 import RichGift.PointsGift;
-import RichPlayer.RichMoney;
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
 import junit.framework.TestCase;
 
 

@@ -1,12 +1,8 @@
 package RichCommandTest;
 
 import RichCommand.RichBombCommand;
-import RichMap.RichDefaultMap;
-import RichMap.RichMap;
-import RichMap.RichSitePosition;
-import RichPlayer.RichMoney;
-import RichPlayer.RichPlayer;
-import RichPlayer.RichPoint;
+import RichCore.*;
+import RichSite.RichDefaultMap;
 import RichTool.BombTool;
 import junit.framework.TestCase;
 

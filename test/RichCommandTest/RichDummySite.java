@@ -1,8 +1,8 @@
 package RichCommandTest;
 
-import RichMap.RichSite;
-import RichPlayer.RichPlayer;
-import RichTool.RichToolFactory;
+import RichCore.RichPlayer;
+import RichCore.RichSite;
+import RichCore.RichToolFactory;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
