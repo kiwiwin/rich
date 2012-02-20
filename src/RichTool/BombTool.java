@@ -5,7 +5,10 @@ import RichCore.*;
 public class BombTool extends RichDeferredTool {
     private RichSitePosition _hospitalSitePosition;
 
-    public BombTool(RichSitePosition position) {
+    public BombTool() {
+    }
+
+    public void setHospitalSitePosition(RichSitePosition position) {
         _hospitalSitePosition = position;
     }
 

@@ -9,7 +9,7 @@ public class RichDefaultMap extends RichMap {
     private final int WIDTH = 29;
     private final int HEIGHT = 8;
     private final int HOSPITAL_SITE_INDEX = 14;
-    private RichSite[] _sites = new RichSite[WIDTH * 2 + HEIGHT * 2 - 4];
+    private final RichSite[] _sites = new RichSite[WIDTH * 2 + HEIGHT * 2 - 4];
 
     public RichDefaultMap(RichMapBuilder mapBuilder) {
         super(mapBuilder);
@@ -55,7 +55,7 @@ public class RichDefaultMap extends RichMap {
         for (int i = 15; i <= 27; i++) {
             setSite(_mapBuilder.buildHouseSite(new RichHouse(new RichHousePlatLevel(new RichMoney(200)))), i);
         }
-        setSite(_mapBuilder.buildToolSite(new RichDefaultToolFactory(new RichSitePosition(this, HOSPITAL_SITE_INDEX))), 28);
+        setSite(_mapBuilder.buildToolSite(new RichDefaultToolFactory()), 28);
         for (int i = 29; i <= 34; i++) {
             setSite(_mapBuilder.buildHouseSite(new RichHouse(new RichHousePlatLevel(new RichMoney(500)))), i);
         }
@@ -74,6 +74,10 @@ public class RichDefaultMap extends RichMap {
         setSite(_mapBuilder.buildMineSite(new RichPoint(40)), 67);
         setSite(_mapBuilder.buildMineSite(new RichPoint(80)), 68);
         setSite(_mapBuilder.buildMineSite(new RichPoint(60)), 69);
+    }
+
+    public int getHospitalIndex() {
+        return HOSPITAL_SITE_INDEX;
     }
 
     private void setSite(RichSite site, int index) {

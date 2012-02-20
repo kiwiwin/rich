@@ -32,7 +32,7 @@ public class RobotToolTest extends TestCase {
 
     public void test_should_return_clean_site() {
         RobotTool robot = new RobotTool();
-        BombTool bomb = new BombTool(null);
+        BombTool bomb = new BombTool();
         RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
         map.buildMap();
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);

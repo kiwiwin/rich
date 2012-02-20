@@ -2,7 +2,7 @@ package RichCore;
 
 public class RichMoney {
 
-    private int _amount;
+    private final int _amount;
 
     public RichMoney(int amount) {
         _amount = amount;

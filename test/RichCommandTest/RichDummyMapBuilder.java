@@ -6,8 +6,8 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 
 public class RichDummyMapBuilder extends RichMapBuilder {
-    private BufferedReader _dummyReader;
-    private PrintStream _dummyWriter;
+    private final BufferedReader _dummyReader;
+    private final PrintStream _dummyWriter;
 
     public RichDummyMapBuilder(BufferedReader dummyReader, PrintStream dummyWriter) {
         _dummyReader = dummyReader;

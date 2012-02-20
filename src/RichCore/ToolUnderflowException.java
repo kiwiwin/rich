@@ -1,7 +1,7 @@
 package RichCore;
 
 public class ToolUnderflowException extends ToolException {
-    private RichTool _tool;
+    private final RichTool _tool;
 
     public ToolUnderflowException(RichTool tool) {
         _tool = tool;

@@ -36,15 +36,15 @@ public class RichHouseTest extends TestCase {
         assertEquals(expectDisplay, house.display());
     }
 
-//    public void test_should_return_2_for_villa_house_display() {
-//        RichHouse house = new RichHouse(new RichHouseVillaLevel(dummyMoney));
-//        assertEquals("2", house.display());
-//    }
-//
-//    public void test_should_return_3_for_skyscraper_house_display() {
-//        RichHouse house = new RichHouse(new RichHouseSkyscraperLevel(dummyMoney));
-//        assertEquals("3", house.display());
-//    }
+    public void test_should_return_2_for_villa_house_display() {
+        RichHouse house = new RichHouse(new RichHouseVillaLevel(dummyMoney));
+        assertEquals("2", house.display());
+    }
+
+    public void test_should_return_3_for_skyscraper_house_display() {
+        RichHouse house = new RichHouse(new RichHouseSkyscraperLevel(dummyMoney));
+        assertEquals("3", house.display());
+    }
 
     public void test_should_return_true_for_can_upgrade_plat() {
         RichHouse house = new RichHouse(new RichHousePlatLevel(dummyMoney));

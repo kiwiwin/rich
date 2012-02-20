@@ -4,7 +4,7 @@ import RichCore.RichPlayer;
 //import RichUtil.RichScheduler;
 
 public class RichRollCommand extends RichCommand {
-    private RichPlayer _player;
+    private final RichPlayer _player;
 
     public RichRollCommand(RichPlayer player) {
         _player = player;

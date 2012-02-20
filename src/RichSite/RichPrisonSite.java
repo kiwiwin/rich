@@ -11,12 +11,11 @@ public class RichPrisonSite extends RichSite {
         super(reader, writer);
     }
 
-    public void doAcceptPlayer(RichPlayer player) {
+    protected void doAcceptPlayer(RichPlayer player) {
         player.setPunishDays(2);
-        //player.setVisible(false);
     }
 
-    public String display() {
+    protected String doDisplay() {
         return "P";
     }
 }

@@ -14,7 +14,6 @@ public class RichBombCommandTest extends TestCase {
     private static final RichPoint dummyPoint = null;
     private static final BufferedReader dummyReader = null;
     private static final PrintStream dummyWriter = null;
-    private static final RichSitePosition dummyHospitalPosition = null;
 
 
     public void test_should_return_has_bomb_at_site_10() {
@@ -22,7 +21,7 @@ public class RichBombCommandTest extends TestCase {
         map.buildMap();
 
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
-        player.addTool(new BombTool(dummyHospitalPosition));
+        player.addTool(new BombTool());
         player.initPosition(new RichSitePosition(map, 0));
         RichBombCommand command = new RichBombCommand(player, 10, null);
 
@@ -37,7 +36,7 @@ public class RichBombCommandTest extends TestCase {
         map.buildMap();
 
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
-        player.addTool(new BombTool(dummyHospitalPosition));
+        player.addTool(new BombTool());
         player.initPosition(new RichSitePosition(map, 0));
         RichBombCommand command = new RichBombCommand(player, -10, null);
 

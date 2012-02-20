@@ -5,7 +5,7 @@ import RichCore.RichSitePosition;
 
 public class RichRobotCommand extends RichCommand {
 
-    private RichPlayer _player;
+    private final RichPlayer _player;
 
     public RichRobotCommand(RichPlayer player) {
         _player = player;

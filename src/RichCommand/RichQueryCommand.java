@@ -11,8 +11,8 @@ import RichTool.RobotTool;
 import java.io.PrintStream;
 
 public class RichQueryCommand extends RichCommand {
-    private RichPlayer _player;
-    private PrintStream _outputWriter;
+    private final RichPlayer _player;
+    private final PrintStream _outputWriter;
 
     public RichQueryCommand(PrintStream writer, RichPlayer player) {
         _outputWriter = writer;
@@ -31,7 +31,7 @@ public class RichQueryCommand extends RichCommand {
     private String queryTools() {
         String result = "道具：";
         result += "路障" + _player.getToolsNumberByType(new RoadBlockTool()) + "个；";
-        result += "炸弹" + _player.getToolsNumberByType(new BombTool(null)) + "个；";
+        result += "炸弹" + _player.getToolsNumberByType(new BombTool()) + "个；";
         result += "机器娃娃" + _player.getToolsNumberByType(new RobotTool()) + "个";
         return result;
     }

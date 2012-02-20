@@ -1,24 +1,24 @@
 package RichCommand;
 
-import RichCore.RichDeferredTool;
 import RichCore.RichPlayer;
 import RichCore.RichSitePosition;
 import RichTool.BombTool;
 
 public class RichBombCommand extends RichCommand {
-    private RichPlayer _player;
-    private int _offset;
-    private RichSitePosition _hospitalPosition;
+    private final RichPlayer _player;
+    private final int _offset;
+    private final RichSitePosition _hospitalPosition;
 
-    public RichBombCommand(RichPlayer player, int offset, RichSitePosition position) {
+    public RichBombCommand(RichPlayer player, int offset, RichSitePosition hospitalPosition) {
         _player = player;
         _offset = offset;
-        _hospitalPosition = position;
+        _hospitalPosition = hospitalPosition;
     }
 
     public void executeCommand() {
-        _player.useTool(new BombTool(_hospitalPosition));
-        RichDeferredTool tool = new BombTool(_hospitalPosition);
+        _player.useTool(new BombTool());
+        BombTool tool = new BombTool();
+        tool.setHospitalSitePosition(_hospitalPosition);
         tool.installTool(_player, _offset);
     }
 

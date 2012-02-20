@@ -6,8 +6,8 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 
 public class RichDefaultMapBuilder extends RichMapBuilder {
-    private BufferedReader _reader;
-    private PrintStream _writer;
+    private final BufferedReader _reader;
+    private final PrintStream _writer;
 
     public RichDefaultMapBuilder(BufferedReader reader, PrintStream writer) {
         _reader = reader;

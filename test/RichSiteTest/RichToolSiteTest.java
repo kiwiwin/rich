@@ -28,7 +28,7 @@ public class RichToolSiteTest extends TestCase {
         RichPlayer player = new RichPlayer(dummyMoney, originalNotEnoughPoint);
 
         RichToolSite site = new RichToolSite(dummyReader, dummyWriter, dummyFactory);
-        site.doAcceptPlayer(player);
+        site.acceptPlayer(player);
 
         assertEquals(originalNotEnoughPoint, player.getPoints());
     }
@@ -40,8 +40,8 @@ public class RichToolSiteTest extends TestCase {
         RichPoint initPoint = new RichPoint(1000);
         RichPlayer player = new RichPlayer(dummyMoney, initPoint);
 
-        RichToolSite site = new RichToolSite(reader, dummyWriter, new RichDefaultToolFactory(null));
-        site.doAcceptPlayer(player);
+        RichToolSite site = new RichToolSite(reader, dummyWriter, new RichDefaultToolFactory());
+        site.acceptPlayer(player);
 
         RichPoint expectPoint = new RichPoint(740);
         assertEquals(expectPoint, player.getPoints());
@@ -58,8 +58,8 @@ public class RichToolSiteTest extends TestCase {
         RichPoint originalPoint = new RichPoint(1000);
         RichPlayer player = new RichPlayer(dummyMoney, originalPoint);
 
-        RichToolSite site = new RichToolSite(reader, writer, new RichDefaultToolFactory(null));
-        site.doAcceptPlayer(player);
+        RichToolSite site = new RichToolSite(reader, writer, new RichDefaultToolFactory());
+        site.acceptPlayer(player);
 
         assertEquals(originalPoint, player.getPoints());
         assertEquals(0, player.getToolsNumber());
@@ -76,8 +76,8 @@ public class RichToolSiteTest extends TestCase {
         RichPoint originalPoint = new RichPoint(40);
         RichPlayer player = new RichPlayer(dummyMoney, originalPoint);
 
-        RichToolSite site = new RichToolSite(reader, writer, new RichDefaultToolFactory(null));
-        site.doAcceptPlayer(player);
+        RichToolSite site = new RichToolSite(reader, writer, new RichDefaultToolFactory());
+        site.acceptPlayer(player);
 
         assertEquals(originalPoint, player.getPoints());
         assertEquals(0, player.getToolsNumber());

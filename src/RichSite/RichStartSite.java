@@ -11,10 +11,10 @@ public class RichStartSite extends RichSite {
         super(reader, writer);
     }
 
-    public void doAcceptPlayer(RichPlayer richPlayer) {
+    protected void doAcceptPlayer(RichPlayer richPlayer) {
     }
 
-    public String display() {
+    protected String doDisplay() {
         return "S";
     }
 }

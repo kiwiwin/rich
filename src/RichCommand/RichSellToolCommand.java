@@ -4,8 +4,8 @@ import RichCore.RichPlayer;
 import RichCore.RichTool;
 
 public class RichSellToolCommand extends RichCommand {
-    private RichPlayer _player;
-    private RichTool _tool;
+    private final RichPlayer _player;
+    private final RichTool _tool;
 
     public RichSellToolCommand(RichPlayer player, RichTool tool) {
         _player = player;

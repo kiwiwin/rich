@@ -5,13 +5,13 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 public abstract class RichSite {
-    protected BufferedReader _inputReader;
-    protected PrintStream _outputWriter;
+    protected final BufferedReader _inputReader;
+    protected final PrintStream _outputWriter;
 
     private RichDeferredTool _tool;
-    private ArrayList<RichPlayer> _players;
+    private final ArrayList<RichPlayer> _players;
 
-    public RichSite(BufferedReader reader, PrintStream writer) {
+    protected RichSite(BufferedReader reader, PrintStream writer) {
         _players = new ArrayList<RichPlayer>();
         _tool = null;
         _inputReader = reader;
@@ -27,7 +27,17 @@ public abstract class RichSite {
 
     protected abstract void doAcceptPlayer(RichPlayer player);
 
-    public abstract String display();
+    protected abstract String doDisplay();
+
+    public String display() {
+        if (hasDeferredToolInstalled()) return _tool.display();
+        if (hasPlayerStand()) return getLastPlayer().display();
+        return doDisplay();
+    }
+
+    private RichPlayer getLastPlayer() {
+        return _players.get(_players.size() - 1);
+    }
 
     public boolean installDeferredTool(RichDeferredTool tool) {
         if (hasDeferredToolInstalled()) return false;
@@ -66,4 +76,6 @@ public abstract class RichSite {
     public void removePlayer(RichPlayer player) {
         _players.remove(player);
     }
+
+
 }

@@ -1,6 +1,5 @@
 package RichTool;
 
-import RichCore.RichSitePosition;
 import RichCore.RichTool;
 import RichCore.RichToolFactory;
 
@@ -9,10 +8,8 @@ public class RichDefaultToolFactory implements RichToolFactory{
     public static final int ROBOT = 2;
     public static final int BOMB = 3;
 
-    private RichSitePosition _hospitalPosition;
 
-    public RichDefaultToolFactory(RichSitePosition position) {
-        _hospitalPosition = position;
+    public RichDefaultToolFactory() {
     }
 
     public RichTool createTool(int toolNumber) {
@@ -22,7 +19,7 @@ public class RichDefaultToolFactory implements RichToolFactory{
             case ROBOT:
                 return new RobotTool();
             case BOMB:
-                return new BombTool(_hospitalPosition);
+                return new BombTool();
             default:
                 throw new IllegalArgumentException("Invalid tool type");
         }

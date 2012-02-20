@@ -159,7 +159,7 @@ public class RichPlayerTest extends TestCase {
     public void test_player_has_bomb_use_tool_null() {
         RichPlayer player = new RichPlayer(null, null);
         try {
-            player.addTool(new BombTool(null));
+            player.addTool(new BombTool());
             player.useTool(null);
             fail();
         } catch (Exception ex) {
@@ -195,7 +195,7 @@ public class RichPlayerTest extends TestCase {
 
         try {
             player.useTool(new RobotTool());
-            fail("there shold have an exception");
+            fail("there should have an exception");
         } catch (ToolUnderflowException ex) {
             assertEquals("You don't have 机器娃娃", ex.getMessage());
         }
@@ -205,7 +205,7 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_points_buy_bomb() {
         RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(100));
-        player.buyTool(new BombTool(null));
+        player.buyTool(new BombTool());
 
         assertEquals(new RichPoint(50), player.getPoints());
         assertEquals(1, player.getToolsNumber());
@@ -214,7 +214,7 @@ public class RichPlayerTest extends TestCase {
     public void test_player_has_not_enough_points_buy_bomb() {
         RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(20));
         try {
-            player.buyTool(new BombTool(null));
+            player.buyTool(new BombTool());
             fail("there should have an exception");
         } catch (ToolPointsNotEnoughException ex) {
             assertEquals("您当前剩余的点数为20， 不足以购买炸弹道具.", ex.getMessage());
@@ -225,10 +225,10 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_enough_bomb_sell() {
         RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(0));
-        player.addTool(new BombTool(null));
+        player.addTool(new BombTool());
         assertEquals(1, player.getToolsNumber());
 
-        player.sellTool(new BombTool(null));
+        player.sellTool(new BombTool());
 
         assertEquals(0, player.getToolsNumber());
         assertEquals(new RichPoint(50), player.getPoints());
@@ -239,7 +239,7 @@ public class RichPlayerTest extends TestCase {
         assertEquals(0, player.getToolsNumber());
 
         try {
-            player.sellTool(new BombTool(null));
+            player.sellTool(new BombTool());
             fail("there should have an exception");
         } catch (ToolUnderflowException ex) {
             assertEquals("You don't have 炸弹", ex.getMessage());
@@ -251,11 +251,11 @@ public class RichPlayerTest extends TestCase {
 
     public void test_player_has_bomb_to_use() {
         RichPlayer player = new RichPlayer(dummyMoney, null);
-        player.addTool(new BombTool(null));
+        player.addTool(new BombTool());
 
         assertEquals(1, player.getToolsNumber());
 
-        player.useTool(new BombTool(null));
+        player.useTool(new BombTool());
         assertEquals(0, player.getToolsNumber());
     }
 
@@ -265,7 +265,7 @@ public class RichPlayerTest extends TestCase {
         assertEquals(0, player.getToolsNumber());
 
         try {
-            player.useTool(new BombTool(null));
+            player.useTool(new BombTool());
             fail("there should have an exception");
         } catch (ToolUnderflowException ex) {
             assertEquals("You don't have 炸弹", ex.getMessage());
@@ -324,7 +324,7 @@ public class RichPlayerTest extends TestCase {
         assertEquals(0, visitor.getHousesNumber());
     }
 
-    public void test_player_has_not_enough_money_to_upgrad_house() {
+    public void test_player_has_not_enough_money_to_upgrade_house() {
         RichPlayer player = new RichPlayer(new RichMoney(0), dummyPoint);
         RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(1000)));
 
@@ -479,7 +479,7 @@ public class RichPlayerTest extends TestCase {
 
         try {
             player.sellHouse(new RichHouse(new RichHousePlatLevel(new RichMoney(100))));
-            fail("there should be an excpetion");
+            fail("there should be an exception");
         } catch (HouseOwnerException ex) {
             assertEquals(new RichMoney(0), player.getMoney());
         }
@@ -537,11 +537,11 @@ public class RichPlayerTest extends TestCase {
 
     public void test_should_return_2_for_get_bomb_number() {
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
-        player.addTool(new BombTool(null));
-        player.addTool(new BombTool(null));
+        player.addTool(new BombTool());
+        player.addTool(new BombTool());
         player.addTool(new RoadBlockTool());
 
-        assertEquals(2, player.getToolsNumberByType(new BombTool(null)));
+        assertEquals(2, player.getToolsNumberByType(new BombTool()));
     }
 
     public void test_should_return_3_for_get_cottage_number() {
@@ -575,13 +575,6 @@ public class RichPlayerTest extends TestCase {
         map.buildMap();
         return map;
     }
-
-//    public void test_should_return_atubo_for_display() {
-//        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
-//        player.setName("atubo");
-//        assertEquals("atubo", player.display());
-//    }
-
 
     public void test_should_return_A_RED_for_display() {
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);

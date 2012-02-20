@@ -4,8 +4,8 @@ import RichCore.RichHouse;
 import RichCore.RichPlayer;
 
 public class RichSellHouseCommand extends RichCommand {
-    private RichHouse _house;
-    private RichPlayer _player;
+    private final RichHouse _house;
+    private final RichPlayer _player;
 
     public RichSellHouseCommand(RichPlayer player, RichHouse house) {
         _player = player;

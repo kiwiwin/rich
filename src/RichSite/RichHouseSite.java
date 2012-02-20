@@ -8,7 +8,7 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 
 public class RichHouseSite extends RichSite {
-    private RichHouse _house;
+    private final RichHouse _house;
 
     public RichHouseSite(BufferedReader reader, PrintStream writer, RichHouse house) {
         super(reader, writer);
@@ -33,7 +33,7 @@ public class RichHouseSite extends RichSite {
         return !isOwner(null);
     }
 
-    public String display() {
+    public String doDisplay() {
         return _house.display();
     }
 
@@ -43,6 +43,8 @@ public class RichHouseSite extends RichSite {
             _outputWriter.println("福神附身，可免过路费");
             return;
         }
+
+        _outputWriter.println(player.display() + "付给" + _house.getOwner().display() + "过路费" + _house.getToll().toInt());
         player.payHouseToll(_house);
     }
 
@@ -66,5 +68,9 @@ public class RichHouseSite extends RichSite {
         } catch (Exception ex) {
             _outputWriter.println(ex.getMessage());
         }
+    }
+
+    public RichHouse getHouse() {
+        return _house;
     }
 }

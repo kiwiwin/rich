@@ -6,8 +6,8 @@ public class RichPlayer {
     private RichPoint _points;
     private RichMoney _money;
 
-    private ArrayList<RichTool> _tools;
-    private ArrayList<RichHouse> _houses;
+    private final ArrayList<RichTool> _tools;
+    private final ArrayList<RichHouse> _houses;
     private RichSitePosition _position;
     private int _remainStep;
     private int _punishDays;

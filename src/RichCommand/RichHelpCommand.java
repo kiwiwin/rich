@@ -3,7 +3,7 @@ package RichCommand;
 import java.io.PrintStream;
 
 public class RichHelpCommand extends RichCommand {
-    private PrintStream _writer;
+    private final PrintStream _writer;
 
     public RichHelpCommand(PrintStream writer) {
         _writer = writer;

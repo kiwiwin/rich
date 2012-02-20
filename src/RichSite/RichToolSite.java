@@ -9,14 +9,14 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 
 public class RichToolSite extends RichSite {
-    private RichToolFactory _factory;
+    private final RichToolFactory _factory;
 
     public RichToolSite(BufferedReader reader, PrintStream writer, RichToolFactory factory) {
         super(reader, writer);
         _factory = factory;
     }
 
-    public void doAcceptPlayer(RichPlayer player) {
+    protected void doAcceptPlayer(RichPlayer player) {
         while (!player.getPoints().isLessThan(new RichPoint(30))) {
             String toolType;
             try {
@@ -29,7 +29,7 @@ public class RichToolSite extends RichSite {
         }
     }
 
-    public String display() {
+    protected String doDisplay() {
         return "T";
     }
 }

@@ -17,7 +17,7 @@ import java.io.StringReader;
 public class RichHouseSiteTest extends TestCase {
     private static final RichPoint dummyPoint = null;
     private static final BufferedReader dummyReader = null;
-    private static final PrintStream dummyWritter = null;
+    private static final PrintStream dummyWriter = null;
 
     public void test_should_return_player_buy_house_for_1000_money() {
         String buyHouseString = "Y\n";
@@ -157,7 +157,7 @@ public class RichHouseSiteTest extends TestCase {
         RichMoney visitorMoneyBefore = new RichMoney(5000);
         RichPlayer visitor = new RichPlayer(visitorMoneyBefore, dummyPoint);
 
-        RichHouseSite site = new RichHouseSite(dummyReader, dummyWritter, house);
+        RichHouseSite site = new RichHouseSite(dummyReader, dummyWriter, house);
         site.acceptPlayer(visitor);
 
         RichMoney toll = housePrice.divide(2);
@@ -172,7 +172,7 @@ public class RichHouseSiteTest extends TestCase {
     public void test_should_return_0_for_toll_of_plat_original_price_is_1000_if_house_owner_is_at_prison_or_hospital() {
         RichMoney anonymousHousePrice = new RichMoney(1000);
         RichHouse house = new RichHouse(new RichHousePlatLevel(anonymousHousePrice));
-        RichHouseSite site = new RichHouseSite(dummyReader, dummyWritter, house);
+        RichHouseSite site = new RichHouseSite(dummyReader, dummyWriter, house);
         RichMoney ownerMoneyBefore = new RichMoney(500);
         RichPlayer owner = new RichPlayer(ownerMoneyBefore, dummyPoint);
         owner.setPunishDays(3);

@@ -9,7 +9,7 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 
 public class RichGiftSite extends RichSite {
-    RichGiftFactory _giftFactory;
+    private final RichGiftFactory _giftFactory;
 
     public RichGiftSite(BufferedReader reader, PrintStream writer, RichGiftFactory factory){
         super(reader, writer);
@@ -28,7 +28,7 @@ public class RichGiftSite extends RichSite {
         }
     }
 
-    public String display() {
+    protected String doDisplay() {
         return "G";
     }
 }

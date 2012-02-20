@@ -1,9 +1,9 @@
 package RichCore;
 
 public abstract class RichHouseLevel {
-    protected RichMoney _originalPrice;
+    protected final RichMoney _originalPrice;
 
-    public RichHouseLevel(RichMoney originalPrice) {
+    protected RichHouseLevel(RichMoney originalPrice) {
         _originalPrice = originalPrice;
     }
 

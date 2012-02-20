@@ -4,8 +4,8 @@ import RichCore.RichPlayer;
 import RichTool.RoadBlockTool;
 
 public class RichBlockCommand extends RichCommand {
-    private RichPlayer _player;
-    private int _offset;
+    private final RichPlayer _player;
+    private final int _offset;
 
     public RichBlockCommand(RichPlayer player, int offset) {
         _player = player;

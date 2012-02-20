@@ -1,43 +1,91 @@
 package RichCommand;
 
+import RichCore.RichMap;
 import RichCore.RichPlayer;
-import RichTool.RichDefaultToolFactory;
+import RichCore.RichSitePosition;
+import RichCore.RichToolFactory;
+import RichSite.RichHouseSite;
+
+import java.io.PrintStream;
 
 public class RichCommandFactory {
-    private RichDefaultToolFactory _factory;
+    private RichToolFactory _toolFactory;
+    private RichSitePosition _hospitalSitePosition;
+    private RichMap _map;
+    private PrintStream _writer;
 
-    public RichCommandFactory(RichDefaultToolFactory factory) {
-        _factory = factory;
+
+    public RichCommandFactory() {
+    }
+
+    public void setToolFactory(RichToolFactory factory) {
+        _toolFactory = factory;
+    }
+
+    public void setHospitalSitePosition(RichSitePosition position) {
+        _hospitalSitePosition = position;
+    }
+
+    public void setMap(RichMap map) {
+        _map = map;
+    }
+
+    public void setWriter(PrintStream writer) {
+        _writer = writer;
     }
 
     public RichCommand createCommand(String commandText, RichPlayer player) {
         String lowerCaseCommandText = commandText.toLowerCase();
-        if (lowerCaseCommandText.equals("roll")) {
-            return new RichRollCommand(player);
-        } else if (lowerCaseCommandText.contains("block ")) {
-            String arg[] = lowerCaseCommandText.split(" ");
-            return new RichBlockCommand(player, Integer.parseInt(arg[1]));
-        } else if (lowerCaseCommandText.contains("bomb ")) {
-            String arg[] = lowerCaseCommandText.split(" ");
-            return new RichBombCommand(player, Integer.parseInt(arg[1]), null);
-        } else if (lowerCaseCommandText.equals("robot")) {
-            return new RichRobotCommand(player);
-        } else if (lowerCaseCommandText.contains("sell ")) {
-//            String arg[] = lowerCaseCommandText.split(" ");
-//            return null;
-            return new RichSellHouseCommand(player, null); //TODO: replace null
-        } else if (lowerCaseCommandText.contains("selltool ")) {
-//            String arg[] = lowerCaseCommandText.split(" ");
-            return new RichSellToolCommand(player, null);//TODO: replace null ... _factory.createTool(arg[1]));
-        } else if (lowerCaseCommandText.equals("query")) {
-            return new RichQueryCommand(null, player);    //TODO: replace null
-        } else if (lowerCaseCommandText.equals("quit")) {
-            return new RichQuitCommand();
-        } else if (lowerCaseCommandText.equals("help")){
-            return new RichHelpCommand(null); //TODO: replace null
-        }else{
-            throw new IllegalArgumentException("Invalid Command");
-        }
 
+        try {
+            if (lowerCaseCommandText.equals("roll")) {
+                return new RichRollCommand(player);
+            } else if (lowerCaseCommandText.contains("block ")) {
+                return createBlockCommand(player, lowerCaseCommandText);
+            } else if (lowerCaseCommandText.contains("bomb ")) {
+                return createBombCommand(player, lowerCaseCommandText);
+            } else if (lowerCaseCommandText.equals("robot")) {
+                return new RichRobotCommand(player);
+            } else if (lowerCaseCommandText.contains("sell ")) {
+                return createSellHouseCommand(player, lowerCaseCommandText);
+            } else if (lowerCaseCommandText.contains("selltool ")) {
+                return createSellToolCommand(player, lowerCaseCommandText);
+            } else if (lowerCaseCommandText.equals("query")) {
+                return new RichQueryCommand(_writer, player);
+            } else if (lowerCaseCommandText.equals("quit")) {
+                return new RichQuitCommand();
+            } else if (lowerCaseCommandText.equals("help")) {
+                return new RichHelpCommand(_writer);
+            } else {
+                throw new IllegalArgumentException("Invalid command");
+            }
+        } catch (Exception ex) {
+            throw new IllegalArgumentException("Invalid command");
+        }
+    }
+
+    private RichCommand createSellToolCommand(RichPlayer player, String lowerCaseCommandText) {
+        String arg[] = lowerCaseCommandText.split(" ");
+        return new RichSellToolCommand(player, _toolFactory.createTool(arg[1]));
+    }
+
+    private RichCommand createSellHouseCommand(RichPlayer player, String lowerCaseCommandText) {
+        String arg[] = lowerCaseCommandText.split(" ");
+        RichHouseSite houseSite = (RichHouseSite) _map.getSite(Integer.parseInt(arg[1]));
+        return new RichSellHouseCommand(player, houseSite.getHouse());
+    }
+
+    private RichCommand createBombCommand(RichPlayer player, String lowerCaseCommandText) {
+        String arg[] = lowerCaseCommandText.split(" ");
+        int offset = Integer.parseInt(arg[1]);
+        if (offset < -10 || offset > 10) throw new IllegalArgumentException("");
+        return new RichBombCommand(player, offset, _hospitalSitePosition);
+    }
+
+    private RichCommand createBlockCommand(RichPlayer player, String lowerCaseCommandText) {
+        String arg[] = lowerCaseCommandText.split(" ");
+        int offset = Integer.parseInt(arg[1]);
+        if (offset < -10 || offset > 10) throw new IllegalArgumentException("");
+        return new RichBlockCommand(player, offset);
     }
 }

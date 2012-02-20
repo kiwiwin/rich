@@ -21,7 +21,7 @@ public class RichDummySite extends RichSite {
     }
 
     @Override
-    public String display() {
+    public String doDisplay() {
         return "";
     }
 }

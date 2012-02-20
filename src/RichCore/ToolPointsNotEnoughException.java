@@ -2,8 +2,8 @@ package RichCore;
 
 
 public class ToolPointsNotEnoughException extends ToolException {
-    private RichPoint _playerPoints;
-    private RichTool _tool;
+    private final RichPoint _playerPoints;
+    private final RichTool _tool;
 
     public ToolPointsNotEnoughException(RichPoint playerPoints, RichTool tool) {
         _playerPoints = playerPoints;

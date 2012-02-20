@@ -2,7 +2,7 @@ package RichCore;
 
 public class RichSitePosition {
     private int _index;
-    private RichMap _map;
+    private final RichMap _map;
     
     public RichSitePosition(RichMap map, int index) {
         _map = map;

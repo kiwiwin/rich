@@ -14,18 +14,17 @@ public class BombToolTest extends TestCase {
     private static final RichPoint dummyPoint = null;
     private static final BufferedReader dummyReader = null;
     private static final PrintStream dummyWriter = null;
-    private static final RichSitePosition dummyHospitalPosition = null;
 
     public void test_should_display_at_for_bomb_tool() {
-        assertEquals("@", new BombTool(dummyHospitalPosition).display());
+        assertEquals("@", new BombTool().display());
     }
 
     public void test_should_return_50_for_bomb_get_points() {
-        assertEquals(new RichPoint(50), new BombTool(dummyHospitalPosition).getPoints());
+        assertEquals(new RichPoint(50), new BombTool().getPoints());
     }
 
     public void test_should_return_炸弹_for_getName() {
-        RichTool tool = new BombTool(dummyHospitalPosition);
+        RichTool tool = new BombTool();
         assertEquals("炸弹", tool.getName());
     }
 
@@ -35,7 +34,8 @@ public class BombToolTest extends TestCase {
         map.buildMap();
 
         RichSitePosition hospitalPosition = new RichSitePosition(map, 14);
-        BombTool tool = new BombTool(hospitalPosition);
+        BombTool tool = new BombTool();
+        tool.setHospitalSitePosition(hospitalPosition);
 
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
         player.initPosition(new RichSitePosition(map, 0));
