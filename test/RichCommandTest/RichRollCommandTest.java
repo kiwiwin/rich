@@ -20,7 +20,7 @@ public class RichRollCommandTest extends TestCase {
 
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
         RichSitePosition position = new RichSitePosition(map, 63);
-        player.setPosition(position);
+        player.initPosition(position);
         
         RichRollCommand command = new RichRollCommand(player);
 

@@ -26,8 +26,9 @@ public class BombTool extends RichDeferredTool {
     }
 
     public void triggerTool(RichPlayer player) {
-        player.setPosition(_hospitalSitePosition);
         player.setRemainStep(0);
-        player.setPunishDays(3);
+        final int PUNISH_HOSPITAL_DAYS = 3;
+        player.setPunishDays(PUNISH_HOSPITAL_DAYS);
+        player.setPosition(_hospitalSitePosition);
     }
 }

@@ -36,7 +36,7 @@ public class RobotToolTest extends TestCase {
         RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
         map.buildMap();
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
-        player.setPosition(new RichSitePosition(map, 0));
+        player.initPosition(new RichSitePosition(map, 0));
 
         bomb.installTool(player, 10);
         robot.useTool(player);

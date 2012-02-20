@@ -22,7 +22,7 @@ public class RichBlockCommandTest extends TestCase{
 
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
         player.addTool(new RoadBlockTool());
-        player.setPosition(new RichSitePosition(map, 2));
+        player.initPosition(new RichSitePosition(map, 2));
         RichBlockCommand command = new RichBlockCommand(player, 8);
 
         command.executeCommand();
@@ -38,7 +38,7 @@ public class RichBlockCommandTest extends TestCase{
 
         RichPlayer player = new RichPlayer(dummyMoney, null);
         player.addTool(new RoadBlockTool());
-        player.setPosition(new RichSitePosition(map, 0));
+        player.initPosition(new RichSitePosition(map, 0));
         RichBlockCommand command = new RichBlockCommand(player, -10);
 
         command.executeCommand();

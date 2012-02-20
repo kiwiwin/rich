@@ -20,7 +20,7 @@ public class RichDeferredToolTest extends TestCase {
         map.buildMap();
 
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
-        player.setPosition(new RichSitePosition(map, 0));
+        player.initPosition(new RichSitePosition(map, 0));
 
         RoadBlockTool deferredTool = new RoadBlockTool();
         assertTrue(deferredTool.installTool(player, 1));
@@ -32,9 +32,9 @@ public class RichDeferredToolTest extends TestCase {
         map.buildMap();
 
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
-        player.setPosition(new RichSitePosition(map, 0));
+        player.initPosition(new RichSitePosition(map, 0));
         RichPlayer stander = new RichPlayer(dummyMoney, dummyPoint);
-        stander.setPosition(new RichSitePosition(map, 69));
+        stander.initPosition(new RichSitePosition(map, 69));
 
         RoadBlockTool deferredTool = new RoadBlockTool();
         assertFalse(deferredTool.installTool(player, 69));

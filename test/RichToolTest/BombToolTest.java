@@ -30,7 +30,7 @@ public class BombToolTest extends TestCase {
     }
 
     public void test_should_return_player_at_hospital_when_pass_by_a_bomb() {
-       
+
         RichMap map = new RichDefaultMap(new RichDefaultMapBuilder(dummyReader, dummyWriter));
         map.buildMap();
 
@@ -38,7 +38,7 @@ public class BombToolTest extends TestCase {
         BombTool tool = new BombTool(hospitalPosition);
 
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
-        player.setPosition(new RichSitePosition(map, 0));
+        player.initPosition(new RichSitePosition(map, 0));
 
         tool.installTool(player, 1);
 
@@ -48,6 +48,7 @@ public class BombToolTest extends TestCase {
 
         assertEquals(hospitalSite, player.getPosition().getSite());
         assertEquals(3, player.getPunishDays());
+        assertFalse(map.getSite(0).hasPlayerStand());
         assertFalse(hospitalSite.hasPlayerStand());
     }
 }

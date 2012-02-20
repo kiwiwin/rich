@@ -1,5 +1,6 @@
 package RichCoreTest;
 
+import RichCommandTest.RichDummyMapBuilder;
 import RichCore.*;
 import RichHouse.RichHouseCottageLevel;
 import RichHouse.RichHousePlatLevel;
@@ -8,10 +9,13 @@ import RichHouse.RichHouseVillaLevel;
 import RichTool.BombTool;
 import RichTool.RoadBlockTool;
 import RichTool.RobotTool;
+import RichSite.*;
 import junit.framework.TestCase;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
+
+import RichColor.*;
 
 public class RichPlayerTest extends TestCase {
     private static final RichMoney dummyMoney = null;
@@ -152,6 +156,28 @@ public class RichPlayerTest extends TestCase {
     }
 
 
+    public void test_player_has_bomb_use_tool_null() {
+        RichPlayer player = new RichPlayer(null, null);
+        try {
+            player.addTool(new BombTool(null));
+            player.useTool(null);
+            fail();
+        } catch (Exception ex) {
+
+        }
+    }
+
+    public void test_player_has_null_sell_tool_null() {
+        RichPlayer player = new RichPlayer(null, null);
+        try {
+            player.addTool(null);
+            player.sellTool(null);
+            fail();
+        } catch (Exception ex) {
+
+        }
+    }
+
     public void test_player_has_robot_to_use() {
         RichPlayer player = new RichPlayer(dummyMoney, null);
         player.addTool(new RobotTool());
@@ -248,7 +274,6 @@ public class RichPlayerTest extends TestCase {
         assertEquals(0, player.getToolsNumber());
     }
 
-
     public void test_player_has_enough_money_buy_house_without_owner() {
         RichPlayer player = new RichPlayer(new RichMoney(5000), null);
 
@@ -266,7 +291,7 @@ public class RichPlayerTest extends TestCase {
         RichMoney notEnoughMoney = new RichMoney(500);
         RichPlayer player = new RichPlayer(notEnoughMoney, null);
 
-        RichMoney housePrice =  new RichMoney(1000);
+        RichMoney housePrice = new RichMoney(1000);
         RichHouse house = new RichHouse(new RichHousePlatLevel(housePrice));
 
         assertNull(house.getOwner());
@@ -297,6 +322,32 @@ public class RichPlayerTest extends TestCase {
         }
 
         assertEquals(0, visitor.getHousesNumber());
+    }
+
+    public void test_player_has_not_enough_money_to_upgrad_house() {
+        RichPlayer player = new RichPlayer(new RichMoney(0), dummyPoint);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(1000)));
+
+        player.addHouse(house);
+
+        try {
+            player.upgradeHouse(house);
+            fail("there should be an exception");
+        } catch (HouseMoneyNotEnoughException ex) {
+
+        }
+    }
+
+    public void test_should_be_exception_for_not_owner_upgrade_the_house() {
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+        RichHouse house = new RichHouse(null);
+
+        try {
+            player.upgradeHouse(house);
+            fail("there should be an exception");
+        } catch (HouseOwnerException ex) {
+
+        }
     }
 
     public void test_player_has_enough_money_to_upgrade_house_from_plat_to_cottage() {
@@ -340,6 +391,17 @@ public class RichPlayerTest extends TestCase {
         assertEquals(new RichMoney(7000), player.getMoney());
     }
 
+
+//    public void test_player_has_null_to_sell_null() {
+//        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+//        try {
+//            player.addHouse(new RichHouse(null));
+//            player.sellHouse(null);
+//            fail();
+//        } catch (HouseOwnerException  ex) {
+//
+//        }
+//    }
 
     public void test_player_sell_plat() {
         RichMoney playerMoneyBeforeSell = new RichMoney(10000);
@@ -412,6 +474,17 @@ public class RichPlayerTest extends TestCase {
         assertEquals(0, player.getHousesNumber());
     }
 
+    public void test_should_be_exception_for_player_not_the_owner() {
+        RichPlayer player = new RichPlayer(new RichMoney(0), null);
+
+        try {
+            player.sellHouse(new RichHouse(new RichHousePlatLevel(new RichMoney(100))));
+            fail("there should be an excpetion");
+        } catch (HouseOwnerException ex) {
+            assertEquals(new RichMoney(0), player.getMoney());
+        }
+    }
+
     public void test_player_pay_for_toll() {
         RichMoney ownerMoneyBeforeSell = new RichMoney(10000);
         RichPlayer owner = new RichPlayer(ownerMoneyBeforeSell, null);
@@ -429,6 +502,21 @@ public class RichPlayerTest extends TestCase {
         assertEquals(new RichMoney(10500), owner.getMoney());
     }
 
+
+    public void test_should_be_exception_for_owner_pay_for_the_toll() {
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+        RichHouse house = new RichHouse(null);
+
+        player.addHouse(house);
+
+        try {
+            player.payHouseToll(house);
+            fail("there should be an exception");
+        } catch (HouseOwnerException ex) {
+
+        }
+    }
+
     public void test_player_add_money() {
         RichMoney playerMoneyBeforeAddMoney = new RichMoney(0);
         RichPlayer player = new RichPlayer(playerMoneyBeforeAddMoney, dummyPoint);
@@ -436,7 +524,106 @@ public class RichPlayerTest extends TestCase {
         assertEquals(new RichMoney(10000), player.getMoney());
     }
 
-    public void test_player_move_forward_4_steps() {
+    public void test_should_return_5_for_move_forward_3_steps_from_index_2() {
+        RichMap map = createDefaultDummyMap();
 
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+        player.initPosition(new RichSitePosition(map, 2));
+        player.forwardSteps(3);
+
+        assertEquals(5, player.getPosition().getIndex());
+        assertEquals(map.getSite(5), player.getPosition().getSite());
+    }
+
+    public void test_should_return_2_for_get_bomb_number() {
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+        player.addTool(new BombTool(null));
+        player.addTool(new BombTool(null));
+        player.addTool(new RoadBlockTool());
+
+        assertEquals(2, player.getToolsNumberByType(new BombTool(null)));
+    }
+
+    public void test_should_return_3_for_get_cottage_number() {
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+        player.addHouse(new RichHouse(new RichHouseCottageLevel(dummyMoney)));
+        player.addHouse(new RichHouse(new RichHouseCottageLevel(dummyMoney)));
+        player.addHouse(new RichHouse(new RichHouseCottageLevel(dummyMoney)));
+
+        player.addHouse(new RichHouse(new RichHousePlatLevel(dummyMoney)));
+
+        assertEquals(3, player.getHousesNumberByLevel(new RichHouse(new RichHouseCottageLevel(dummyMoney))));
+    }
+
+    public void test_should_return_true_for_has_remain_steps() {
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+        player.setRemainStep(100);
+
+        assertTrue(player.hasRemainStep());
+    }
+
+    public void test_should_return_true_for_is_punished() {
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+        player.setPunishDays(11);
+
+        assertTrue(player.isPunished());
+        assertEquals(11, player.getPunishDays());
+    }
+
+    private RichMap createDefaultDummyMap() {
+        RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
+        map.buildMap();
+        return map;
+    }
+
+//    public void test_should_return_atubo_for_display() {
+//        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+//        player.setName("atubo");
+//        assertEquals("atubo", player.display());
+//    }
+
+
+    public void test_should_return_A_RED_for_display() {
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+        player.setName("A");
+        player.setColor(new RichRedColor());
+
+        String expectDisplay = (char) 27 + "[01;31mA" + (char) 27 + "[00;00m";
+        assertEquals(expectDisplay, player.display());
+    }
+
+    public void test_should_return_2_for_get_house_numbers() {
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+        player.addHouse(new RichHouse(null));
+        player.addHouse(new RichHouse(null));
+
+        assertEquals(2, player.getHousesNumber());
+    }
+
+    public void test_should_return_300_for_get_points() {
+        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(0));
+        player.addPoints(new RichPoint(300));
+        assertEquals(new RichPoint(300), player.getPoints());
+    }
+
+    public void test_should_return_player_at_site_5() {
+        RichMap map = createDefaultDummyMap();
+
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+        player.initPosition(new RichSitePosition(map, 0));
+
+        player.setPosition(new RichSitePosition(map, 5));
+
+        assertEquals(5, player.getPosition().getIndex());
+        assertEquals(map.getSite(5), player.getPosition().getSite());
+        assertFalse(map.getSite(0).hasPlayerStand());
+        assertTrue(map.getSite(5).hasPlayerStand());
+    }
+
+    public void test_should_return_true_for_has_blessing_god() {
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+        player.setBlessingGod();
+
+        assertTrue(player.hasBlessingGod());
     }
 }

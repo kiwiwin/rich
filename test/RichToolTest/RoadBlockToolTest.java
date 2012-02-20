@@ -34,7 +34,7 @@ public class RoadBlockToolTest extends TestCase {
         RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
         map.buildMap();
         RichPlayer player= new RichPlayer(dummyMoney, dummyPoint);
-        player.setPosition(new RichSitePosition(map, 63));
+        player.initPosition(new RichSitePosition(map, 63));
 
         tool.installTool(player, 1);
         player.forwardSteps(7);

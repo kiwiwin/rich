@@ -37,7 +37,12 @@ public abstract class RichSite {
     }
 
     public boolean hasPlayerStand() {
-        return _players.size() > 0;
+        for (RichPlayer player : _players) {
+            if (!player.isPunished()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void removeDeferredTool() {

@@ -23,7 +23,7 @@ public class RichBombCommandTest extends TestCase {
 
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
         player.addTool(new BombTool(dummyHospitalPosition));
-        player.setPosition(new RichSitePosition(map, 0));
+        player.initPosition(new RichSitePosition(map, 0));
         RichBombCommand command = new RichBombCommand(player, 10, null);
 
         command.executeCommand();
@@ -38,7 +38,7 @@ public class RichBombCommandTest extends TestCase {
 
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
         player.addTool(new BombTool(dummyHospitalPosition));
-        player.setPosition(new RichSitePosition(map, 0));
+        player.initPosition(new RichSitePosition(map, 0));
         RichBombCommand command = new RichBombCommand(player, -10, null);
 
         command.executeCommand();

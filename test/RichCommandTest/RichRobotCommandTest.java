@@ -20,7 +20,7 @@ public class RichRobotCommandTest extends TestCase {
         RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
         map.buildMap();
     
-        player.setPosition(new RichSitePosition(map, 0));
+        player.initPosition(new RichSitePosition(map, 0));
         
         map.getSite(10).installDeferredTool(new RoadBlockTool());
         

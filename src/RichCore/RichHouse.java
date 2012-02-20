@@ -46,7 +46,10 @@ public class RichHouse {
     }
 
     public String display() {
-        return _houseLevel.display();
+        if (hasOwner())
+            return _owner.getColor().decorate(_houseLevel.display());
+        else
+            return _houseLevel.display();
     }
 
     public void sell() {

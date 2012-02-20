@@ -13,6 +13,7 @@ public class RichPlayer {
     private int _punishDays;
     private int _blessingGodDays;
     private String _name;
+    private RichColor _color;
 
     public RichPlayer(RichMoney money, RichPoint point) {
         _tools = new ArrayList<RichTool>();
@@ -31,14 +32,13 @@ public class RichPlayer {
         _tools.add(tool);
     }
 
-    public void removeTool(RichTool toolToRemove) {
+    private void removeTool(RichTool toolToRemove) {
         for (RichTool tool : _tools) {
             if (tool.isSameTool(toolToRemove)) {
                 _tools.remove(tool);
                 return;
             }
         }
-
         throw new ToolUnderflowException(toolToRemove);
     }
 
@@ -66,16 +66,15 @@ public class RichPlayer {
     }
 
     public void buyHouse(RichHouse house) {
-        if (house.getOwner() != null) throw new HouseOwnerException();
+        if (house.hasOwner()) throw new HouseOwnerException();
         if (_money.isLessThan(house.getOriginalPrice())) throw new HouseMoneyNotEnoughException();
         addHouse(house);
         subtractMoney(house.getOriginalPrice());
     }
 
     public void sellHouse(RichHouse house) {
-        if (!this.equals(house.getOwner())) throw new HouseOwnerException();
-        addMoney(house.getPriceForSell());
         removeHouse(house);
+        addMoney(house.getPriceForSell());
         house.sell();
     }
 
@@ -106,7 +105,7 @@ public class RichPlayer {
         _money = _money.add(money);
     }
 
-    public void subtractMoney(RichMoney money) {
+    private void subtractMoney(RichMoney money) {
         _money = _money.subtract(money);
     }
 
@@ -114,29 +113,29 @@ public class RichPlayer {
         _points = _points.add(points);
     }
 
-    public void subtractPoints(RichPoint points) {
+    private void subtractPoints(RichPoint points) {
         _points = _points.subtract(points);
     }
 
     private void removeHouse(RichHouse houseToRemove) {
-        for (RichHouse house : _houses) {
-            if (house.equals(houseToRemove)) {
-                _houses.remove(house);
-                return;
-            }
-        }
-
-        throw new HouseOwnerException();
+        if (!_houses.remove(houseToRemove))
+            throw new HouseOwnerException();
     }
 
+    public void initPosition(RichSitePosition position) {
+        _position = position;
+        _position.getSite().addPlayer(this);
+    }
+
+
     public void setPosition(RichSitePosition position) {
-        if (_position != null) _position.getSite().removePlayer(this);
+        _position.getSite().removePlayer(this);
         _position = position;
         _position.getSite().addPlayer(this);
     }
 
     public void forwardSteps(int step) {
-        if (_position != null) _position.getSite().removePlayer(this);
+        _position.getSite().removePlayer(this);
         setRemainStep(step);
         while (hasRemainStep()) {
             _remainStep--;
@@ -145,8 +144,6 @@ public class RichPlayer {
 
         if (!isPunished()) {
             _position.getSite().acceptPlayer(this);
-        } else {
-            _position.getSite().removePlayer(this);
         }
     }
 
@@ -188,7 +185,7 @@ public class RichPlayer {
     }
 
     public String display() {
-        return _name;
+        return _color.decorate(_name);
     }
 
     public void setName(String name) {
@@ -213,5 +210,13 @@ public class RichPlayer {
             if (h.isSameLevel(house)) result++;
         }
         return result;
+    }
+
+    public void setColor(RichColor color) {
+        _color = color;
+    }
+
+    public RichColor getColor() {
+        return _color;
     }
 }
