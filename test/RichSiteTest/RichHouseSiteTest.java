@@ -1,7 +1,7 @@
 package RichSiteTest;
 
-import RichColor.RichBlueColor;
-import RichColor.RichRedColor;
+import DummyObject.DummyColor;
+import RichColor.RichColor;
 import RichCore.RichHouse;
 import RichCore.RichMoney;
 import RichCore.RichPlayer;
@@ -19,7 +19,6 @@ import java.io.StringReader;
 public class RichHouseSiteTest extends TestCase {
     private static final RichPoint dummyPoint = null;
     private static final BufferedReader dummyReader = null;
-    private static final PrintStream dummyWriter = null;
 
     public void test_should_return_player_buy_house_for_1000_money() {
         String buyHouseString = "Y\n";
@@ -28,16 +27,19 @@ public class RichHouseSiteTest extends TestCase {
         ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
         PrintStream writer = new PrintStream(writerStream);
 
+        RichMoney moneyBeforeBuyHouse = new RichMoney(5000);
+        RichPlayer player = new RichPlayer(moneyBeforeBuyHouse, dummyPoint);
+
+
         RichMoney housePrice = new RichMoney(1000);
         RichHouse house = new RichHouse(new RichHousePlatLevel(housePrice));
+
         RichHouseSite site = new RichHouseSite(reader, writer, house);
-        RichMoney playerMoneyBeforeBuyHouse = new RichMoney(5000);
-        RichPlayer player = new RichPlayer(playerMoneyBeforeBuyHouse, dummyPoint);
         site.acceptPlayer(player);
 
+        RichMoney expectMoneyAfterHouse = moneyBeforeBuyHouse.subtract(housePrice);
         assertEquals(player, house.getOwner());
-        RichMoney expectPlayerMoneyAfterHouse = playerMoneyBeforeBuyHouse.subtract(housePrice);
-        assertEquals(expectPlayerMoneyAfterHouse, player.getMoney());
+        assertEquals(expectMoneyAfterHouse, player.getMoney());
         assertEquals("是否购买该处空地，1000元（Y/N）?\n", writerStream.toString());
     }
 
@@ -48,11 +50,13 @@ public class RichHouseSiteTest extends TestCase {
         ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
         PrintStream writer = new PrintStream(writerStream);
 
-        RichMoney housePrice = new RichMoney(1000);
-        RichHouse house = new RichHouse(new RichHousePlatLevel(housePrice));
-        RichHouseSite site = new RichHouseSite(reader, writer, house);
         RichMoney playerOriginalMoney = new RichMoney(5000);
         RichPlayer player = new RichPlayer(playerOriginalMoney, dummyPoint);
+
+        RichMoney housePrice = new RichMoney(1000);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(housePrice));
+
+        RichHouseSite site = new RichHouseSite(reader, writer, house);
 
         site.acceptPlayer(player);
 
@@ -68,17 +72,19 @@ public class RichHouseSiteTest extends TestCase {
         ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
         PrintStream writer = new PrintStream(writerStream);
 
+        RichMoney moneyBeforeBuyHouse = new RichMoney(500);
+        RichPlayer player = new RichPlayer(moneyBeforeBuyHouse, dummyPoint);
+
         RichMoney housePrice = new RichMoney(1000);
         RichHouse house = new RichHouse(new RichHousePlatLevel(housePrice));
         RichHouseSite site = new RichHouseSite(reader, writer, house);
-        RichMoney playerMoneyBeforeBuyHouse = new RichMoney(500);
-        RichPlayer player = new RichPlayer(playerMoneyBeforeBuyHouse, dummyPoint);
+
         site.acceptPlayer(player);
 
-        String expectString = "是否购买该处空地，1000元（Y/N）?\n" + "You do not have enough money\n";
+        String expectString = "是否购买该处空地，1000元（Y/N）?\n" + "你现金不足\n";
 
         assertFalse(house.hasOwner());
-        assertEquals(playerMoneyBeforeBuyHouse, player.getMoney());
+        assertEquals(moneyBeforeBuyHouse, player.getMoney());
         assertEquals(expectString, writerStream.toString());
     }
 
@@ -89,19 +95,22 @@ public class RichHouseSiteTest extends TestCase {
         ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
         PrintStream writer = new PrintStream(writerStream);
 
+
+        RichMoney moneyBeforeUpgrade = new RichMoney(5000);
+        RichPlayer player = new RichPlayer(moneyBeforeUpgrade, dummyPoint);
+
         RichMoney housePrice = new RichMoney(2000);
         RichHouse house = new RichHouse(new RichHousePlatLevel(housePrice));
-        RichMoney playerMoneyBeforeUpgradeHouse = new RichMoney(5000);
-        RichPlayer player = new RichPlayer(playerMoneyBeforeUpgradeHouse, null);
+
         player.addHouse(house);
 
         RichHouseSite site = new RichHouseSite(reader, writer, house);
         site.acceptPlayer(player);
 
-        RichMoney expectPlayerMoneyAfterUpgradeHouse = playerMoneyBeforeUpgradeHouse.subtract(housePrice);
+        RichMoney expectMoneyAfterUpgrade = moneyBeforeUpgrade.subtract(housePrice);
 
         assertTrue(house.getLevel() instanceof RichHouseCottageLevel);
-        assertEquals(expectPlayerMoneyAfterUpgradeHouse, player.getMoney());
+        assertEquals(expectMoneyAfterUpgrade, player.getMoney());
         assertEquals("是否升级该处地产，2000元（Y/N）?\n", writerStream.toString());
     }
 
@@ -113,10 +122,12 @@ public class RichHouseSiteTest extends TestCase {
         ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
         PrintStream writer = new PrintStream(writerStream);
 
-        RichMoney housePrice = new RichMoney(2000);
-        RichHouse house = new RichHouse(new RichHousePlatLevel(housePrice));
         RichMoney playerOriginalMoney = new RichMoney(5000);
         RichPlayer player = new RichPlayer(playerOriginalMoney, dummyPoint);
+
+        RichMoney housePrice = new RichMoney(2000);
+        RichHouse house = new RichHouse(new RichHousePlatLevel(housePrice));
+
         player.addHouse(house);
 
         RichHouseSite site = new RichHouseSite(reader, writer, house);
@@ -134,65 +145,78 @@ public class RichHouseSiteTest extends TestCase {
         ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
         PrintStream writer = new PrintStream(writerStream);
 
+        RichMoney moneyBeforeUpgrade = new RichMoney(0);
+        RichPlayer player = new RichPlayer(moneyBeforeUpgrade, dummyPoint);
+
         RichMoney housePrice = new RichMoney(2000);
         RichHouse house = new RichHouse(new RichHousePlatLevel(housePrice));
-        RichMoney playerMoneyBeforeUpgradeHouse = new RichMoney(0);
-        RichPlayer player = new RichPlayer(playerMoneyBeforeUpgradeHouse, null);
+
         player.addHouse(house);
 
         RichHouseSite site = new RichHouseSite(reader, writer, house);
         site.acceptPlayer(player);
 
-        String expectString = "是否升级该处地产，2000元（Y/N）?\n" + "You do not have enough money\n";
+        String expectString = "是否升级该处地产，2000元（Y/N）?\n" + "你现金不足\n";
 
         assertTrue(house.getLevel() instanceof RichHousePlatLevel);
-        assertEquals(playerMoneyBeforeUpgradeHouse, player.getMoney());
+        assertEquals(moneyBeforeUpgrade, player.getMoney());
         assertEquals(expectString, writerStream.toString());
     }
 
     public void test_should_return_player_pay_for_toll_1000() {
+        RichMoney ownerMoneyBefore = new RichMoney(5000);
+        RichPlayer owner = createPlayerWithDummyPoint(ownerMoneyBefore, "Q", new DummyColor());
+
         RichMoney housePrice = new RichMoney(2000);
         RichHouse house = new RichHouse(new RichHousePlatLevel(housePrice));
-        RichMoney ownerMoneyBefore = new RichMoney(5000);
-        RichPlayer owner = new RichPlayer(ownerMoneyBefore, dummyPoint);
-        owner.setColor(new RichRedColor());
-        owner.setName("Q");
 
         owner.addHouse(house);
-        RichMoney visitorMoneyBefore = new RichMoney(5000);
-        RichPlayer visitor = new RichPlayer(visitorMoneyBefore, dummyPoint);
-        visitor.setColor(new RichBlueColor());
-        visitor.setName("A");
 
-        PrintStream writer = new PrintStream(new ByteArrayOutputStream());
+        RichMoney visitorMoneyBefore = new RichMoney(5000);
+        RichPlayer visitor = createPlayerWithDummyPoint(visitorMoneyBefore, "A", new DummyColor());
+
+        ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
+        PrintStream writer = new PrintStream(writerStream);
 
         RichHouseSite site = new RichHouseSite(dummyReader, writer, house);
         site.acceptPlayer(visitor);
 
-        RichMoney toll = housePrice.divide(2);
-        RichMoney expectOwnerMoneyAfter = ownerMoneyBefore.add(toll);
-        RichMoney expectVisitorMoneyAfter = visitorMoneyBefore.subtract(toll);
+        RichMoney expectOwnerMoneyAfter = new RichMoney(6000);
+        RichMoney expectVisitorMoneyAfter = new RichMoney(4000);
 
         assertTrue(house.getLevel() instanceof RichHousePlatLevel);
         assertEquals(expectOwnerMoneyAfter, owner.getMoney());
         assertEquals(expectVisitorMoneyAfter, visitor.getMoney());
+        assertEquals("A付给Q过路费1000元\n", writerStream.toString());
+    }
+
+    private RichPlayer createPlayerWithDummyPoint(RichMoney ownerMoneyBefore, String name, RichColor color) {
+        RichPlayer owner = new RichPlayer(ownerMoneyBefore, dummyPoint);
+        owner.setName(name);
+        owner.setColor(color);
+        return owner;
     }
 
     public void test_should_return_0_for_toll_of_plat_original_price_is_1000_if_house_owner_is_at_prison_or_hospital() {
-        RichMoney anonymousHousePrice = new RichMoney(1000);
-        RichHouse house = new RichHouse(new RichHousePlatLevel(anonymousHousePrice));
-        RichHouseSite site = new RichHouseSite(dummyReader, dummyWriter, house);
+        ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
+        PrintStream writer = new PrintStream(writerStream);
+
         RichMoney ownerMoneyBefore = new RichMoney(500);
-        RichPlayer owner = new RichPlayer(ownerMoneyBefore, dummyPoint);
+        RichPlayer owner = createPlayerWithDummyPoint(ownerMoneyBefore, "Q", new DummyColor());
         owner.setPunishDays(3);
+
+        RichHouse house = new RichHouse(new RichHousePlatLevel(new RichMoney(1000)));
+        RichHouseSite site = new RichHouseSite(dummyReader, writer, house);
+
         owner.addHouse(house);
 
         RichMoney visitorMoneyBefore = new RichMoney(600);
-        RichPlayer visitor = new RichPlayer(visitorMoneyBefore, dummyPoint);
+        RichPlayer visitor = createPlayerWithDummyPoint(visitorMoneyBefore, "A", new DummyColor());
         site.acceptPlayer(visitor);
 
         assertEquals(ownerMoneyBefore, owner.getMoney());
         assertEquals(visitorMoneyBefore, visitor.getMoney());
+        assertEquals("Q受罚中，无需过路费\n", writerStream.toString());
     }
 
     public void test_should_return_0_for_toll_of_plat_original_price_is_1000_if_visitor_has_blessing_god() {

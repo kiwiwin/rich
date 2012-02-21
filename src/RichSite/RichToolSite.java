@@ -17,7 +17,13 @@ public class RichToolSite extends RichSite {
     }
 
     protected void doAcceptPlayer(RichPlayer player) {
+        if (player.getPoints().isLessThan(new RichPoint(30)))
+            return;
+
+        _outputWriter.println("请选择你想要购买的道具：1.路障（50点）；2.机器娃娃（30点）；3.炸弹（50点）：");
+
         while (!player.getPoints().isLessThan(new RichPoint(30))) {
+
             String toolType;
             try {
                 toolType = _inputReader.readLine();

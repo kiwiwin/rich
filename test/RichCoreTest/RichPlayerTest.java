@@ -299,7 +299,7 @@ public class RichPlayerTest extends TestCase {
             player.buyHouse(house);
             fail("there should have an exception");
         } catch (HouseMoneyNotEnoughException ex) {
-            assertEquals("You do not have enough money", ex.getMessage());
+            assertEquals("你现金不足", ex.getMessage());
         }
 
         assertNull(house.getOwner());

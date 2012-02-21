@@ -14,15 +14,15 @@ import java.io.PrintStream;
 import java.io.StringReader;
 
 public class RichGiftSiteTest extends TestCase {
-    private static final String welcomeMessage = "欢迎光临礼品屋，请选择一件您喜欢的礼品：\n";
-    private static final RichPoint dummyPoint = null;
-    private static final BufferedReader dummyReader = null;
-    private static final PrintStream dummyWriter = null;
-    private static final RichGiftFactory dummyGiftFactory = null;
+    private final String welcomeMessage = "欢迎光临礼品屋，请选择一件您喜欢的礼品：\n";
+    private final RichPoint dummyPoint = null;
+    private final BufferedReader dummyReader = null;
+    private final PrintStream dummyWriter = null;
+    private final RichGiftFactory dummyGiftFactory = null;
+    private final RichMoney dummyMoney = null;
 
-    public void test_should_return_G_for_display() {
-        RichGiftSite site = new RichGiftSite(dummyReader, dummyWriter, dummyGiftFactory);
-        assertEquals("G", site.display());
+    public void test_should_return_G_for_display_without_player_and_tool_installed() {
+        assertEquals("G", new RichGiftSite(dummyReader, dummyWriter, dummyGiftFactory).display());
     }
 
     public void test_should_return_get_money_gift_add_2000_money() {
@@ -32,15 +32,16 @@ public class RichGiftSiteTest extends TestCase {
         ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
         PrintStream writer = new PrintStream(writerStream);
 
-        RichPlayer player = new RichPlayer(new RichMoney(1000), dummyPoint);
+        RichMoney moneyBeforeGift = new RichMoney(1000);
+        RichPlayer player = new RichPlayer(moneyBeforeGift, dummyPoint);
+
         RichGiftSite site = new RichGiftSite(reader, writer, new RichGiftDefaultFactory());
 
-        site.doAcceptPlayer(player);
+        site.acceptPlayer(player);
 
-        String expectMessage = welcomeMessage;
-
-        assertEquals(new RichMoney(3000), player.getMoney());
-        assertEquals(expectMessage, writerStream.toString());
+        RichMoney expectMoneyAfterGift = moneyBeforeGift.add(new RichMoney(2000));
+        assertEquals(expectMoneyAfterGift, player.getMoney());
+        assertEquals(welcomeMessage, writerStream.toString());
     }
 
 
@@ -53,12 +54,11 @@ public class RichGiftSiteTest extends TestCase {
 
         RichGiftSite site = new RichGiftSite(reader, writer, new RichGiftDefaultFactory());
 
-        RichPlayer player = new RichPlayer(null, null);
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
 
         site.acceptPlayer(player);
 
-        String expectOutput = welcomeMessage + "Invalid gift type\n";
-
+        String expectOutput = welcomeMessage + "错误的礼物类型\n";
         assertEquals(expectOutput, writerStream.toString());
     }
 }

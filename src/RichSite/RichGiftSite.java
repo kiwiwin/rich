@@ -16,7 +16,7 @@ public class RichGiftSite extends RichSite {
         _giftFactory = factory;
     }
 
-    public void doAcceptPlayer(RichPlayer player) {
+    protected void doAcceptPlayer(RichPlayer player) {
         _outputWriter.println("欢迎光临礼品屋，请选择一件您喜欢的礼品：");
 
         try {

@@ -38,13 +38,16 @@ public class RichHouseSite extends RichSite {
     }
 
     private void handlePayToll(RichPlayer player) {
-        if (_house.getOwner().isPunished()) return;
+        if (_house.getOwner().isPunished()) {
+            _outputWriter.println(_house.getOwner().display() + "受罚中，无需过路费");
+            return;
+        }
         if (player.hasBlessingGod()) {
             _outputWriter.println("福神附身，可免过路费");
             return;
         }
 
-        _outputWriter.println(player.display() + "付给" + _house.getOwner().display() + "过路费" + _house.getToll().toInt());
+        _outputWriter.println(player.display() + "付给" + _house.getOwner().display() + "过路费" + _house.getToll().toInt() + "元");
         player.payHouseToll(_house);
     }
 
