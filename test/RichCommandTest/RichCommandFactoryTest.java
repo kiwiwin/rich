@@ -2,39 +2,60 @@ package RichCommandTest;
 
 import RichCommand.*;
 import RichCore.RichMap;
-import RichCore.RichSitePosition;
+import RichCore.RichPlayer;
 import RichCore.RichToolFactory;
 import RichSite.RichDefaultMap;
 import RichSite.RichDefaultMapBuilder;
 import RichTool.RichDefaultToolFactory;
 import junit.framework.TestCase;
 
+import java.io.BufferedReader;
+import java.io.PrintStream;
+
 public class RichCommandFactoryTest extends TestCase {
+    private final RichPlayer dummyPlayer = null;
+    private final BufferedReader dummyReader = null;
+    private final PrintStream dummyWriter = null;
+
     public void test_create_roll_command() {
-        assertTrue(new RichCommandFactory().createCommand("roll", null) instanceof RichRollCommand);
+        assertTrue(new RichCommandFactory().createCommand("roll", dummyPlayer) instanceof RichRollCommand);
     }
 
     public void test_create_block_command() {
-        assertTrue(new RichCommandFactory().createCommand("block 3", null) instanceof RichBlockCommand);
+        assertTrue(new RichCommandFactory().createCommand("block 3", dummyPlayer) instanceof RichBlockCommand);
     }
 
     public void test_create_bomb_command() {
-        RichCommandFactory commandFactory = new RichCommandFactory();
-        commandFactory.setHospitalSitePosition(new RichSitePosition(null, 0));
-        assertTrue(commandFactory.createCommand("bomb 5", null) instanceof RichBombCommand);
+        assertTrue(new RichCommandFactory().createCommand("bomb 5", dummyPlayer) instanceof RichBombCommand);
     }
 
     public void test_create_robot_command() {
-        assertTrue(new RichCommandFactory().createCommand("robot", null) instanceof RichRobotCommand);
+        assertTrue(new RichCommandFactory().createCommand("robot", dummyPlayer) instanceof RichRobotCommand);
     }
 
     public void test_create_sell_house_command() {
-        RichMap map = new RichDefaultMap(new RichDefaultMapBuilder(null, null));
+        RichMap map = new RichDefaultMap(new RichDefaultMapBuilder(dummyReader, dummyWriter));
         map.buildMap();
 
         RichCommandFactory commandFactory = new RichCommandFactory();
         commandFactory.setMap(map);
-        assertTrue(commandFactory.createCommand("sell 34", null) instanceof RichSellHouseCommand);
+
+        assertTrue(commandFactory.createCommand("sell 34", dummyPlayer) instanceof RichSellHouseCommand);
+    }
+
+    public void test_should_be_exception_create_sell_house_command_which_the_site_is_not_house_site() {
+        RichMap map = new RichDefaultMap(new RichDefaultMapBuilder(dummyReader, dummyWriter));
+        map.buildMap();
+
+        RichCommandFactory commandFactory = new RichCommandFactory();
+        commandFactory.setMap(map);
+        
+        try{
+            commandFactory.createCommand("sell 0", dummyPlayer);
+            fail("cannot sell house which index is start site");
+        }catch(Exception ex){
+            assertEquals("Invalid command", ex.getMessage());
+        }
     }
 
     public void test_create_sell_tool_command() {
@@ -42,26 +63,26 @@ public class RichCommandFactoryTest extends TestCase {
 
         RichCommandFactory commandFactory = new RichCommandFactory();
         commandFactory.setToolFactory(toolFactory);
-        assertTrue(commandFactory.createCommand("selltool 1", null) instanceof RichSellToolCommand);
+        assertTrue(commandFactory.createCommand("selltool 1", dummyPlayer) instanceof RichSellToolCommand);
     }
 
     public void test_create_help_command() {
         RichCommandFactory commandFactory = new RichCommandFactory();
         commandFactory.setWriter(null);
-        assertTrue(commandFactory.createCommand("help", null) instanceof RichHelpCommand);
+        assertTrue(commandFactory.createCommand("help", dummyPlayer) instanceof RichHelpCommand);
     }
 
     public void test_create_query_command() {
-        assertTrue(new RichCommandFactory().createCommand("query", null) instanceof RichQueryCommand);
+        assertTrue(new RichCommandFactory().createCommand("query", dummyPlayer) instanceof RichQueryCommand);
     }
 
     public void test_create_quit_command() {
-        assertTrue(new RichCommandFactory().createCommand("quit", null) instanceof RichQuitCommand);
+        assertTrue(new RichCommandFactory().createCommand("quit", dummyPlayer) instanceof RichQuitCommand);
     }
 
     public void test_create_invalid_command() {
         try {
-            new RichCommandFactory().createCommand("invalid command", null);
+            new RichCommandFactory().createCommand("invalid command", dummyPlayer);
             fail("there should have an exception");
         } catch (IllegalArgumentException ex) {
             assertEquals("Invalid command", ex.getMessage());
@@ -71,7 +92,7 @@ public class RichCommandFactoryTest extends TestCase {
 
     public void test_should_be_exception_for_block_invalid_offset() {
         try {
-            new RichCommandFactory().createCommand("block invalid offset", null);
+            new RichCommandFactory().createCommand("block invalid offset", dummyPlayer);
             fail("there should have an exception");
         } catch (IllegalArgumentException ex) {
             assertEquals("Invalid command", ex.getMessage());
@@ -80,7 +101,7 @@ public class RichCommandFactoryTest extends TestCase {
 
     public void test_should_be_exception_for_block_12() {
         try {
-            new RichCommandFactory().createCommand("block 12", null);
+            new RichCommandFactory().createCommand("block 12", dummyPlayer);
             fail("there should have an exception");
         } catch (IllegalArgumentException ex) {
             assertEquals("Invalid command", ex.getMessage());
@@ -89,7 +110,7 @@ public class RichCommandFactoryTest extends TestCase {
 
     public void test_should_be_exception_for_bomb_invalid_offset() {
         try {
-            new RichCommandFactory().createCommand("bomb invalid offset", null);
+            new RichCommandFactory().createCommand("bomb invalid offset", dummyPlayer);
             fail("there should have an exception");
         } catch (IllegalArgumentException ex) {
             assertEquals("Invalid command", ex.getMessage());
@@ -98,7 +119,7 @@ public class RichCommandFactoryTest extends TestCase {
 
     public void test_should_be_exception_for_bomb_12() {
         try {
-            new RichCommandFactory().createCommand("bomb 12", null);
+            new RichCommandFactory().createCommand("bomb 12", dummyPlayer);
             fail("there should have an exception");
         } catch (IllegalArgumentException ex) {
             assertEquals("Invalid command", ex.getMessage());

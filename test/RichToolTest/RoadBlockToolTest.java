@@ -1,6 +1,6 @@
 package RichToolTest;
 
-import RichCommandTest.RichDummyMapBuilder;
+import DummyObject.RichDummyMapBuilder;
 import RichCore.*;
 import RichSite.RichDefaultMap;
 import RichTool.RoadBlockTool;

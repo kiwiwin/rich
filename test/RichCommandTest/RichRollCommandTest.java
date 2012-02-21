@@ -1,5 +1,6 @@
 package RichCommandTest;
 
+import DummyObject.RichDummyMapBuilder;
 import RichCommand.RichRollCommand;
 import RichCore.*;
 import RichSite.RichDefaultMap;
@@ -9,12 +10,12 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 
 public class RichRollCommandTest extends TestCase {
-    private static final RichMoney dummyMoney = null;
-    private static final RichPoint dummyPoint = null;
-    private static final BufferedReader dummyReader = null;
-    private static final PrintStream dummyWriter = null;
+    private final RichMoney dummyMoney = null;
+    private final RichPoint dummyPoint = null;
+    private final BufferedReader dummyReader = null;
+    private final PrintStream dummyWriter = null;
 
-    public void test_should_return_number_range_from_1_to_6_inclusively() {
+    public void test_should_return_number_range_from_1_to_6_inclusively_for_roll_number() {
         RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
         map.buildMap();
 

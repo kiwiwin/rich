@@ -1,9 +1,9 @@
 package RichCoreTest;
 
+import DummyObject.RichDummyMapBuilder;
 import RichColor.RichBlueColor;
 import RichColor.RichRedColor;
 import RichCommand.RichCommandFactory;
-import RichCommandTest.RichDummyMapBuilder;
 import RichCore.RichMap;
 import RichCore.RichMoney;
 import RichCore.RichPlayer;

@@ -1,6 +1,6 @@
 package RichSiteTest;
 
-import RichCommandTest.RichDummyMapBuilder;
+import DummyObject.RichDummyMapBuilder;
 import RichCore.RichMap;
 import RichSite.RichDefaultMap;
 import junit.framework.TestCase;

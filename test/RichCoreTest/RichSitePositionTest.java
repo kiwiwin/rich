@@ -1,6 +1,6 @@
 package RichCoreTest;
 
-import RichCommandTest.RichDummyMapBuilder;
+import DummyObject.RichDummyMapBuilder;
 import RichCore.RichMap;
 import RichCore.RichSitePosition;
 import RichSite.RichDefaultMap;

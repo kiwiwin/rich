@@ -1,5 +1,6 @@
 package RichCommandTest;
 
+import DummyObject.RichDummyMapBuilder;
 import RichCommand.RichRobotCommand;
 import RichCore.*;
 import RichSite.RichDefaultMap;
@@ -11,16 +12,17 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 
 public class RichRobotCommandTest extends TestCase {
-    private static final RichMoney dummyMoney = null;
-    private static final RichPoint dummyPoint = null;
-    private static final BufferedReader dummyReader = null;
-    private static final PrintStream dummyWriter = null;
+    private final RichMoney dummyMoney = null;
+    private final RichPoint dummyPoint = null;
+    private final BufferedReader dummyReader = null;
+    private final PrintStream dummyWriter = null;
 
     public void test_should_clean_tools() {
-        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
-        player.addTool(new RobotTool());
         RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
         map.buildMap();
+
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+        player.addTool(new RobotTool());
 
         player.initPosition(new RichSitePosition(map, 0));
 

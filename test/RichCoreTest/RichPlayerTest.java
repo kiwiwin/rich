@@ -1,7 +1,7 @@
 package RichCoreTest;
 
+import DummyObject.RichDummyMapBuilder;
 import RichColor.RichRedColor;
-import RichCommandTest.RichDummyMapBuilder;
 import RichCore.*;
 import RichHouse.RichHouseCottageLevel;
 import RichHouse.RichHousePlatLevel;

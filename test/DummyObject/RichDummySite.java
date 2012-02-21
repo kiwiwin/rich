@@ -1,4 +1,4 @@
-package RichCommandTest;
+package DummyObject;
 
 import RichCore.RichPlayer;
 import RichCore.RichSite;

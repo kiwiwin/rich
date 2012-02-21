@@ -10,8 +10,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 public class RichQueryCommandTest extends TestCase {
-
-    public void test_query_initialize_player() {
+    public void test_query_initialize_player_with_10000_money() {
         ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
         PrintStream writer = new PrintStream(writerStream);
 

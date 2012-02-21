@@ -1,7 +1,7 @@
 package RichCoreTest;
 
+import DummyObject.RichDummySite;
 import RichColor.RichRedColor;
-import RichCommandTest.RichDummySite;
 import RichCore.RichPlayer;
 import RichCore.RichSite;
 import RichTool.RoadBlockTool;
