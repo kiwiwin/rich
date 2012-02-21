@@ -8,10 +8,6 @@ public class RichDefaultToolFactory implements RichToolFactory {
     public static final int ROBOT = 2;
     public static final int BOMB = 3;
 
-
-    public RichDefaultToolFactory() {
-    }
-
     public RichTool createTool(int toolNumber) {
         switch (toolNumber) {
             case ROADBLOCK:
@@ -21,7 +17,7 @@ public class RichDefaultToolFactory implements RichToolFactory {
             case BOMB:
                 return new BombTool();
             default:
-                throw new IllegalArgumentException("Invalid tool type");
+                throw new IllegalArgumentException("错误的道具类型");
         }
     }
 

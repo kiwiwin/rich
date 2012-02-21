@@ -19,12 +19,21 @@ public class RichToolFactoryTest extends TestCase {
         assertTrue(new RichDefaultToolFactory().createTool(RichDefaultToolFactory.BOMB) instanceof BombTool);
     }
 
-    public void test_should_exception_for_create_invalid_tool() {
+    public void test_should_exception_for_create_5() {
         try {
-            new RichDefaultToolFactory().createTool(-1);
+            new RichDefaultToolFactory().createTool(5);
             fail("there should have an exception");
         } catch (IllegalArgumentException ex) {
-            assertEquals("Invalid tool type", ex.getMessage());
+            assertEquals("错误的道具类型", ex.getMessage());
+        }
+    }
+
+    public void test_should_exception_for_create_invalid_tool() {
+        try {
+            new RichDefaultToolFactory().createTool("invalid tool");
+            fail("there should have an exception");
+        } catch (IllegalArgumentException ex) {
+            assertEquals("错误的道具类型", ex.getMessage());
         }
     }
 }

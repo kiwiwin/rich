@@ -10,10 +10,10 @@ import java.io.BufferedReader;
 import java.io.PrintStream;
 
 public class BombToolTest extends TestCase {
-    private static final RichMoney dummyMoney = null;
-    private static final RichPoint dummyPoint = null;
-    private static final BufferedReader dummyReader = null;
-    private static final PrintStream dummyWriter = null;
+    private final RichMoney dummyMoney = null;
+    private final RichPoint dummyPoint = null;
+    private final BufferedReader dummyReader = null;
+    private final PrintStream dummyWriter = null;
 
     public void test_should_display_at_for_bomb_tool() {
         assertEquals("@", new BombTool().display());
@@ -24,12 +24,10 @@ public class BombToolTest extends TestCase {
     }
 
     public void test_should_return_炸弹_for_getName() {
-        RichTool tool = new BombTool();
-        assertEquals("炸弹", tool.getName());
+        assertEquals("炸弹", new BombTool().getName());
     }
 
     public void test_should_return_player_at_hospital_when_pass_by_a_bomb() {
-
         RichMap map = new RichDefaultMap(new RichDefaultMapBuilder(dummyReader, dummyWriter));
         map.buildMap();
 
@@ -39,12 +37,13 @@ public class BombToolTest extends TestCase {
         RichSitePosition hospitalPosition = new RichSitePosition(map, 14);
         BombTool tool = new BombTool();
         tool.setHospitalSitePosition(hospitalPosition);
+
         RichSite installBombSite = map.getSite(1);
         installBombSite.installDeferredTool(tool);
         
         player.forwardSteps(3);
 
-        RichSite hospitalSite = map.getSite(14);
+        RichSite hospitalSite = hospitalPosition.getSite();
 
         assertEquals(hospitalSite, player.getPosition().getSite());
         assertEquals(3, player.getPunishDays());

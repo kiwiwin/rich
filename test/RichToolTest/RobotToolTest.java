@@ -15,7 +15,6 @@ public class RobotToolTest extends TestCase {
     }
 
     public void test_should_return_机器娃娃_for_getName() {
-        RichTool tool = new RobotTool();
-        assertEquals("机器娃娃", tool.getName());
+        assertEquals("机器娃娃", new RobotTool().getName());
     }
 }
