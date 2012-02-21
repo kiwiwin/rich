@@ -15,7 +15,7 @@ public class RichGiftDefaultFactory extends RichGiftFactory {
             case 3:
                 return new BlessingGodGift();
             default:
-                throw new IllegalArgumentException("Invalid gift type");
+                throw new IllegalArgumentException("错误的礼物类型");
         }
     }
 
@@ -23,7 +23,7 @@ public class RichGiftDefaultFactory extends RichGiftFactory {
         try {
             return Integer.parseInt(giftNumberString);
         } catch (Exception ex) {
-            throw new IllegalArgumentException("Invalid gift type");
+            throw new IllegalArgumentException("错误的礼物类型");
         }
     }
 }

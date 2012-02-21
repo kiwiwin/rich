@@ -54,7 +54,7 @@ public class RichCommandFactoryTest extends TestCase {
             commandFactory.createCommand("sell 0", dummyPlayer);
             fail("cannot sell house which index is start site");
         }catch(Exception ex){
-            assertEquals("Invalid command", ex.getMessage());
+            assertEquals("错误的命令", ex.getMessage());
         }
     }
 
@@ -85,7 +85,7 @@ public class RichCommandFactoryTest extends TestCase {
             new RichCommandFactory().createCommand("invalid command", dummyPlayer);
             fail("there should have an exception");
         } catch (IllegalArgumentException ex) {
-            assertEquals("Invalid command", ex.getMessage());
+            assertEquals("错误的命令", ex.getMessage());
         }
     }
 
@@ -95,7 +95,7 @@ public class RichCommandFactoryTest extends TestCase {
             new RichCommandFactory().createCommand("block invalid offset", dummyPlayer);
             fail("there should have an exception");
         } catch (IllegalArgumentException ex) {
-            assertEquals("Invalid command", ex.getMessage());
+            assertEquals("错误的命令", ex.getMessage());
         }
     }
 
@@ -104,7 +104,7 @@ public class RichCommandFactoryTest extends TestCase {
             new RichCommandFactory().createCommand("block 12", dummyPlayer);
             fail("there should have an exception");
         } catch (IllegalArgumentException ex) {
-            assertEquals("Invalid command", ex.getMessage());
+            assertEquals("错误的命令", ex.getMessage());
         }
     }
 
@@ -113,7 +113,7 @@ public class RichCommandFactoryTest extends TestCase {
             new RichCommandFactory().createCommand("bomb invalid offset", dummyPlayer);
             fail("there should have an exception");
         } catch (IllegalArgumentException ex) {
-            assertEquals("Invalid command", ex.getMessage());
+            assertEquals("错误的命令", ex.getMessage());
         }
     }
 
@@ -122,7 +122,7 @@ public class RichCommandFactoryTest extends TestCase {
             new RichCommandFactory().createCommand("bomb 12", dummyPlayer);
             fail("there should have an exception");
         } catch (IllegalArgumentException ex) {
-            assertEquals("Invalid command", ex.getMessage());
+            assertEquals("错误的命令", ex.getMessage());
         }
     }
 }

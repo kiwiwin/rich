@@ -8,13 +8,17 @@ import junit.framework.TestCase;
 
 
 public class PointsGiftTest extends TestCase {
-    private static final RichMoney dummyMoney = new RichMoney(0);
-
+    private static RichMoney dummyMoney = null;
 
     public void test_should_add_200_points_for_open_points_gift() {
-        RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(0));
+        RichPoint pointBeforeOpen = new RichPoint(0);
+        RichPlayer player = new RichPlayer(dummyMoney, pointBeforeOpen);
+
         PointsGift pointsGift = new PointsGift();
         pointsGift.openGift(player);
-        assertEquals(new RichPoint(200), player.getPoints());
+
+        RichPoint expectPointAfterOpen = pointBeforeOpen.add(new RichPoint(200));
+
+        assertEquals(expectPointAfterOpen, player.getPoints());
     }
 }

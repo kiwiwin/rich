@@ -57,10 +57,10 @@ public class RichCommandFactory {
             } else if (lowerCaseCommandText.equals("help")) {
                 return new RichHelpCommand(_writer);
             } else {
-                throw new IllegalArgumentException("Invalid command");
+                throw new IllegalArgumentException("错误的命令");
             }
         } catch (Exception ex) {
-            throw new IllegalArgumentException("Invalid command");
+            throw new IllegalArgumentException("错误的命令");
         }
     }
 

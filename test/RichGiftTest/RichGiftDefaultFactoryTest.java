@@ -24,7 +24,7 @@ public class RichGiftDefaultFactoryTest extends TestCase {
             new RichGiftDefaultFactory().createGift("invalid gift");
             fail("there should have an exception");
         } catch (IllegalArgumentException e) {
-            assertEquals("Invalid gift type", e.getMessage());
+            assertEquals("错误的礼物类型", e.getMessage());
         }
     }
 
@@ -33,7 +33,7 @@ public class RichGiftDefaultFactoryTest extends TestCase {
             new RichGiftDefaultFactory().createGift("100");
             fail("there should have an exception");
         } catch (IllegalArgumentException e) {
-            assertEquals("Invalid gift type", e.getMessage());
+            assertEquals("错误的礼物类型", e.getMessage());
         }
     }
 }
