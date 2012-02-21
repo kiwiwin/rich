@@ -9,8 +9,10 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 
 public class RichHouseVillaLevelTest extends TestCase {
+    private final RichMoney dummyMoney = null;
+
     public void test_upgrade_villa_to_skyscraper() {
-        RichHouse house = new RichHouse(new RichHouseVillaLevel(null));
+        RichHouse house = new RichHouse(new RichHouseVillaLevel(dummyMoney));
         house.upgrade();
         assertTrue(house.getLevel() instanceof RichHouseSkyscraperLevel);
     }
@@ -23,17 +25,20 @@ public class RichHouseVillaLevelTest extends TestCase {
         Assert.assertEquals(new RichMoney(8000), new RichHouseVillaLevel(new RichMoney(4000)).getToll());
     }
 
-    public void test_should_return_true_for_plat_is_same_level() {
-        assertTrue(new RichHouseVillaLevel(null).isSameLevel(new RichHouseVillaLevel(null)));
+    public void test_should_return_true_for_villa_is_same_level() {
+        assertTrue(new RichHouseVillaLevel(dummyMoney).isSameLevel(new RichHouseVillaLevel(dummyMoney)));
+    }
+
+    public void test_should_return_false_for_villa_skyscraper_is_same_level() {
+        assertFalse(new RichHouseVillaLevel(dummyMoney).isSameLevel(new RichHouseSkyscraperLevel(dummyMoney)));
     }
 
     public void test_should_return_2_for_plat_house_display() {
-        RichHouseVillaLevel platLevel = new RichHouseVillaLevel(null);
-        Assert.assertEquals("2", platLevel.display());
+        Assert.assertEquals("2", new RichHouseVillaLevel(dummyMoney).display());
     }
 
     public void test_should_return_plat_after_sell_villa() {
-        RichHouse house = new RichHouse(new RichHouseVillaLevel(null));
+        RichHouse house = new RichHouse(new RichHouseVillaLevel(dummyMoney));
         house.sell();
         assertTrue(house.getLevel() instanceof RichHousePlatLevel);
     }

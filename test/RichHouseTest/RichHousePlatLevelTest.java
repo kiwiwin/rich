@@ -7,8 +7,10 @@ import RichHouse.RichHousePlatLevel;
 import junit.framework.TestCase;
 
 public class RichHousePlatLevelTest extends TestCase {
+    private final RichMoney dummyMoney = null;
+
     public void test_upgrade_plat_to_cottage() {
-        RichHouse house = new RichHouse(new RichHousePlatLevel(null));
+        RichHouse house = new RichHouse(new RichHousePlatLevel(dummyMoney));
         house.upgrade();
         assertTrue(house.getLevel() instanceof RichHouseCottageLevel);
     }
@@ -22,16 +24,19 @@ public class RichHousePlatLevelTest extends TestCase {
     }
 
     public void test_should_return_true_for_plat_is_same_level() {
-        assertTrue(new RichHousePlatLevel(null).isSameLevel(new RichHousePlatLevel(null)));
+        assertTrue(new RichHousePlatLevel(dummyMoney).isSameLevel(new RichHousePlatLevel(dummyMoney)));
+    }
+
+    public void test_should_return_false_for_plat_and_cottage_is_same_level() {
+        assertFalse(new RichHousePlatLevel(dummyMoney).isSameLevel(new RichHouseCottageLevel(dummyMoney)));
     }
 
     public void test_should_return_0_for_plat_house_display() {
-        RichHousePlatLevel platLevel = new RichHousePlatLevel(null);
-        assertEquals("0", platLevel.display());
+        assertEquals("0", new RichHousePlatLevel(dummyMoney).display());
     }
 
     public void test_should_return_plat_after_sell_plat() {
-        RichHouse house = new RichHouse(new RichHousePlatLevel(null));
+        RichHouse house = new RichHouse(new RichHousePlatLevel(dummyMoney));
         house.sell();
         assertTrue(house.getLevel() instanceof RichHousePlatLevel);
     }
