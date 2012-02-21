@@ -1,4 +1,4 @@
 package RichCore;
 
-class HouseException extends RuntimeException{
+class HouseException extends RuntimeException {
 }

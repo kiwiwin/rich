@@ -1,10 +1,8 @@
 package RichMain;
 
-import RichCommand.RichCommandFactory;
 import RichCommand.RichCommand;
+import RichCommand.RichCommandFactory;
 import RichCore.*;
-import RichCore.RichMap;
-import RichCore.RichSitePosition;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
@@ -123,7 +121,7 @@ public class RichScheduler {
     }
 
     private void flushDisplay(RichPlayer player) {
-        _writer.println((char)27 + "[0J");
+        _writer.println((char) 27 + "[0J");
         _writer.println(_map.display());
         _writer.println("It's " + player.display() + " turn:");
     }

@@ -3,7 +3,7 @@ package RichCore;
 public class RichSitePosition {
     private int _index;
     private final RichMap _map;
-    
+
     public RichSitePosition(RichMap map, int index) {
         _map = map;
         _index = index;
@@ -19,7 +19,7 @@ public class RichSitePosition {
     }
 
     public void moveForward(int step) {
-        _index = (_index + step + _map.getSitesNumber())%_map.getSitesNumber();
+        _index = (_index + step + _map.getSitesNumber()) % _map.getSitesNumber();
     }
 
     public RichSite getSite() {
@@ -27,6 +27,6 @@ public class RichSitePosition {
     }
 
     public void moveBackward(int step) {
-        _index = (_index - step + _map.getSitesNumber())%_map.getSitesNumber();
+        _index = (_index - step + _map.getSitesNumber()) % _map.getSitesNumber();
     }
 }

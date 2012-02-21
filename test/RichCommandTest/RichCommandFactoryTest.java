@@ -69,7 +69,7 @@ public class RichCommandFactoryTest extends TestCase {
     }
 
 
-    public void test_should_be_exception_for_block_invalid_offset(){
+    public void test_should_be_exception_for_block_invalid_offset() {
         try {
             new RichCommandFactory().createCommand("block invalid offset", null);
             fail("there should have an exception");
@@ -78,7 +78,7 @@ public class RichCommandFactoryTest extends TestCase {
         }
     }
 
-    public void test_should_be_exception_for_block_12(){
+    public void test_should_be_exception_for_block_12() {
         try {
             new RichCommandFactory().createCommand("block 12", null);
             fail("there should have an exception");
@@ -87,7 +87,7 @@ public class RichCommandFactoryTest extends TestCase {
         }
     }
 
-    public void test_should_be_exception_for_bomb_invalid_offset(){
+    public void test_should_be_exception_for_bomb_invalid_offset() {
         try {
             new RichCommandFactory().createCommand("bomb invalid offset", null);
             fail("there should have an exception");
@@ -96,7 +96,7 @@ public class RichCommandFactoryTest extends TestCase {
         }
     }
 
-    public void test_should_be_exception_for_bomb_12(){
+    public void test_should_be_exception_for_bomb_12() {
         try {
             new RichCommandFactory().createCommand("bomb 12", null);
             fail("there should have an exception");

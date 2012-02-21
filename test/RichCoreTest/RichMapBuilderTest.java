@@ -42,8 +42,8 @@ public class RichMapBuilderTest extends TestCase {
         RichMapBuilder mapBuilder = new RichDefaultMapBuilder(null, null);
         assertTrue(mapBuilder.buildToolSite(null) instanceof RichToolSite);
     }
-    
-    public void test_should_return_mine_site_site(){
+
+    public void test_should_return_mine_site_site() {
         final RichPoint dummyPoint = new RichPoint(0);
         RichMapBuilder mapBuilder = new RichDefaultMapBuilder(null, null);
         assertTrue(mapBuilder.buildMineSite(dummyPoint) instanceof RichMineSite);

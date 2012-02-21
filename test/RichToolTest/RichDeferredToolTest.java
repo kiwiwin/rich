@@ -2,8 +2,6 @@ package RichToolTest;
 
 import RichCommandTest.RichDummyMapBuilder;
 import RichCore.*;
-import RichCore.RichMap;
-import RichCore.RichSitePosition;
 import RichSite.RichDefaultMap;
 import RichTool.RoadBlockTool;
 import junit.framework.TestCase;
@@ -24,9 +22,10 @@ public class RichDeferredToolTest extends TestCase {
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
         player.initPosition(new RichSitePosition(map, 0));
 
-        RoadBlockTool deferredTool = new RoadBlockTool();
-        assertTrue(deferredTool.installTool(player, 1));
-        assertFalse(deferredTool.installTool(player, 1));
+        RichSite site = map.getSite(1);
+        
+        assertTrue(site.installDeferredTool(new RoadBlockTool()));
+        assertFalse(site.installDeferredTool(new RoadBlockTool()));
     }
 
     public void test_cannot_install_tool_if_the_site_already_stand_a_person() {
@@ -38,7 +37,7 @@ public class RichDeferredToolTest extends TestCase {
         RichPlayer stander = new RichPlayer(dummyMoney, dummyPoint);
         stander.initPosition(new RichSitePosition(map, 69));
 
-        RoadBlockTool deferredTool = new RoadBlockTool();
-        assertFalse(deferredTool.installTool(player, 69));
+        RichSite site = map.getSite(69);
+        assertFalse(site.installDeferredTool(new RoadBlockTool()));
     }
 }

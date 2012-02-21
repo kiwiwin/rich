@@ -1,8 +1,6 @@
 package RichColorTest;
 
 import RichColor.*;
-import RichColor.RichRedColor;
-import RichColor.RichColor;
 import junit.framework.TestCase;
 
 public class RichColorTest extends TestCase {

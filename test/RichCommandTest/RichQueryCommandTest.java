@@ -26,5 +26,5 @@ public class RichQueryCommandTest extends TestCase {
                 "道具：路障0个；炸弹0个；机器娃娃0个\n";
 
         assertEquals(expectDisplay, writerStream.toString());
-  }
+    }
 }

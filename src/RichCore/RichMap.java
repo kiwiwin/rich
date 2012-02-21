@@ -2,9 +2,9 @@ package RichCore;
 
 public abstract class RichMap {
     protected final RichMapBuilder _mapBuilder;
-    
-    protected RichMap(RichMapBuilder mapBuilder){
-        _mapBuilder = mapBuilder;        
+
+    protected RichMap(RichMapBuilder mapBuilder) {
+        _mapBuilder = mapBuilder;
     }
 
     public abstract int getSitesNumber();

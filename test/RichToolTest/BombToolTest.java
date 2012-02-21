@@ -1,7 +1,6 @@
 package RichToolTest;
 
 import RichCore.*;
-import RichCore.RichMap;
 import RichSite.RichDefaultMap;
 import RichSite.RichDefaultMapBuilder;
 import RichTool.BombTool;
@@ -9,8 +8,6 @@ import junit.framework.TestCase;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
-import RichCore.RichSitePosition;
-import RichCore.RichSite;
 
 public class BombToolTest extends TestCase {
     private static final RichMoney dummyMoney = null;
@@ -36,15 +33,15 @@ public class BombToolTest extends TestCase {
         RichMap map = new RichDefaultMap(new RichDefaultMapBuilder(dummyReader, dummyWriter));
         map.buildMap();
 
-        RichSitePosition hospitalPosition = new RichSitePosition(map, 14);
-        BombTool tool = new BombTool();
-        tool.setHospitalSitePosition(hospitalPosition);
-
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
         player.initPosition(new RichSitePosition(map, 0));
 
-        tool.installTool(player, 1);
-
+        RichSitePosition hospitalPosition = new RichSitePosition(map, 14);
+        BombTool tool = new BombTool();
+        tool.setHospitalSitePosition(hospitalPosition);
+        RichSite installBombSite = map.getSite(1);
+        installBombSite.installDeferredTool(tool);
+        
         player.forwardSteps(3);
 
         RichSite hospitalSite = map.getSite(14);

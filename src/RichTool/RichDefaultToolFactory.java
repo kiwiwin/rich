@@ -3,7 +3,7 @@ package RichTool;
 import RichCore.RichTool;
 import RichCore.RichToolFactory;
 
-public class RichDefaultToolFactory implements RichToolFactory{
+public class RichDefaultToolFactory implements RichToolFactory {
     public static final int ROADBLOCK = 1;
     public static final int ROBOT = 2;
     public static final int BOMB = 3;

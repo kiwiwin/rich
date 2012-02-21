@@ -1,6 +1,7 @@
 package RichCommand;
 
 import RichCore.RichPlayer;
+import RichCore.RichSitePosition;
 import RichTool.RoadBlockTool;
 
 public class RichBlockCommand extends RichCommand {
@@ -14,8 +15,16 @@ public class RichBlockCommand extends RichCommand {
 
     public void executeCommand() {
         _player.useTool(new RoadBlockTool());
-        RoadBlockTool tool = new RoadBlockTool();
-        tool.installTool(_player, _offset);
+
+        if (!installRoadBlock()){
+            throw new RuntimeException("此处不能安装" + new RoadBlockTool().getName());
+        }
+    }
+
+    private boolean installRoadBlock() {
+        RichSitePosition position = new RichSitePosition(_player.getPosition());
+        position.moveForward(_offset);
+        return position.getSite().installDeferredTool(new RoadBlockTool());
     }
 
     public static String getHelp() {

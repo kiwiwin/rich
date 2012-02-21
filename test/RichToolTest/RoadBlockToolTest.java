@@ -2,14 +2,12 @@ package RichToolTest;
 
 import RichCommandTest.RichDummyMapBuilder;
 import RichCore.*;
-import RichCore.RichMap;
 import RichSite.RichDefaultMap;
 import RichTool.RoadBlockTool;
 import junit.framework.TestCase;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
-import RichCore.RichSitePosition;
 
 public class RoadBlockToolTest extends TestCase {
     private static final RichMoney dummyMoney = null;
@@ -32,16 +30,16 @@ public class RoadBlockToolTest extends TestCase {
     }
 
     public void test_should_roadblock_block_player() {
-        RoadBlockTool tool = new RoadBlockTool();
         RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
         map.buildMap();
-        RichPlayer player= new RichPlayer(dummyMoney, dummyPoint);
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
         player.initPosition(new RichSitePosition(map, 63));
 
-        tool.installTool(player, 1);
+        RichSite installBlockSite =  map.getSite(64);
+        installBlockSite.installDeferredTool(new RoadBlockTool());
         player.forwardSteps(7);
 
         assertEquals(64, player.getPosition().getIndex());
-        assertTrue(map.getSite(64).hasPlayerStand());
+        assertTrue(installBlockSite.hasPlayerStand());
     }
 }

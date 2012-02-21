@@ -1,12 +1,12 @@
 package RichCoreTest;
 
-import RichCore.RichPlayer;
-import RichMain.RichDefaultPlayerFactory;
 import RichColor.RichBlueColor;
 import RichColor.RichGreenColor;
 import RichColor.RichRedColor;
 import RichColor.RichYellowColor;
+import RichCore.RichPlayer;
 import RichCore.RichPlayerFactory;
+import RichMain.RichDefaultPlayerFactory;
 import junit.framework.TestCase;
 
 public class RichPlayerFactoryTest extends TestCase {
@@ -51,6 +51,7 @@ public class RichPlayerFactoryTest extends TestCase {
             assertEquals("Invalid player index", ex.getMessage());
         }
     }
+
     public void test_should_be_exception_create_invalid_player() {
         RichPlayerFactory factory = new RichDefaultPlayerFactory();
         try {

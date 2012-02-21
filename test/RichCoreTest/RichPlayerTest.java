@@ -1,24 +1,20 @@
 package RichCoreTest;
 
+import RichColor.RichRedColor;
 import RichCommandTest.RichDummyMapBuilder;
 import RichCore.*;
 import RichHouse.RichHouseCottageLevel;
 import RichHouse.RichHousePlatLevel;
 import RichHouse.RichHouseSkyscraperLevel;
 import RichHouse.RichHouseVillaLevel;
-import RichCore.RichMap;
+import RichSite.RichDefaultMap;
 import RichTool.BombTool;
 import RichTool.RoadBlockTool;
 import RichTool.RobotTool;
-import RichSite.*;
-import RichCore.RichSitePosition;
-
 import junit.framework.TestCase;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
-
-import RichColor.*;
 
 public class RichPlayerTest extends TestCase {
     private static final RichMoney dummyMoney = null;

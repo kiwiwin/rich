@@ -1,6 +1,7 @@
 package RichTool;
 
-import RichCore.*;
+import RichCore.RichPoint;
+import RichCore.RichTool;
 
 public class RobotTool implements RichTool {
     public String display() {

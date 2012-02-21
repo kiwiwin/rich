@@ -2,13 +2,11 @@ package RichCommandTest;
 
 import RichCommand.RichRollCommand;
 import RichCore.*;
-import RichCore.RichMap;
 import RichSite.RichDefaultMap;
 import junit.framework.TestCase;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
-import RichCore.RichSitePosition;
 
 public class RichRollCommandTest extends TestCase {
     private static final RichMoney dummyMoney = null;
@@ -23,7 +21,7 @@ public class RichRollCommandTest extends TestCase {
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
         RichSitePosition position = new RichSitePosition(map, 63);
         player.initPosition(position);
-        
+
         RichRollCommand command = new RichRollCommand(player);
 
         command.executeCommand();

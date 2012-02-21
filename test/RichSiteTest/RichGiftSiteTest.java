@@ -50,15 +50,15 @@ public class RichGiftSiteTest extends TestCase {
         BufferedReader reader = new BufferedReader(new StringReader(getMoneyGiftInputString));
         ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
         PrintStream writer = new PrintStream(writerStream);
-        
+
         RichGiftSite site = new RichGiftSite(reader, writer, new RichGiftDefaultFactory());
 
         RichPlayer player = new RichPlayer(null, null);
-        
+
         site.acceptPlayer(player);
-        
+
         String expectOutput = welcomeMessage + "Invalid gift type\n";
-        
+
         assertEquals(expectOutput, writerStream.toString());
     }
 }

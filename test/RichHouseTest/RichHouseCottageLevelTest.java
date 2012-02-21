@@ -2,7 +2,9 @@ package RichHouseTest;
 
 import RichCore.RichHouse;
 import RichCore.RichMoney;
-import RichHouse.*;
+import RichHouse.RichHouseCottageLevel;
+import RichHouse.RichHousePlatLevel;
+import RichHouse.RichHouseVillaLevel;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 

@@ -5,7 +5,7 @@ import RichCore.RichPlayer;
 import RichCore.RichPoint;
 import RichCore.RichTool;
 
-public class RoadBlockTool extends RichDeferredTool {
+public class RoadBlockTool implements RichDeferredTool, RichTool {
     public String display() {
         return "#";
     }

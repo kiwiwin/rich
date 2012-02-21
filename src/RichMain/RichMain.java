@@ -21,7 +21,7 @@ public class RichMain {
         RichCommandFactory commandFactory = initCommandFactory(writer, map);
 
         RichScheduler scheduler = initScheduler(reader, writer, map, commandFactory);
-        
+
         scheduler.initMoney();
         scheduler.initPlayers();
         scheduler.schedule();

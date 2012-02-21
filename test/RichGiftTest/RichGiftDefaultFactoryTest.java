@@ -28,7 +28,7 @@ public class RichGiftDefaultFactoryTest extends TestCase {
         }
     }
 
-    public void test_should_return_illegal_argument_exception_for_input_100(){
+    public void test_should_return_illegal_argument_exception_for_input_100() {
         try {
             new RichGiftDefaultFactory().createGift("100");
             fail("there should have an exception");

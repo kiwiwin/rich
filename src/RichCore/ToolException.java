@@ -1,4 +1,4 @@
 package RichCore;
 
-abstract class ToolException extends RuntimeException{
+abstract class ToolException extends RuntimeException {
 }

@@ -11,7 +11,7 @@ import junit.framework.TestCase;
 public class RichSellToolCommandTest extends TestCase {
     private static final RichMoney dummyMoney = new RichMoney(0);
 
-    public void test_sell_tool_success(){
+    public void test_sell_tool_success() {
         RichPlayer player = new RichPlayer(dummyMoney, new RichPoint(0));
         RichTool tool = new RoadBlockTool();
         player.addTool(tool);

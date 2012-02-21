@@ -13,8 +13,8 @@ public class RichMineSiteTest extends TestCase {
     public void test_player_should_gain_40_points_for_enter_mine_site() {
         RichPoint playerPointBefore = new RichPoint(10);
         RichPlayer player = new RichPlayer(null, playerPointBefore);
-        
-        RichPoint bonusPoint =  new RichPoint(40);
+
+        RichPoint bonusPoint = new RichPoint(40);
         RichMineSite mineSite = new RichMineSite(null, null, bonusPoint);
 
         mineSite.acceptPlayer(player);

@@ -3,8 +3,6 @@ package RichSite;
 import RichCore.*;
 import RichGift.RichGiftDefaultFactory;
 import RichHouse.RichHousePlatLevel;
-import RichCore.RichMap;
-import RichCore.RichSite;
 import RichTool.RichDefaultToolFactory;
 
 public class RichDefaultMap extends RichMap {

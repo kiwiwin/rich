@@ -21,7 +21,7 @@ public class RichSellHouseCommandTest extends TestCase {
         command.executeCommand();
 
         RichMoney expectPlayerMoneyAfterSell = playerMoneyBeforeSell.add(originalHousePrice.times(2));
-        
+
         assertEquals(expectPlayerMoneyAfterSell, player.getMoney());
         assertEquals(0, player.getHousesNumber());
     }

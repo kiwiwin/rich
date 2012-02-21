@@ -1,7 +1,6 @@
 package RichCommandTest;
 
 import RichCore.*;
-import RichCore.RichSite;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
