@@ -2,7 +2,7 @@ package RichColorTest;
 
 import RichColor.*;
 import RichColor.RichRedColor;
-import RichCore.RichColor;
+import RichColor.RichColor;
 import junit.framework.TestCase;
 
 public class RichColorTest extends TestCase {

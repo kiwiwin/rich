@@ -2,12 +2,15 @@ package RichCommandTest;
 
 import RichCommand.RichRobotCommand;
 import RichCore.*;
+import RichCore.RichMap;
 import RichSite.RichDefaultMap;
 import RichTool.RoadBlockTool;
 import junit.framework.TestCase;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
+import RichCore.RichSitePosition;
+import RichTool.RobotTool;
 
 public class RichRobotCommandTest extends TestCase {
     private static final RichMoney dummyMoney = null;
@@ -17,6 +20,7 @@ public class RichRobotCommandTest extends TestCase {
 
     public void test_should_clean_tools() {
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+        player.addTool(new RobotTool());
         RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
         map.buildMap();
     

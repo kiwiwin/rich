@@ -2,6 +2,8 @@ package RichToolTest;
 
 import RichCommandTest.RichDummyMapBuilder;
 import RichCore.*;
+import RichCore.RichMap;
+import RichCore.RichSitePosition;
 import RichSite.RichDefaultMap;
 import RichTool.RoadBlockTool;
 import junit.framework.TestCase;

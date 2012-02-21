@@ -1,11 +1,13 @@
 package RichCoreTest;
 
+import RichCore.RichSitePosition;
 import RichMain.RichDefaultPlayerFactory;
 import RichColor.RichBlueColor;
 import RichColor.RichRedColor;
 import RichCommand.RichCommandFactory;
 import RichCommandTest.RichDummyMapBuilder;
 import RichCore.*;
+import RichCore.RichMap;
 import RichSite.RichDefaultMap;
 import junit.framework.TestCase;
 

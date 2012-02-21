@@ -2,6 +2,7 @@ package RichCommand;
 
 import RichCore.RichPlayer;
 import RichCore.RichSitePosition;
+import RichTool.RobotTool;
 
 public class RichRobotCommand extends RichCommand {
 
@@ -13,6 +14,7 @@ public class RichRobotCommand extends RichCommand {
 
 
     public void executeCommand() {
+        _player.useTool(new RobotTool());
         RichSitePosition position = new RichSitePosition(_player.getPosition());
 
         for (int i = 0; i < 10; i++) {

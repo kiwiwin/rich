@@ -3,6 +3,8 @@ package RichMain;
 import RichCommand.RichCommandFactory;
 import RichCommand.RichCommand;
 import RichCore.*;
+import RichCore.RichMap;
+import RichCore.RichSitePosition;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;

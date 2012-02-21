@@ -1,5 +1,7 @@
 package RichCore;
 
+import RichColor.RichColor;
+
 import java.util.ArrayList;
 
 public class RichPlayer {

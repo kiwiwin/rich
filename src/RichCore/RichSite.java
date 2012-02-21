@@ -62,6 +62,7 @@ public abstract class RichSite {
     public void acceptPassenger(RichPlayer player) {
         if (hasDeferredToolInstalled()) {
             _tool.triggerTool(player);
+            removeDeferredTool();
         }
     }
 

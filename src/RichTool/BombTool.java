@@ -1,6 +1,8 @@
 package RichTool;
 
 import RichCore.*;
+import RichCore.RichPlayer;
+import RichCore.RichSitePosition;
 
 public class BombTool extends RichDeferredTool {
     private RichSitePosition _hospitalSitePosition;

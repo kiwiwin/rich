@@ -1,5 +1,7 @@
 package RichSiteTest;
 
+import RichColor.RichBlueColor;
+import RichColor.RichRedColor;
 import RichCore.RichHouse;
 import RichCore.RichMoney;
 import RichCore.RichPlayer;
@@ -153,11 +155,18 @@ public class RichHouseSiteTest extends TestCase {
         RichHouse house = new RichHouse(new RichHousePlatLevel(housePrice));
         RichMoney ownerMoneyBefore = new RichMoney(5000);
         RichPlayer owner = new RichPlayer(ownerMoneyBefore, dummyPoint);
+        owner.setColor(new RichRedColor());
+        owner.setName("Q");
+
         owner.addHouse(house);
         RichMoney visitorMoneyBefore = new RichMoney(5000);
         RichPlayer visitor = new RichPlayer(visitorMoneyBefore, dummyPoint);
+        visitor.setColor(new RichBlueColor());
+        visitor.setName("A");
 
-        RichHouseSite site = new RichHouseSite(dummyReader, dummyWriter, house);
+        PrintStream writer = new PrintStream(new ByteArrayOutputStream());
+
+        RichHouseSite site = new RichHouseSite(dummyReader, writer, house);
         site.acceptPlayer(visitor);
 
         RichMoney toll = housePrice.divide(2);

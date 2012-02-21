@@ -1,9 +1,8 @@
 package RichCommand;
 
+import RichCore.*;
 import RichCore.RichMap;
-import RichCore.RichPlayer;
 import RichCore.RichSitePosition;
-import RichCore.RichToolFactory;
 import RichSite.RichHouseSite;
 
 import java.io.PrintStream;

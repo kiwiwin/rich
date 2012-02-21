@@ -1,11 +1,11 @@
 package RichCoreTest;
 
+import RichCore.RichPlayer;
 import RichMain.RichDefaultPlayerFactory;
 import RichColor.RichBlueColor;
 import RichColor.RichGreenColor;
 import RichColor.RichRedColor;
 import RichColor.RichYellowColor;
-import RichCore.RichPlayer;
 import RichCore.RichPlayerFactory;
 import junit.framework.TestCase;
 

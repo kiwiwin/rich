@@ -2,12 +2,14 @@ package RichCommandTest;
 
 import RichCommand.RichBombCommand;
 import RichCore.*;
+import RichCore.RichMap;
 import RichSite.RichDefaultMap;
 import RichTool.BombTool;
 import junit.framework.TestCase;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
+import RichCore.RichSitePosition;
 
 public class RichBombCommandTest extends TestCase {
     private static final RichMoney dummyMoney = null;

@@ -2,7 +2,7 @@ package RichTool;
 
 import RichCore.*;
 
-public class RobotTool extends RichRealTimeTool {
+public class RobotTool implements RichTool {
     public String display() {
         return " ";
     }
@@ -17,13 +17,5 @@ public class RobotTool extends RichRealTimeTool {
 
     public boolean isSameTool(RichTool tool) {
         return tool instanceof RobotTool;
-    }
-
-    public void useTool(RichPlayer player) {
-        RichSitePosition position = new RichSitePosition(player.getPosition());
-        for (int i = 0; i < 10; i++) {
-            position.moveForward(1);
-            position.getSite().removeDeferredTool();
-        }
     }
 }
