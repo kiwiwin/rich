@@ -1,8 +1,8 @@
 package RichToolTest;
 
+import DummyObject.RichDummyMapBuilder;
 import RichCore.*;
 import RichSite.RichDefaultMap;
-import RichSite.RichDefaultMapBuilder;
 import RichTool.BombTool;
 import junit.framework.TestCase;
 
@@ -28,7 +28,7 @@ public class BombToolTest extends TestCase {
     }
 
     public void test_should_return_player_at_hospital_when_pass_by_a_bomb() {
-        RichMap map = new RichDefaultMap(new RichDefaultMapBuilder(dummyReader, dummyWriter));
+        RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
         map.buildMap();
 
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
@@ -40,7 +40,7 @@ public class BombToolTest extends TestCase {
 
         RichSite installBombSite = map.getSite(1);
         installBombSite.installDeferredTool(tool);
-        
+
         player.forwardSteps(3);
 
         RichSite hospitalSite = hospitalPosition.getSite();
@@ -49,5 +49,37 @@ public class BombToolTest extends TestCase {
         assertEquals(3, player.getPunishDays());
         assertFalse(map.getSite(0).hasPlayerStand());
         assertFalse(hospitalSite.hasPlayerStand());
+    }
+
+
+    public void test_player_should_continue_play_from_hospital_site_after_been_bombed() {
+        RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
+        map.buildMap();
+
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+        player.initPosition(new RichSitePosition(map, 0));
+
+        RichSitePosition hospitalPosition = new RichSitePosition(map, 14);
+        BombTool tool = new BombTool();
+        tool.setHospitalSitePosition(hospitalPosition);
+
+        RichSite installBombSite = map.getSite(1);
+        installBombSite.installDeferredTool(tool);
+
+        player.forwardSteps(3);
+
+        RichSite hospitalSite = hospitalPosition.getSite();
+
+        assertEquals(hospitalSite, player.getPosition().getSite());
+        assertEquals(3, player.getPunishDays());
+        assertFalse(map.getSite(0).hasPlayerStand());
+        assertFalse(hospitalSite.hasPlayerStand());
+
+        player.setPunishDays(0);
+
+        player.forwardSteps(3);
+
+        assertEquals(17, player.getPosition().getIndex());
+        assertEquals(map.getSite(17), player.getPosition().getSite());
     }
 }

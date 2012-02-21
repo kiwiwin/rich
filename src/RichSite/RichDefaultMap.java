@@ -83,6 +83,4 @@ public class RichDefaultMap extends RichMap {
     private void setSite(RichSite site, int index) {
         _sites[index] = site;
     }
-
-
 }

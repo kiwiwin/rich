@@ -19,8 +19,9 @@ public abstract class RichSite {
     }
 
     public void acceptPlayer(RichPlayer player) {
+        addPlayer(player);
+
         if (!player.isPunished()) {
-            addPlayer(player);
             doAcceptPlayer(player);
         }
     }
@@ -46,6 +47,14 @@ public abstract class RichSite {
         return true;
     }
 
+    public boolean hasDeferredToolInstalled() {
+        return _tool != null;
+    }
+
+    public void removeDeferredTool() {
+        _tool = null;
+    }
+
     public boolean hasPlayerStand() {
         for (RichPlayer player : _players) {
             if (!player.isPunished()) {
@@ -55,10 +64,6 @@ public abstract class RichSite {
         return false;
     }
 
-    public void removeDeferredTool() {
-        _tool = null;
-    }
-
     public void acceptPassenger(RichPlayer player) {
         if (hasDeferredToolInstalled()) {
             _tool.triggerTool(player);
@@ -66,9 +71,6 @@ public abstract class RichSite {
         }
     }
 
-    public boolean hasDeferredToolInstalled() {
-        return _tool != null;
-    }
 
     public void addPlayer(RichPlayer player) {
         _players.add(player);

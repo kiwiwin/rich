@@ -7,8 +7,6 @@ import RichSite.RichDefaultMap;
 import junit.framework.TestCase;
 
 public class RichSitePositionTest extends TestCase {
-
-
     public void test_should_return_5_move_forward_3_steps_from_index_2() {
         RichMap map = createDefaultDummyMap();
 

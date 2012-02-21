@@ -17,8 +17,8 @@ public class RichHouse {
         return _owner;
     }
 
-    public void upgrade() {
-        _houseLevel.upgrade(this);
+    public boolean hasOwner() {
+        return getOwner() != null;
     }
 
     public void setLevel(RichHouseLevel level) {
@@ -29,8 +29,12 @@ public class RichHouse {
         return _houseLevel;
     }
 
-    private RichMoney getCost() {
-        return _houseLevel.getPrice();
+    public boolean canUpgrade() {
+        return _houseLevel.canUpgrade();
+    }
+
+    public void upgrade() {
+        _houseLevel.upgrade(this);
     }
 
     public RichMoney getPriceForSell() {
@@ -43,6 +47,10 @@ public class RichHouse {
 
     public RichMoney getOriginalPrice() {
         return _houseLevel.getOriginalPrice();
+    }
+
+    private RichMoney getCost() {
+        return _houseLevel.getPrice();
     }
 
     public String display() {
@@ -59,13 +67,5 @@ public class RichHouse {
 
     public boolean isSameLevel(RichHouse house) {
         return _houseLevel.isSameLevel(house.getLevel());
-    }
-
-    public boolean hasOwner() {
-        return getOwner() != null;
-    }
-
-    public boolean canUpgrade() {
-        return _houseLevel.canUpgrade();
     }
 }

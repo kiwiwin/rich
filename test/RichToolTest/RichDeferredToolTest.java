@@ -14,9 +14,9 @@ public class RichDeferredToolTest extends TestCase {
     private final RichPoint dummyPoint = null;
     private final BufferedReader dummyReader = null;
     private final PrintStream dummyWriter = null;
-    
+
     private static int uniqueIndex = 0;
-    
+
     public void test_should_return_true_for_install_deferred_tool_at_site_without_person_or_another_tool() {
         RichMap map = createDummyMap();
 
@@ -28,7 +28,7 @@ public class RichDeferredToolTest extends TestCase {
     public void test_cannot_install_tool_if_the_site_already_has_one() {
         RichMap map = createDummyMap();
 
-        RichSite site = getUniqueSite(map) ;
+        RichSite site = getUniqueSite(map);
 
         assertTrue(site.installDeferredTool(new RoadBlockTool()));
         assertFalse(site.installDeferredTool(new RoadBlockTool()));
@@ -51,7 +51,7 @@ public class RichDeferredToolTest extends TestCase {
     }
 
     private RichSite getUniqueSite(RichMap map) {
-        if(++uniqueIndex > map.getSitesNumber())
+        if (++uniqueIndex > map.getSitesNumber())
             uniqueIndex = 0;
         return map.getSite(uniqueIndex);
     }

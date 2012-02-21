@@ -15,6 +15,10 @@ public class RichRobotCommand extends RichCommand {
 
     public void executeCommand() {
         _player.useTool(new RobotTool());
+        cleanDeferredTools();
+    }
+
+    private void cleanDeferredTools() {
         RichSitePosition position = new RichSitePosition(_player.getPosition());
 
         for (int i = 0; i < 10; i++) {

@@ -35,7 +35,7 @@ public class RoadBlockToolTest extends TestCase {
         RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
         player.initPosition(new RichSitePosition(map, 63));
 
-        RichSite installBlockSite =  map.getSite(64);
+        RichSite installBlockSite = map.getSite(64);
         installBlockSite.installDeferredTool(new RoadBlockTool());
         player.forwardSteps(7);
 

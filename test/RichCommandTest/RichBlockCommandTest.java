@@ -60,6 +60,7 @@ public class RichBlockCommandTest extends TestCase {
             fail("cannot install a block at site already have a person stand or a tool installed");
         } catch (Exception ex) {
             assertEquals("此处不能安装路障", ex.getMessage());
+            assertEquals(1, player.getToolsNumberByType(new RoadBlockTool()));
         }
     }
 

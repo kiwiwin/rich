@@ -22,6 +22,6 @@ public class RichDummySite extends RichSite {
 
     @Override
     public String doDisplay() {
-        return "";
+        return "Dummy Site";
     }
 }

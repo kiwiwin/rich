@@ -2,6 +2,6 @@ package RichCore;
 
 public class HouseOwnerException extends HouseException {
     public String getMessage() {
-        return "House has already been occupied";
+        return "房屋拥有权不正确";
     }
 }

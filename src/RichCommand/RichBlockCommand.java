@@ -14,9 +14,9 @@ public class RichBlockCommand extends RichCommand {
     }
 
     public void executeCommand() {
-        _player.useTool(new RoadBlockTool());
-
-        if (!installRoadBlock()){
+        if (installRoadBlock()) {
+            _player.useTool(new RoadBlockTool());
+        } else {
             throw new RuntimeException("此处不能安装" + new RoadBlockTool().getName());
         }
     }

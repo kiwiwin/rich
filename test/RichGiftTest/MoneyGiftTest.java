@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 
 public class MoneyGiftTest extends TestCase {
     private final RichPoint dummyPoint = null;
-    
+
     public void test_should_add_2000_money_for_open_money_gift() {
         RichMoney moneyBeforeOpen = new RichMoney(0);
         RichPlayer player = new RichPlayer(moneyBeforeOpen, dummyPoint);

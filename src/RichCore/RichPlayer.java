@@ -28,6 +28,21 @@ public class RichPlayer {
         return _tools.size();
     }
 
+    public void buyTool(RichTool tool) {
+        if (getPoints().isLessThan(tool.getPoints())) throw new ToolPointsNotEnoughException(_points, tool);
+        addTool(tool);
+        subtractPoints(tool.getPoints());
+    }
+
+    public void sellTool(RichTool toolToSell) {
+        removeTool(toolToSell);
+        addPoints(toolToSell.getPoints());
+    }
+
+    public void useTool(RichTool toolToUse) {
+        removeTool(toolToUse);
+    }
+
     public void addTool(RichTool tool) {
         final int TOOL_NUMBER_LIMIT = 10;
         if (getToolsNumber() >= TOOL_NUMBER_LIMIT) throw new ToolOverflowException();
@@ -44,27 +59,24 @@ public class RichPlayer {
         throw new ToolUnderflowException(toolToRemove);
     }
 
+    public int getToolsNumberByType(RichTool tool) {
+        int result = 0;
+        for (RichTool t : _tools) {
+            if (t.isSameTool(tool)) result++;
+        }
+        return result;
+    }
+
+    public void addPoints(RichPoint points) {
+        _points = _points.add(points);
+    }
+
+    private void subtractPoints(RichPoint points) {
+        _points = _points.subtract(points);
+    }
+
     public RichPoint getPoints() {
         return _points;
-    }
-
-    public RichMoney getMoney() {
-        return _money;
-    }
-
-    public void buyTool(RichTool tool) {
-        if (getPoints().isLessThan(tool.getPoints())) throw new ToolPointsNotEnoughException(_points, tool);
-        addTool(tool);
-        subtractPoints(tool.getPoints());
-    }
-
-    public void sellTool(RichTool toolToSell) {
-        removeTool(toolToSell);
-        addPoints(toolToSell.getPoints());
-    }
-
-    public void useTool(RichTool toolToUse) {
-        removeTool(toolToUse);
     }
 
     public void buyHouse(RichHouse house) {
@@ -78,6 +90,11 @@ public class RichPlayer {
         removeHouse(house);
         addMoney(house.getPriceForSell());
         house.sell();
+    }
+
+    private void removeHouse(RichHouse houseToRemove) {
+        if (!_houses.remove(houseToRemove))
+            throw new HouseOwnerException();
     }
 
     public int getHousesNumber() {
@@ -111,18 +128,10 @@ public class RichPlayer {
         _money = _money.subtract(money);
     }
 
-    public void addPoints(RichPoint points) {
-        _points = _points.add(points);
+    public RichMoney getMoney() {
+        return _money;
     }
 
-    private void subtractPoints(RichPoint points) {
-        _points = _points.subtract(points);
-    }
-
-    private void removeHouse(RichHouse houseToRemove) {
-        if (!_houses.remove(houseToRemove))
-            throw new HouseOwnerException();
-    }
 
     public void initPosition(RichSitePosition position) {
         _position = position;
@@ -198,13 +207,6 @@ public class RichPlayer {
         return _punishDays;
     }
 
-    public int getToolsNumberByType(RichTool tool) {
-        int result = 0;
-        for (RichTool t : _tools) {
-            if (t.isSameTool(tool)) result++;
-        }
-        return result;
-    }
 
     public int getHousesNumberByLevel(RichHouse house) {
         int result = 0;

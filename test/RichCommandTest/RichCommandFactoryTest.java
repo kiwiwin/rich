@@ -49,11 +49,11 @@ public class RichCommandFactoryTest extends TestCase {
 
         RichCommandFactory commandFactory = new RichCommandFactory();
         commandFactory.setMap(map);
-        
-        try{
+
+        try {
             commandFactory.createCommand("sell 0", dummyPlayer);
             fail("cannot sell house which index is start site");
-        }catch(Exception ex){
+        } catch (Exception ex) {
             assertEquals("错误的命令", ex.getMessage());
         }
     }

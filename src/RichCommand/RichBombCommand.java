@@ -16,13 +16,12 @@ public class RichBombCommand extends RichCommand {
     }
 
     public void executeCommand() {
-        _player.useTool(new BombTool());
-
         BombTool bomb = new BombTool();
         bomb.setHospitalSitePosition(_hospitalPosition);
 
-        if (!installBomb(bomb))
-        {
+        if (installBomb(bomb)) {
+            _player.useTool(bomb);
+        } else {
             throw new RuntimeException("此处不能安装" + new BombTool().getName());
         }
     }

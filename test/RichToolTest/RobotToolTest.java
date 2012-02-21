@@ -1,7 +1,6 @@
 package RichToolTest;
 
 import RichCore.RichPoint;
-import RichCore.RichTool;
 import RichTool.RobotTool;
 import junit.framework.TestCase;
 
