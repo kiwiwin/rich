@@ -1,4 +1,4 @@
-package RichMain;
+package RichScheduler;
 
 import RichColor.RichBlueColor;
 import RichColor.RichGreenColor;
@@ -6,41 +6,39 @@ import RichColor.RichRedColor;
 import RichColor.RichYellowColor;
 import RichCore.RichMoney;
 import RichCore.RichPlayer;
-import RichCore.RichPlayerFactory;
 import RichCore.RichPoint;
 
-public class RichDefaultPlayerFactory implements RichPlayerFactory {
+public class RichPlayerFactory {
     public RichPlayer createPlayer(String s) {
-        int playerIndex;
         try {
-            playerIndex = Integer.parseInt(s);
+            return createPlayer(Integer.parseInt(s));
         } catch (Exception ex) {
-            throw new IllegalArgumentException("Invalid player index");
+            throw new IllegalArgumentException("错误的玩家编号");
         }
+    }
 
+    private RichPlayer createPlayer(int playerIndex) {
         RichPlayer player = new RichPlayer(new RichMoney(0), new RichPoint(0));
 
         switch (playerIndex) {
             case 1:
                 player.setName("Q");
                 player.setColor(new RichRedColor());
-                break;
+                return player;
             case 2:
                 player.setName("A");
                 player.setColor(new RichGreenColor());
-                break;
+                return player;
             case 3:
                 player.setName("S");
                 player.setColor(new RichYellowColor());
-                break;
+                return player;
             case 4:
                 player.setName("J");
                 player.setColor(new RichBlueColor());
-                break;
+                return player;
             default:
-                throw new IllegalArgumentException("Invalid player index");
+                throw new IllegalArgumentException("错误的玩家编号");
         }
-
-        return player;
     }
 }

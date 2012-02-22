@@ -1,14 +1,12 @@
-package RichCoreTest;
+package RichSchedulerTest;
 
 import DummyObject.RichDummyMapBuilder;
 import RichColor.RichBlueColor;
 import RichColor.RichRedColor;
-import RichCommand.RichCommandFactory;
-import RichCore.RichMap;
-import RichCore.RichMoney;
-import RichCore.RichPlayer;
-import RichCore.RichSitePosition;
-import RichMain.RichDefaultPlayerFactory;
+import RichCommand.RichDefaultCommandFactory;
+import RichCore.*;
+import RichScheduler.RichCommandFactory;
+import RichScheduler.RichPlayerFactory;
 import RichSite.RichDefaultMap;
 import junit.framework.TestCase;
 
@@ -18,6 +16,10 @@ import java.io.PrintStream;
 import java.io.StringReader;
 
 public class RichSchedulerTest extends TestCase {
+    private final BufferedReader dummyReader = null;
+    private final RichMoney dummyMoney = null;
+    private final RichPoint dummyPoint = null;
+
     public void test_should_return_10000_for_default_player_money() {
         BufferedReader reader = new BufferedReader(new StringReader("\n"));
         ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
@@ -53,7 +55,7 @@ public class RichSchedulerTest extends TestCase {
             scheduler.initMoney();
             fail();
         } catch (IllegalArgumentException ex) {
-
+            assertEquals("错误的初始金钱，请重新输入：（1000~50000）", ex.getMessage());
         }
     }
 
@@ -66,8 +68,9 @@ public class RichSchedulerTest extends TestCase {
         map.buildMap();
 
         RichTestUseScheduler scheduler = new RichTestUseScheduler(reader, writer);
-        scheduler.setPlayerFactory(new RichDefaultPlayerFactory());
+        scheduler.setPlayerFactory(new RichPlayerFactory());
         scheduler.setMap(map);
+
         scheduler.initPlayers();
 
         assertEquals(2, scheduler.getPlayersNumber());
@@ -79,11 +82,12 @@ public class RichSchedulerTest extends TestCase {
         PrintStream writer = new PrintStream(writerStream);
 
         RichTestUseScheduler scheduler = new RichTestUseScheduler(reader, writer);
-        scheduler.setPlayerFactory(new RichDefaultPlayerFactory());
+        scheduler.setPlayerFactory(new RichPlayerFactory());
         try {
             scheduler.initPlayers();
             fail();
         } catch (IllegalArgumentException ex) {
+            assertEquals("错误的玩家编号", ex.getMessage());
         }
     }
 
@@ -92,11 +96,11 @@ public class RichSchedulerTest extends TestCase {
         ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
         PrintStream writer = new PrintStream(writerStream);
 
-        RichMap map = new RichDefaultMap(new RichDummyMapBuilder(null, writer));
+        RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, writer));
         map.buildMap();
 
-        RichTestUseScheduler scheduler = new RichTestUseScheduler(null, writer);
-        RichPlayer player = new RichPlayer(null, null);
+        RichTestUseScheduler scheduler = new RichTestUseScheduler(dummyReader, writer);
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
         player.setName("A");
         player.setColor(new RichRedColor());
         scheduler.addPlayer(player);
@@ -128,7 +132,7 @@ public class RichSchedulerTest extends TestCase {
         dummyPlayer2.setColor(new RichBlueColor());
 
 
-        RichCommandFactory commandFactory = new RichCommandFactory();
+        RichCommandFactory commandFactory = new RichDefaultCommandFactory();
 
         scheduler.addPlayer(playerWithoutMoney);
         scheduler.addPlayer(dummyPlayer1);
@@ -157,7 +161,7 @@ public class RichSchedulerTest extends TestCase {
 
         RichMap map = new RichDefaultMap(new RichDummyMapBuilder(null, null));
         map.buildMap();
-        RichCommandFactory commandFactory = new RichCommandFactory();
+        RichDefaultCommandFactory commandFactory = new RichDefaultCommandFactory();
 
         scheduler.addPlayer(playerBePunished);
         scheduler.addPlayer(dummyPlayer);
@@ -189,7 +193,7 @@ public class RichSchedulerTest extends TestCase {
 
         scheduler.addPlayer(dummyPlayer1);
         scheduler.addPlayer(dummyPlayer2);
-        scheduler.setCommandFactory(new RichCommandFactory());
+        scheduler.setCommandFactory(new RichDefaultCommandFactory());
         scheduler.setMap(map);
 
         scheduler.schedule();

@@ -1,8 +1,8 @@
-package RichCoreTest;
+package RichSchedulerTest;
 
 import RichCore.RichMoney;
 import RichCore.RichPlayer;
-import RichMain.RichScheduler;
+import RichScheduler.RichScheduler;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;

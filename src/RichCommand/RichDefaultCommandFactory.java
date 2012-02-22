@@ -4,18 +4,19 @@ import RichCore.RichMap;
 import RichCore.RichPlayer;
 import RichCore.RichSitePosition;
 import RichCore.RichToolFactory;
+import RichScheduler.RichCommandFactory;
 import RichSite.RichHouseSite;
 
 import java.io.PrintStream;
 
-public class RichCommandFactory {
+public class RichDefaultCommandFactory implements RichCommandFactory{
     private RichToolFactory _toolFactory;
     private RichSitePosition _hospitalSitePosition;
     private RichMap _map;
     private PrintStream _writer;
 
 
-    public RichCommandFactory() {
+    public RichDefaultCommandFactory() {
     }
 
     public void setToolFactory(RichToolFactory factory) {

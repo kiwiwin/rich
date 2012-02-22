@@ -1,7 +1,6 @@
-package RichMain;
+package RichScheduler;
 
 import RichCommand.RichCommand;
-import RichCommand.RichCommandFactory;
 import RichCore.*;
 
 import java.io.BufferedReader;
@@ -45,7 +44,7 @@ public class RichScheduler {
             if (!initMoneyString.equals(""))
                 _initMoney = new RichMoney(parseMoneyAmount(initMoneyString));
         } catch (Exception e) {
-            throw new IllegalArgumentException("invalid money");
+            throw new IllegalArgumentException("错误的初始金钱，请重新输入：（1000~50000）");
         }
     }
 
@@ -67,7 +66,7 @@ public class RichScheduler {
                 _players.get(i).initPosition(new RichSitePosition(_map, 0));
             }
         } catch (Exception ex) {
-            throw new IllegalArgumentException("invalid players");
+            throw new IllegalArgumentException("错误的玩家编号");
         }
     }
 
