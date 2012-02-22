@@ -1,4 +1,10 @@
 This simple application is for practice purpose.
 
+Ant is used. One can look into the build.xml to change the configure
+
+A shell file is generated, one can use below command to start this application
+
+sh ./rich
+
 Kiwi
 2012.1.18
