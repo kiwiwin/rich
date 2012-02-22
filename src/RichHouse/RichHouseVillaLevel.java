@@ -29,7 +29,7 @@ public class RichHouseVillaLevel extends RichHouseLevel {
         return "2";
     }
 
-    public void sell(RichHouse house) {
+    public void reInitialize(RichHouse house) {
         setHouseLevel(house, new RichHousePlatLevel(_originalPrice));
     }
 }

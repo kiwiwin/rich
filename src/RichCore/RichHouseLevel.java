@@ -25,7 +25,7 @@ public abstract class RichHouseLevel {
 
     public abstract String display();
 
-    public abstract void sell(RichHouse richHouse);
+    public abstract void reInitialize(RichHouse richHouse);
 
     public boolean canUpgrade() {
         return true;

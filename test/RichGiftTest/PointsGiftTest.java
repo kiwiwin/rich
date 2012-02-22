@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 
 
 public class PointsGiftTest extends TestCase {
-    private static RichMoney dummyMoney = null;
+    private final RichMoney dummyMoney = null;
 
     public void test_should_add_200_points_for_open_points_gift() {
         RichPoint pointBeforeOpen = new RichPoint(0);

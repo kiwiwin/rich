@@ -1,7 +1,10 @@
 package RichScheduler;
 
 import RichCommand.RichCommand;
-import RichCore.*;
+import RichCore.RichMap;
+import RichCore.RichMoney;
+import RichCore.RichPlayer;
+import RichCore.RichSitePosition;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
@@ -65,9 +68,22 @@ public class RichScheduler {
                 _players.get(i).addMoney(_initMoney);
                 _players.get(i).initPosition(new RichSitePosition(_map, 0));
             }
+
+            checkDuplicatePlayers();
+
         } catch (Exception ex) {
+            _players.clear();
             throw new IllegalArgumentException("错误的玩家编号");
         }
+    }
+
+    private void checkDuplicatePlayers() {
+        for (int i = 0; i < _players.size(); i++)
+            for (int j = i + 1; j < _players.size(); j++) {
+                if (_players.get(i).display().equals(_players.get(j).display())) {
+                    throw new IllegalArgumentException("错误的玩家编号");
+                }
+            }
     }
 
     public void schedule() {
@@ -83,15 +99,16 @@ public class RichScheduler {
         }
 
         if (_players.size() == 1) {
-            _writer.println("Winner is: " + _players.get(0).display());
+            _writer.println("胜利者是: " + _players.get(0).display());
         }
     }
 
-    private void checkPlayerHasMoney(RichPlayer currentPlayer) {
+    public void checkPlayerHasMoney(RichPlayer currentPlayer) {
         if (currentPlayer.getMoney().isLessThan(new RichMoney(0))) {
             _players.remove(currentPlayer);
             _currentPlayerIndex--;
-            _writer.println(currentPlayer.display() + " has no money anymore! ");
+            currentPlayer.clear();
+            _writer.println(currentPlayer.display() + "出局");
         }
     }
 

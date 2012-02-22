@@ -5,6 +5,8 @@ import RichColor.RichBlueColor;
 import RichColor.RichRedColor;
 import RichCommand.RichDefaultCommandFactory;
 import RichCore.*;
+import RichHouse.RichHouseCottageLevel;
+import RichHouse.RichHousePlatLevel;
 import RichScheduler.RichCommandFactory;
 import RichScheduler.RichPlayerFactory;
 import RichSite.RichDefaultMap;
@@ -19,6 +21,7 @@ public class RichSchedulerTest extends TestCase {
     private final BufferedReader dummyReader = null;
     private final RichMoney dummyMoney = null;
     private final RichPoint dummyPoint = null;
+    private final PrintStream dummyWriter = null;
 
     public void test_should_return_10000_for_default_player_money() {
         BufferedReader reader = new BufferedReader(new StringReader("\n"));
@@ -76,6 +79,26 @@ public class RichSchedulerTest extends TestCase {
         assertEquals(2, scheduler.getPlayersNumber());
     }
 
+    public void test_should_be_exception_for_input_11_duplicate_player() {
+        BufferedReader reader = new BufferedReader(new StringReader("11\n"));
+        ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
+        PrintStream writer = new PrintStream(writerStream);
+
+        RichMap map = new RichDefaultMap(new RichDummyMapBuilder(reader, writer));
+        map.buildMap();
+
+        RichTestUseScheduler scheduler = new RichTestUseScheduler(reader, writer);
+        scheduler.setPlayerFactory(new RichPlayerFactory());
+        scheduler.setMap(map);
+
+        try {
+            scheduler.initPlayers();
+            fail("player cannot be duplicate");
+        } catch (IllegalArgumentException ex) {
+            assertEquals("错误的玩家编号", ex.getMessage());
+        }
+    }
+
     public void test_should_be_exception_for_create_45() {
         BufferedReader reader = new BufferedReader(new StringReader("45\n"));
         ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
@@ -106,7 +129,7 @@ public class RichSchedulerTest extends TestCase {
         scheduler.addPlayer(player);
         scheduler.schedule();
 
-        String expectString = "Winner is: " + (char) 27 + "[01;31mA" + (char) 27 + "[00;00m\n";
+        String expectString = "胜利者是: " + (char) 27 + "[01;31mA" + (char) 27 + "[00;00m\n";
         assertEquals(expectString, writerStream.toString());
     }
 
@@ -117,24 +140,25 @@ public class RichSchedulerTest extends TestCase {
 
         RichTestUseScheduler scheduler = new RichTestUseScheduler(reader, writer);
 
-        RichMap map = new RichDefaultMap(new RichDummyMapBuilder(null, null));
+        RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
         map.buildMap();
 
-        RichPlayer playerWithoutMoney = new RichPlayer(new RichMoney(-100), null);
-        playerWithoutMoney.setName("dummy name");
-        playerWithoutMoney.setColor(new RichRedColor());
-        playerWithoutMoney.initPosition(new RichSitePosition(map, 0));
-        RichPlayer dummyPlayer1 = new RichPlayer(new RichMoney(1000), null);
+        RichPlayer poorPlayer = new RichPlayer(new RichMoney(-100), dummyPoint);
+        poorPlayer.setName("dummy name");
+        poorPlayer.setColor(new RichRedColor());
+        poorPlayer.initPosition(new RichSitePosition(map, 0));
+
+        RichPlayer dummyPlayer1 = new RichPlayer(new RichMoney(1000), dummyPoint);
         dummyPlayer1.setName("dummy name 1");
         dummyPlayer1.setColor(new RichBlueColor());
-        RichPlayer dummyPlayer2 = new RichPlayer(new RichMoney(1000), null);
+        RichPlayer dummyPlayer2 = new RichPlayer(new RichMoney(1000), dummyPoint);
         dummyPlayer2.setName("dummy name 2");
         dummyPlayer2.setColor(new RichBlueColor());
 
 
         RichCommandFactory commandFactory = new RichDefaultCommandFactory();
 
-        scheduler.addPlayer(playerWithoutMoney);
+        scheduler.addPlayer(poorPlayer);
         scheduler.addPlayer(dummyPlayer1);
         scheduler.addPlayer(dummyPlayer2);
         scheduler.setMap(map);
@@ -144,6 +168,31 @@ public class RichSchedulerTest extends TestCase {
         assertEquals(2, scheduler.getPlayersNumber());
     }
 
+    public void test_player_house_should_be_reinitialized_for_player_lost() {
+        BufferedReader reader = new BufferedReader(new StringReader("roll\nquit\n"));
+        ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
+        PrintStream writer = new PrintStream(writerStream);
+
+        RichTestUseScheduler scheduler = new RichTestUseScheduler(reader, writer);
+
+        RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
+        map.buildMap();
+
+        RichHouse houseOfPoor = new RichHouse(new RichHouseCottageLevel(dummyMoney));
+
+        RichPlayer poorPlayer = new RichPlayer(new RichMoney(-100), dummyPoint);
+        poorPlayer.setName("dummy name");
+        poorPlayer.setColor(new RichRedColor());
+        poorPlayer.initPosition(new RichSitePosition(map, 0));
+        poorPlayer.addHouse(houseOfPoor);
+
+        scheduler.checkPlayerHasMoney(poorPlayer);
+
+        assertEquals(0, poorPlayer.getHousesNumber());
+        assertFalse(houseOfPoor.hasOwner());
+        assertTrue(houseOfPoor.getLevel() instanceof RichHousePlatLevel);
+    }
+
     public void test_return_false_for_player_is_punished_for_his_day() {
         BufferedReader reader = new BufferedReader(new StringReader("quit\n"));
         ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
@@ -151,15 +200,15 @@ public class RichSchedulerTest extends TestCase {
 
         RichTestUseScheduler scheduler = new RichTestUseScheduler(reader, writer);
 
-        RichPlayer playerBePunished = new RichPlayer(new RichMoney(1000), null);
+        RichPlayer playerBePunished = new RichPlayer(new RichMoney(1000), dummyPoint);
         playerBePunished.setName("dummy name");
         playerBePunished.setColor(new RichRedColor());
         playerBePunished.setPunishDays(5);
-        RichPlayer dummyPlayer = new RichPlayer(new RichMoney(1000), null);
+        RichPlayer dummyPlayer = new RichPlayer(new RichMoney(1000), dummyPoint);
         dummyPlayer.setName("dummy name 2");
         dummyPlayer.setColor(new RichBlueColor());
 
-        RichMap map = new RichDefaultMap(new RichDummyMapBuilder(null, null));
+        RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
         map.buildMap();
         RichDefaultCommandFactory commandFactory = new RichDefaultCommandFactory();
 
@@ -179,13 +228,13 @@ public class RichSchedulerTest extends TestCase {
         ByteArrayOutputStream writerStream = new ByteArrayOutputStream();
         PrintStream writer = new PrintStream(writerStream);
 
-        RichMap map = new RichDefaultMap(new RichDummyMapBuilder(null, null));
+        RichMap map = new RichDefaultMap(new RichDummyMapBuilder(dummyReader, dummyWriter));
         map.buildMap();
 
-        RichPlayer dummyPlayer1 = new RichPlayer(new RichMoney(1000), null);
+        RichPlayer dummyPlayer1 = new RichPlayer(new RichMoney(1000), dummyPoint);
         dummyPlayer1.setName("dummy name 1");
         dummyPlayer1.setColor(new RichBlueColor());
-        RichPlayer dummyPlayer2 = new RichPlayer(new RichMoney(1000), null);
+        RichPlayer dummyPlayer2 = new RichPlayer(new RichMoney(1000), dummyPoint);
         dummyPlayer2.setName("dummy name 2");
         dummyPlayer2.setColor(new RichBlueColor());
 

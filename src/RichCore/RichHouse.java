@@ -60,9 +60,9 @@ public class RichHouse {
             return _houseLevel.display();
     }
 
-    public void sell() {
+    public void reInitialize() {
         _owner = null;
-        _houseLevel.sell(this);
+        _houseLevel.reInitialize(this);
     }
 
     public boolean isSameLevel(RichHouse house) {

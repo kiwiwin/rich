@@ -37,7 +37,7 @@ public class RichHousePlatLevelTest extends TestCase {
 
     public void test_should_return_plat_after_sell_plat() {
         RichHouse house = new RichHouse(new RichHousePlatLevel(dummyMoney));
-        house.sell();
+        house.reInitialize();
         assertTrue(house.getLevel() instanceof RichHousePlatLevel);
     }
 

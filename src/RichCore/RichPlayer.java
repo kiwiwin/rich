@@ -89,7 +89,7 @@ public class RichPlayer {
     public void sellHouse(RichHouse house) {
         removeHouse(house);
         addMoney(house.getPriceForSell());
-        house.sell();
+        house.reInitialize();
     }
 
     private void removeHouse(RichHouse houseToRemove) {
@@ -222,5 +222,13 @@ public class RichPlayer {
 
     public RichColor getColor() {
         return _color;
+    }
+
+    public void clear() {
+        for (RichHouse house : _houses) {
+            house.reInitialize();
+        }
+
+        _houses.clear();
     }
 }

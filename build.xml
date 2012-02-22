@@ -1,27 +1,57 @@
-<project>
+<project name="rich" basedir="." default="clean-build">
+    <property name="src.dir" value="src"/>
+    <property name="test.dir" value="test"/>
+
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="jar.dir" value="${build.dir}/jar"/>
+
+    <property name="main-class" value="RichMain.RichMain"/>
+
+    <property name="ant.dir" value="/usr/share/ant"/>
+
     <target name="clean">
-        <delete dir="build"/>
+        <delete dir="${build.dir}"/>
     </target>
 
     <target name="compile">
-        <mkdir dir="build/classes"/>
-        <javac srcdir="src" destdir="build/classes"/>
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="." destdir="${classes.dir}"/>
     </target>
 
-    <target name="jar">
-        <mkdir dir="build/jar"/>
-        <jar destfile="build/jar/Rich.jar" basedir="build/classes">
+    <target name="jar" depends="compile">
+        <mkdir dir="${jar.dir}"/>
+        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
             <manifest>
-                <attribute name="Main-Class" value="RichCommand.RichMain"/>
+                <attribute name="Main-Class" value="${main-class}"/>
             </manifest>
         </jar>
+        <touch file="rich"/>
+        <echo file="rich">java -jar ${jar.dir}/${ant.project.name}.jar</echo>
     </target>
 
-    <target name="rich">
-        <java jar="build/jar/Rich.jar" fork="true"/>
+    <target name="test" depends="jar">
+        <junit dir="${classes.dir}" printsummary="yes" fork="yes" haltonfailure="yes">
+
+            <classpath>
+                <pathelement location="${ant.dir}/lib/junit.jar"/>
+                <pathelement location="${ant.dir}/lib/ant-junit.jar"/>
+                <pathelement location="${jar.dir}/${ant.project.name}.jar"/>
+            </classpath>
+
+            <batchtest fork="yes">
+                <fileset dir="${classes.dir}">
+                    <include name="**/*Test.class"/>
+                </fileset>
+            </batchtest>
+
+        </junit>
     </target>
 
-    <target name="test">
+    <target name="rich" depends="jar">
+        <java classpath="${classes.dir}" classname="${main-class}" fork="false"/>
     </target>
+
+    <target name="clean-build" depends="clean,jar"/>
 
 </project>

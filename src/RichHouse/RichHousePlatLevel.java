@@ -29,6 +29,6 @@ public class RichHousePlatLevel extends RichHouseLevel {
         return "0";
     }
 
-    public void sell(RichHouse house) {
+    public void reInitialize(RichHouse house) {
     }
 }

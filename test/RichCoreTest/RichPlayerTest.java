@@ -383,4 +383,23 @@ public class RichPlayerTest extends TestCase {
 
         assertTrue(player.hasBlessingGod());
     }
+
+    public void test_should_return_0_house_after_clear_player_and_house_is_reset() {
+        RichPlayer player = new RichPlayer(dummyMoney, dummyPoint);
+
+        RichHouse cottageHouse = new RichHouse(new RichHouseCottageLevel(dummyMoney));
+        player.addHouse(cottageHouse);
+        RichHouse platHouse = new RichHouse(new RichHousePlatLevel(dummyMoney));
+        player.addHouse(platHouse);
+
+        assertEquals(2, player.getHousesNumber());
+
+        player.clear();
+
+        assertEquals(0, player.getHousesNumber());
+        assertFalse(platHouse.hasOwner());
+        assertFalse(cottageHouse.hasOwner());
+        assertTrue(platHouse.getLevel() instanceof RichHousePlatLevel);
+        assertTrue(cottageHouse.getLevel() instanceof RichHousePlatLevel);
+    }
 }

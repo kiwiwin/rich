@@ -3,8 +3,9 @@ package RichMain;
 import RichCommand.RichDefaultCommandFactory;
 import RichCore.RichMap;
 import RichCore.RichSitePosition;
-import RichScheduler.RichScheduler;
 import RichScheduler.RichCommandFactory;
+import RichScheduler.RichPlayerFactory;
+import RichScheduler.RichScheduler;
 import RichSite.RichDefaultMap;
 import RichSite.RichDefaultMapBuilder;
 import RichTool.RichDefaultToolFactory;
@@ -12,7 +13,6 @@ import RichTool.RichDefaultToolFactory;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
-import RichScheduler.RichPlayerFactory;
 
 public class RichMain {
     public static void main(String args[]) {
@@ -25,8 +25,24 @@ public class RichMain {
 
         RichScheduler scheduler = initScheduler(reader, writer, map, commandFactory, playerFactory);
 
-        scheduler.initMoney();
-        scheduler.initPlayers();
+        while (true) {
+            try {
+                scheduler.initMoney();
+                break;
+            } catch (Exception ex) {
+                writer.println(ex.getMessage());
+            }
+        }
+
+        while (true) {
+            try {
+                scheduler.initPlayers();
+                break;
+            } catch (Exception ex) {
+                writer.println(ex.getMessage());
+            }
+        }
+
         scheduler.schedule();
     }
 
